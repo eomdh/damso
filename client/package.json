@@ -1,0 +1,14 @@
+{
+  "name": "bluejay-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "author": "Eom Deokhyeon",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^9.5.5"
+  }
+}

@@ -1,7 +1,12 @@
 import React from 'react';
+import AppLayout from '../components/AppLayout';
 
 const Profile = () => {
-  return <div>Profile Page</div>;
+  return (
+    <AppLayout>
+      <div>Profile Page</div>
+    </AppLayout>
+  )
 };
 
 export default Profile;

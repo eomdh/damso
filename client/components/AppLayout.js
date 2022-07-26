@@ -30,7 +30,7 @@ const LinkIcon = styled.div`
   height: 70%;
   font-size: 30px;
   margin-left: 10px;
-  color: #70a1ff;
+  color: #1864ab;
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -60,19 +60,43 @@ const SearchBar = styled.input`
   all: unset;
   width: 100%;
   height: 100%;
-  font-size: 13px;
+  font-size: 16px;
   display: flex;
 `;
 
 const SearchIconContainer = styled.div`
   position: absolute;
-  top: 8px;
+  top: 10px;
   right: 10px;
   font-size: 19px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #70a1ff;
+  color: #1864ab;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Button = styled.div`
+  width: 80px;
+  height: 35px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: ${props => props.backgroundColor};
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  cursor: pointer;
+  opacity: 0.8;
+  &:hover {
+    transform: scale(0.98);
+    opacity: 1;
+  }
 `;
 
 const AppLayout = ({ children }) => {
@@ -96,12 +120,19 @@ const AppLayout = ({ children }) => {
           </Link>
         </LinkIconContainer>
         <SearchForm>
-          <SearchBar type="text" />
+          <SearchBar type="text" placeholder="Search..." />
           <SearchIconContainer>
             <FaSearch></FaSearch>
           </SearchIconContainer>
         </SearchForm>
-
+        <ButtonContainer>
+          <Link href="/login">
+            <Button backgroundColor="#1864ab"><a>LOGIN</a></Button>
+          </Link>
+          <Link href="/signup">
+          <Button backgroundColor="#2b8a3e"><a>SIGNUP</a></Button>
+          </Link>
+        </ButtonContainer>
       </Container>
       {children}
     </>

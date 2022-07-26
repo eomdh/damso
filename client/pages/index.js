@@ -9,20 +9,11 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const GridContainer = styled.div`
-  width: 80%;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-gap: 20px;
-`;
-
 const Home = () => {
   return (
     <AppLayout>
       <Container>
-        <GridContainer>
-          Home
-        </GridContainer>
+        Home
       </Container>
     </AppLayout>
   )

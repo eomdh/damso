@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import useInput from '../hooks/useInput';
 
 const Container = styled.div`
   width: 30%;
@@ -70,12 +71,14 @@ const Button = styled.button`
   }
 `;
 
-const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm = ({ setIsLoggedIn }) => {
+  const [email, onChangeEmail] = useInput('');
+  const [password, onChangePassword] = useInput('');
 
-  const onLoginSubmit = useCallback(() => {
-  },[]);
+  const onLoginSubmit = useCallback((e) => {
+    console.log(email, password);
+    setIsLoggedIn(true);
+  },[email, password]);
 
   return (
     <Container>
@@ -83,8 +86,22 @@ const LoginForm = () => {
         <Title>Login</Title>
       </TitleContainer>
       <Form onSubmit={onLoginSubmit}>
-        <Input type="email" value={email} placeholder="Email"></Input>
-        <Input type="password" value={password} placeholder="Password"></Input>
+        <Input
+          type="email"
+          name="user-email"
+          value={email}
+          required
+          placeholder="Email"
+          onChange={onChangeEmail}>
+        </Input>
+        <Input 
+          type="password" 
+          name="user-password"
+          value={password}
+          required
+          placeholder="Password"
+          onChange={onChangePassword}>
+        </Input>
         <Button type="submit">로그인</Button>
       </Form>
     </Container>

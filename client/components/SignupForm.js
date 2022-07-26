@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import useInput from '../hooks/useInput';
 
 const Container = styled.div`
   width: 30%;
@@ -54,8 +55,8 @@ const CheckBoxContainer = styled.div`
   display: flex;
   width: 85%;
   justify-content: flex-start;
-  margin-top: -15px;
-  margin-bottom: 15px;
+  margin-top: -10px;
+  margin-bottom: 20px;
 `;
 
 const CheckBox = styled.input``;
@@ -79,10 +80,41 @@ const Button = styled.button`
   }
 `;
 
-const SignupForm = () => {
-  const onSignupSubmit = useCallback(() => {
+const ErrorMessage = styled.span`
+  margin-top: -10px;
+  margin-bottom: 15px;
+  color: red;
+`;
 
-  }, []);
+const SignupForm = () => {
+  const [email, onChangeEmail] = useInput('');
+  const [nickname, onChangeNickname] = useInput('');
+  const [password, onChangePassword] = useInput('');
+
+  const [verifyPassword, setVerifyPassword] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const onChangeVerifyPassword = useCallback((e) => {
+    setVerifyPassword(e.target.value);
+    setPasswordError(e.target.value !== password);
+  }, [password]);
+
+  const [term, setTerm] = useState('');
+  const [termError, setTermError] = useState(false);
+  const onChangeTerm = useCallback((e) => {
+    setTerm(e.target.checked);
+    setTermError(false);
+  }, [term]);
+
+  const onSignupSubmit = useCallback((e) => {
+    e.preventDefault();
+    if (password !== verifyPassword) {
+      return setPasswordError(true);
+    }
+    if (!term) {
+      return setTermError(true);
+    }
+    console.log(email, nickname, password )
+  }, [email, password, verifyPassword, term]);
 
   return (
     <Container>
@@ -90,14 +122,42 @@ const SignupForm = () => {
         <Title>Signup</Title>
       </TitleContainer>
       <Form onSubmit={onSignupSubmit}>
-        <Input type="email" placeholder="Email"></Input>
-        <Input type="text" placeholder="Nickname"></Input>
-        <Input type="password" placeholder="Password"></Input>
-        <Input type="password" placeholder="Verify Password"></Input>
+        <Input 
+          type="email" 
+          name="user-email"
+          value={email}
+          required
+          placeholder="Email"
+          onChange={onChangeEmail}>
+        </Input>
+        <Input 
+          type="text"
+          name="user-nickname"
+          value={nickname}
+          required
+          placeholder="Nickname"
+          onChange={onChangeNickname}>
+        </Input>
+        <Input 
+          type="password"
+          name="user-password"
+          value={password}
+          placeholder="Password"
+          onChange={onChangePassword}>
+        </Input>
+        <Input 
+          type="password"
+          name="verify-password"
+          value={verifyPassword}
+          placeholder="Verify Password"
+          onChange={onChangeVerifyPassword}>
+        </Input>
         <CheckBoxContainer>
-          <CheckBox type="checkbox" />
+          <CheckBox type="checkbox" value={term} onChange={onChangeTerm} />
           <label htmlFor={CheckBox}>약관에 동의합니다.</label>
         </CheckBoxContainer>
+        {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
+        {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
         <Button type="submit">가입하기</Button>
       </Form>
     </Container>  

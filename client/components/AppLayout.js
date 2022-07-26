@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
@@ -20,12 +20,12 @@ const Container = styled.div`
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 `;
 
-const LinkIconContainer = styled.div`
+const IconContainer = styled.div`
   display: flex;
   justify-content: flex-start;
 `;
 
-const LinkIcon = styled.div`
+const Icon = styled.div`
   width: 80px;
   height: 70%;
   font-size: 30px;
@@ -99,26 +99,26 @@ const Button = styled.div`
   }
 `;
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ children }) => {  
   return (
     <>
       <Container>
-        <LinkIconContainer>
+        <IconContainer>
           <Link href="/">
-            <LinkIcon>
+            <Icon>
               <a>
                 <AiFillHome />
               </a>
-            </LinkIcon>
+            </Icon>
           </Link>
           <Link href="/profile">
-            <LinkIcon>
+            <Icon>
               <a>
                 <FaUser />
               </a>
-            </LinkIcon>
+            </Icon>
           </Link>
-        </LinkIconContainer>
+        </IconContainer>
         <SearchForm>
           <SearchBar type="text" placeholder="Search..." />
           <SearchIconContainer>
@@ -130,7 +130,7 @@ const AppLayout = ({ children }) => {
             <Button backgroundColor="#1864ab"><a>LOGIN</a></Button>
           </Link>
           <Link href="/signup">
-          <Button backgroundColor="#2b8a3e"><a>SIGNUP</a></Button>
+            <Button backgroundColor="#2b8a3e"><a>SIGNUP</a></Button>
           </Link>
         </ButtonContainer>
       </Container>

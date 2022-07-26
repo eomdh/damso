@@ -14,7 +14,7 @@ const Container = styled.div`
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;
 
-const ImageContainer = styled.div`
+const ProfileImageContainer = styled.div`
   margin-top: 50px;
   width: 150px;
   height: 150px;
@@ -49,14 +49,14 @@ const UserProfile = () => {
 
   return (
     <Container>
-      <ImageContainer>
+      <ProfileImageContainer>
         <ProfileImage src={require('../image/me.png')} />
-      </ImageContainer>
+      </ProfileImageContainer>
       <NicknameContainer>
         <Nickname>Eomdh</Nickname>
       </NicknameContainer>
     </Container>
   )
-}
+};
 
 export default UserProfile;

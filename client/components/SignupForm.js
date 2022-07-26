@@ -17,8 +17,7 @@ const TitleContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 40px;
-  margin-bottom: 10px;
+  margin-top: 30px;
 `;
 
 const Title = styled.div`
@@ -61,7 +60,7 @@ const CheckBoxContainer = styled.div`
 
 const CheckBox = styled.input``;
 
-const SubmitButton = styled.button`
+const Button = styled.button`
   all: unset;
   border-radius: 10px;
   width: 85%;
@@ -99,7 +98,7 @@ const SignupForm = () => {
           <CheckBox type="checkbox" />
           <label htmlFor={CheckBox}>약관에 동의합니다.</label>
         </CheckBoxContainer>
-        <SubmitButton type="submit">가입하기</SubmitButton>
+        <Button type="submit">가입하기</Button>
       </Form>
     </Container>  
   )

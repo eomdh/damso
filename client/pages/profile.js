@@ -9,6 +9,7 @@ const Container = styled.div`
   min-height: calc(100vh - 55px);
   display: flex;
   justify-content: center;
+  margin-top: 80px;
 `;
 
 const Profile = () => {

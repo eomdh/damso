@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import useInput from '../hooks/useInput';
 
 const Container = styled.div`
-  width: 30%;
-  height: 50%;
+  width: 450px;
+  height: 380px;
   background-color: #e9ecef;
   border-radius: 20px;
   display: flex;
@@ -103,7 +103,7 @@ const LoginForm = () => {
           placeholder="Password"
           onChange={onChangePassword}>
         </Input>
-        <Button type="submit">로그인</Button>
+        <Button type="submit">LOGIN</Button>
       </Form>
     </Container>
   )

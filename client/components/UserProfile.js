@@ -42,11 +42,7 @@ const Nickname = styled.div`
   color: #212529;
 `;
 
-
 const UserProfile = () => {
-  // const followerList = [{ nickname: '한예지'}, { nickname: '채송현'}, { nickname : '김상원'}];
-  // const followingList = [{ nickname: '한예지'}, { nickname: '채송현'}, { nickname : '김상원'}];
-
   return (
     <Container>
       <ProfileImageContainer>

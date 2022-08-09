@@ -9,7 +9,7 @@ const Container = styled.div`
   height: calc(100vh - 55px);
   display: flex;
   justify-content: center;
-  margin-top : 80px;
+  margin-top: 80px;
 `;
 
 const Login = () => {

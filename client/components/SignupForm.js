@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import useInput from '../hooks/useInput';
 
 const Container = styled.div`
-  width: 30%;
-  height: 75%;
+  width: 450px;
+  height: 530px;
   background-color: #e9ecef;
   border-radius: 20px;
   display: flex;
@@ -159,7 +159,7 @@ const SignupForm = () => {
         </CheckBoxContainer>
         {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
         {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
-        <Button type="submit">가입하기</Button>
+        <Button type="submit">SIGNUP</Button>
       </Form>
     </Container>  
   )

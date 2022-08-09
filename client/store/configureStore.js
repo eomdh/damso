@@ -1,4 +1,4 @@
-const { createWrapper } = require('next-redux-wrapper');
+import { createWrapper } from 'next-redux-wrapper';
 
 const configureStore = () => {
 

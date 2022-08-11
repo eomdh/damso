@@ -44,9 +44,8 @@ const Icon = styled.div`
 
 const SearchForm = styled.form`
   position: relative;
-  margin-right: 60px;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 380px;
   height: 20px;
   border: 0.5px solid black;
@@ -139,7 +138,12 @@ const AppLayout = ({ children }) => {
         <ButtonContainer>
           {isLoggedIn ? (
             <Link href="/">
-              <Button backgroundColor="#e03131" onClick={onLogout}><a>LOGOUT</a></Button>
+              <Button 
+                backgroundColor="#e03131" 
+                onClick={onLogout} 
+                style={{marginLeft: '95px'}}>
+                <a>LOGOUT</a>
+              </Button>
             </Link>
           ) : (
             <>

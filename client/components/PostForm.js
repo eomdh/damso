@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
 
@@ -8,7 +9,7 @@ const Container = styled.div`
 `;
 
 const FormContainer = styled.form`
-  width: 93%;
+  width: 100%;
   min-height: 120px;
   border-bottom: 1px solid #e6ecf0;
   padding: 10px;
@@ -17,9 +18,9 @@ const FormContainer = styled.form`
 `;
 
 const ProfileImageContainer = styled.div`
-  margin-top: 50px;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
   border-radius: 50px;
   overflow: hidden;
 `;
@@ -31,12 +32,16 @@ const ProfileImage = styled.img`
 `;
 
 const ContentInput = styled(TextArea)`
-  width: 95%;
+  width: 80%;
   border: none;
   font-size: 16px;
   min-height: 50px;
   max-height: 300px;
   margin-bottom: 50px;
+
+  :disabled {
+    background-color: white;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -44,15 +49,14 @@ const SubmitButton = styled.button`
   position: absolute;
   background-color: #1864ab;
   color: white;
-  -webkit-text-fill-color: white;
   letter-spacing: 2px;
   font-weight: 600;
   font-size: 14px;
   width: 70px;
   height: 30px;
   border-radius: 6px;
-  bottom: 5px;
-  right: 5px;
+  bottom: 10px;
+  right: 30px;
   cursor: pointer;
   opacity: ${props => (props.isAvailablePosting ? 1 : 0.8)};
   transition: all 0.3s linear;
@@ -66,11 +70,13 @@ const SubmitButton = styled.button`
 `;
 
 const PostForm = () => {
+  const { isLoggedIn } = useSelector((state) => state.user);
+
   const [content, setContent] = useState('');
   const onChangeContent = useCallback((e) => {
-    const value = e.target.value;
+    const {target: {value}} = e;
     setContent(e.target.value);
-    if (!value.trim()) {
+    if (value.trim()) {
       setIsAvailablePosting(true);
     } else if (value.length === 0 || value.length > 500) {
       setIsAvailablePosting(false);
@@ -86,7 +92,12 @@ const PostForm = () => {
           <ProfileImage src={require('../image/user.png')} />
         </ProfileImageContainer>
         <ContentInput 
-          placeholder="오늘은 어떤 일이 있었나요?"
+          placeholder={`${
+            isLoggedIn
+              ? "오늘은 어떤 일이 있었나요?"
+              : "로그인 후 사용해주세요."
+          }`}
+          disabled={isLoggedIn ? false : true}
           value={content}
           onChange={onChangeContent}
           style={{
@@ -96,7 +107,7 @@ const PostForm = () => {
            }}
         />
         <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>
-          업로드
+          게시
         </SubmitButton>
       </FormContainer>
     </Container>

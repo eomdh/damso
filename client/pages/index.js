@@ -21,14 +21,13 @@ const GridContainer = styled.div`
 `;
 
 const Home = () => {
-  const { isLoggedIn } = useSelector((state) => state.user);
   const { mainPosts } = useSelector((state) => state.post);
 
   return (
     <AppLayout>
       <Container>
         <GridContainer>
-          {isLoggedIn && <PostForm />}
+          <PostForm />
           {/* {mainPosts.map((post) => <PostCard key={post.id} post={post} />)} */}
         </GridContainer>
       </Container>

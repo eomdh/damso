@@ -12,6 +12,14 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const GridContainer = styled.div`
+  width: 45%;
+  display: gird;
+  background-color: white;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 20px;
+`;
+
 const Home = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
   const { mainPosts } = useSelector((state) => state.post);
@@ -19,8 +27,10 @@ const Home = () => {
   return (
     <AppLayout>
       <Container>
-        {isLoggedIn && <PostForm />}
-        {mainPosts.map((post) => <PostCard key={post.id} post={post} />)}
+        <GridContainer>
+          {isLoggedIn && <PostForm />}
+          {/* {mainPosts.map((post) => <PostCard key={post.id} post={post} />)} */}
+        </GridContainer>
       </Container>
     </AppLayout>
   )

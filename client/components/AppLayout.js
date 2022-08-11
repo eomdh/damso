@@ -44,6 +44,7 @@ const Icon = styled.div`
 
 const SearchForm = styled.form`
   position: relative;
+  margin-right: 60px;
   align-items: center;
   justify-content: center;
   width: 380px;

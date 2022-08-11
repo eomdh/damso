@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import useInput from '../hooks/useInput';
-import { loginAction } from '../reducers';
+import { loginAction } from '../reducers/user';
 
 import styled from 'styled-components';
 
@@ -83,7 +83,7 @@ const LoginForm = () => {
   const onLoginSubmit = useCallback((e) => {
     e.preventDefault();
     console.log(email, password);
-    dispatch(loginAction(email, password));
+    dispatch(loginAction({ email, password }));
   },[email, password]);
 
   return (

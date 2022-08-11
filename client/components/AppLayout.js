@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction } from '../reducers';
+import { logoutAction } from '../reducers/user';
 
 import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
@@ -104,7 +104,7 @@ const Button = styled.div`
 const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   const onLogout = useCallback(() => {
     dispatch(logoutAction());

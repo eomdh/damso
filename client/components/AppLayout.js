@@ -139,7 +139,7 @@ const AppLayout = ({ children }) => {
           {isLoggedIn ? (
             <Link href="/">
               <Button 
-                backgroundColor="#e03131" 
+                backgroundColor="#1864ab" 
                 onClick={onLogout} 
                 style={{marginLeft: '95px'}}>
                 <a>LOGOUT</a>

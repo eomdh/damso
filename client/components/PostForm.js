@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
+import { FaRegImage } from 'react-icons/fa';
 
 const Container = styled.div`
   width: 100%;
@@ -44,6 +45,20 @@ const ContentInput = styled(TextArea)`
   }
 `;
 
+const IconContainer = styled.div`
+  position: absolute;
+  bottom: -3.5px;
+  right: 107px;
+  color: #1864ab;
+  font-size: 38px;
+  opacity: 0.5;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    transform: scale(0.98);
+  }
+`;
+
 const SubmitButton = styled.button`
   all: unset;
   position: absolute;
@@ -58,7 +73,7 @@ const SubmitButton = styled.button`
   bottom: 10px;
   right: 30px;
   cursor: pointer;
-  opacity: ${props => (props.isAvailablePosting ? 1 : 0.8)};
+  opacity: ${props => (props.isAvailablePosting ? 1 : 0.5)};
   transition: all 0.3s linear;
   display: flex;
   justify-content: center;
@@ -106,6 +121,9 @@ const PostForm = () => {
             overflow: "hidden",
            }}
         />
+        <IconContainer>
+           <FaRegImage o/>
+        </IconContainer>
         <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>
           게시
         </SubmitButton>

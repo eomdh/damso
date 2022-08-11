@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAction } from '../reducers';
 
 import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
@@ -99,7 +101,15 @@ const Button = styled.div`
   }
 `;
 
-const AppLayout = ({ children }) => {  
+const AppLayout = ({ children }) => {
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  const onLogout = useCallback(() => {
+    dispatch(logoutAction());
+  }, [])
+
   return (
     <>
       <Container>
@@ -122,16 +132,24 @@ const AppLayout = ({ children }) => {
         <SearchForm>
           <SearchBar type="text" placeholder="Search..." />
           <SearchIconContainer>
-            <FaSearch></FaSearch>
+            <FaSearch />
           </SearchIconContainer>
         </SearchForm>
         <ButtonContainer>
-          <Link href="/login">
-            <Button backgroundColor="#1864ab"><a>LOGIN</a></Button>
-          </Link>
-          <Link href="/signup">
-            <Button backgroundColor="#2b8a3e"><a>SIGNUP</a></Button>
-          </Link>
+          {isLoggedIn ? (
+            <Link href="/">
+              <Button backgroundColor="#e03131" onClick={onLogout}><a>LOGOUT</a></Button>
+            </Link>
+          ) : (
+            <>
+              <Link href="/login">
+                <Button backgroundColor="#1864ab"><a>LOGIN</a></Button>
+              </Link>
+              <Link href="/signup">
+                <Button backgroundColor="#2b8a3e"><a>SIGNUP</a></Button>
+              </Link>
+            </>
+          )}
         </ButtonContainer>
       </Container>
       {children}

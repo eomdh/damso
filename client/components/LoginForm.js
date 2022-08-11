@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import useInput from '../hooks/useInput';
+import { loginAction } from '../reducers';
+
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 450px;
@@ -73,12 +76,14 @@ const Button = styled.button`
 `;
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
 
   const onLoginSubmit = useCallback((e) => {
     e.preventDefault();
     console.log(email, password);
+    dispatch(loginAction(email, password));
   },[email, password]);
 
   return (

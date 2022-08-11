@@ -42,6 +42,7 @@ const Nickname = styled.div`
 `;
 
 const UserProfile = () => {
+
   return (
     <Container>
       <ProfileImageContainer>

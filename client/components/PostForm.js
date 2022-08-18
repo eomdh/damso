@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
 import { FaRegImage } from 'react-icons/fa';
+import { IoMdRemove } from "react-icons/io";
 
 const Container = styled.div`
   width: 100%;
@@ -84,8 +85,40 @@ const SubmitButton = styled.button`
   }
 `;
 
+const ImageUploadContainer = styled.div`
+  display: flex;
+  width: 50%;
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
+`;
+
+const Image = styled.img`
+  width: 150px;
+  margin-top: 5px;
+`;
+
+const ImageDeleteContainer = styled.div`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: red;
+  font-size: 2px;
+  border: 1px solid red;
+  border-radius: 50%;
+  padding: 1px;
+  opacity: 0.7;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    transform: scale(0.98);
+  }
+`;
+
 const PostForm = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
+  const { imagePaths } = useSelector((state) => state.post);
 
   const [content, setContent] = useState('');
   const onChangeContent = useCallback((e) => {
@@ -97,7 +130,20 @@ const PostForm = () => {
       setIsAvailablePosting(false);
     };
   }, [content]);
+
+  const imageInput = useRef();
+  const onClickImageUpload = useCallback(() => {
+    imageInput.current.click();
+  }, [imageInput.current]);
   
+  const onChangeImages = useCallback((e) => {
+    const imageFormData = new FormData();
+    [].forEach.call(e.target.files, f => {
+      imageFormData.append("image", f);
+    });
+
+    console.log(imageFormData);
+  });
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
   return (
@@ -121,15 +167,35 @@ const PostForm = () => {
             overflow: "hidden",
            }}
         />
-        <IconContainer>
-           <FaRegImage o/>
+        <input
+          type="file"
+          multiple
+          hidden
+          ref={imageInput}
+          onChange={onChangeImages}
+        />
+        <IconContainer onClick={onClickImageUpload}>
+           <FaRegImage />
         </IconContainer>
         <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>
           게시
         </SubmitButton>
+        <ImageUploadContainer>
+          {imagePaths && imagePaths.map((path, i) => (
+            <ImageContainer key={path}>
+              <Image 
+                src={`${path}`} 
+                alt={path}
+              />
+              <ImageDeleteContainer onClick={onClickDeleteImage(i)}>
+                <IoMdRemove />
+              </ImageDeleteContainer>
+            </ImageContainer>
+          ))}
+        </ImageUploadContainer>
       </FormContainer>
     </Container>
-  )
+  );
 };
 
 export default PostForm;

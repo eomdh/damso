@@ -32,7 +32,7 @@ const Home = () => {
         </GridContainer>
       </Container>
     </AppLayout>
-  )
+  )  
 };
 
 export default Home;

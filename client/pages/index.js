@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
+import PostCard from '../components/PostCard';
 import PostForm from '../components/PostForm';
 
 const Container = styled.div`
@@ -28,7 +29,7 @@ const Home = () => {
       <Container>
         <GridContainer>
           <PostForm />
-          {/* {mainPosts.map((post) => <PostCard key={post.id} post={post} />)} */}
+          {mainPosts.map((post) => <PostCard key={post.id} post={post} />)}
         </GridContainer>
       </Container>
     </AppLayout>

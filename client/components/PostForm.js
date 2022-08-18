@@ -1,9 +1,10 @@
 import React, { useCallback, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
 import { FaRegImage } from 'react-icons/fa';
 import { IoMdRemove } from "react-icons/io";
+import { addPost } from "../reducers/post";
 
 const Container = styled.div`
   width: 100%;
@@ -15,14 +16,18 @@ const FormContainer = styled.form`
   min-height: 120px;
   border-bottom: 1px solid #e6ecf0;
   padding: 10px;
-  display: flex;
   position: relative;
+`;
+
+const FormUpSideContainer = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
 const ProfileImageContainer = styled.div`
   width: 60px;
   height: 60px;
-  margin-right: 10px;
+  margin-right: 15px;
   border-radius: 50px;
   overflow: hidden;
 `;
@@ -40,7 +45,6 @@ const ContentInput = styled(TextArea)`
   min-height: 50px;
   max-height: 300px;
   margin-bottom: 50px;
-
   :disabled {
     background-color: white;
   }
@@ -119,6 +123,7 @@ const ImageDeleteContainer = styled.div`
 const PostForm = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
   const { imagePaths } = useSelector((state) => state.post);
+  const dispatch = useDispatch();
 
   const [content, setContent] = useState('');
   const onChangeContent = useCallback((e) => {
@@ -146,46 +151,55 @@ const PostForm = () => {
   });
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+    dispatch(addPost);
+    setContent('');
+  }, []);
+
   return (
     <Container>
-      <FormContainer encType="multipart/form-data">
-        <ProfileImageContainer>
-          <ProfileImage src={require('../image/user.png')} />
-        </ProfileImageContainer>
-        <ContentInput 
-          placeholder={`${
-            isLoggedIn
-              ? "오늘은 어떤 일이 있었나요?"
-              : "로그인 후 사용해주세요."
-          }`}
-          disabled={isLoggedIn ? false : true}
-          value={content}
-          onChange={onChangeContent}
-          style={{
-            resize: "none",
-            outline: "none",
-            overflow: "hidden",
-           }}
-        />
-        <input
-          type="file"
-          multiple
-          hidden
-          ref={imageInput}
-          onChange={onChangeImages}
-        />
-        <IconContainer onClick={onClickImageUpload}>
-           <FaRegImage />
-        </IconContainer>
-        <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>
-          게시
-        </SubmitButton>
+      <FormContainer onSubmit={onSubmit} encType="multipart/form-data">
+        <FormUpSideContainer>
+          <ProfileImageContainer>
+            <ProfileImage src={require('../image/user.png')} />
+          </ProfileImageContainer>
+          <ContentInput 
+            placeholder={`${
+              isLoggedIn
+                ? "오늘은 어떤 일이 있었나요?"
+                : "로그인 후 사용해주세요."
+            }`}
+            disabled={isLoggedIn ? false : true}
+            value={content}
+            onChange={onChangeContent}
+            style={{
+              resize: "none",
+              outline: "none",
+              overflow: "hidden",
+            }}
+          />
+          <input
+            type="file"
+            multiple
+            hidden
+            ref={imageInput}
+            onChange={onChangeImages}
+          />
+          <IconContainer onClick={onClickImageUpload}>
+            <FaRegImage />
+          </IconContainer>
+          <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>
+            게시
+          </SubmitButton>
+        </FormUpSideContainer>
         <ImageUploadContainer>
           {imagePaths && imagePaths.map((path, i) => (
             <ImageContainer key={path}>
               <Image 
                 src={`${path}`} 
                 alt={path}
+                style={{ width: "50px" }}
               />
               <ImageDeleteContainer onClick={onClickDeleteImage(i)}>
                 <IoMdRemove />

@@ -26,8 +26,8 @@ const FormUpSideContainer = styled.div`
 `;
 
 const ProfileImageContainer = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   margin-right: 15px;
   border-radius: 50px;
   overflow: hidden;

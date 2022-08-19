@@ -5,6 +5,7 @@ import TextArea from 'react-textarea-autosize';
 import { FaRegImage } from 'react-icons/fa';
 import { IoMdRemove } from "react-icons/io";
 import { addPost } from "../reducers/post";
+import ProfileImage from "./ProfileImage";
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +15,7 @@ const Container = styled.div`
 const FormContainer = styled.form`
   width: 100%;
   min-height: 120px;
-  border-bottom: 1px solid #e6ecf0;
+  border-bottom: 5px solid #e6ecf0;
   padding: 10px;
   position: relative;
 `;
@@ -30,12 +31,6 @@ const ProfileImageContainer = styled.div`
   margin-right: 15px;
   border-radius: 50px;
   overflow: hidden;
-`;
-
-const ProfileImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
 `;
 
 const ContentInput = styled(TextArea)`

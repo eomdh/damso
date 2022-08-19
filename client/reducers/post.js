@@ -24,6 +24,7 @@ export const initialState = {
       },
       content: '두 번째 댓글'
     }],
+    Likers: [{}],
     imagePaths: [],
     postAdded: false,
   }],

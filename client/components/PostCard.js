@@ -99,8 +99,10 @@ const IconsContainer = styled.div`
 `;
 
 const Amount = styled.div`
+  margin-left: -2px;
+  margin-bottom: 5px;
   font-size: 16px;
-  opacity: 0.8;
+  opacity: 0.7;
 `;
 
 const PostCard = ({ post }) => {
@@ -147,6 +149,7 @@ const PostCard = ({ post }) => {
           <IconsContainer onClick={onToggleCommnet}>
             <FaRegCommentDots color="#3498db"/>
           </IconsContainer>
+          <Amount>{post.Comments.length}</Amount>
         </UnderSideContainer>
         {commentFormOpend && (
           <>

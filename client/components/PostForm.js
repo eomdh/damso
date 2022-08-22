@@ -79,9 +79,6 @@ const SubmitButton = styled.button`
   justify-content: center;
   align-items: center;
   outline: none;
-  &:focus {
-    outline: none;
-  }
 `;
 
 const ImageUploadContainer = styled.div`
@@ -144,6 +141,7 @@ const PostForm = () => {
 
     console.log(imageFormData);
   });
+
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
   const onSubmit = useCallback((e) => {
@@ -160,11 +158,7 @@ const PostForm = () => {
             <ProfileImage src={require('../image/user.png')} />
           </ProfileImageContainer>
           <ContentInput 
-            placeholder={`${
-              isLoggedIn
-                ? "오늘은 어떤 일이 있었나요?"
-                : "로그인 후 사용해주세요."
-            }`}
+            placeholder={isLoggedIn ? "오늘은 어떤 일이 있었나요?" : "로그인 후 사용해주세요."}
             disabled={isLoggedIn ? false : true}
             value={content}
             onChange={onChangeContent}

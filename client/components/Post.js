@@ -105,6 +105,14 @@ const Amount = styled.div`
   opacity: 0.7;
 `;
 
+const CommentContainer = styled.div`
+  width: 100%;
+  max-height: 500px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid #e6ecf0;
+`;
+
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
   const [liked, setLiked] = useState(false);
@@ -122,7 +130,7 @@ const PostCard = ({ post }) => {
     post && (
       <Container>
         <ProfileImageContainer>
-          <ProfileImage src={require('../image/user.png')} /> 
+          <ProfileImage src={require('../image/user.png')} />
         </ProfileImageContainer>
         <PostInformationContainer>
           <Nickname>{ post.User.nickname }</Nickname>
@@ -149,11 +157,13 @@ const PostCard = ({ post }) => {
           <IconsContainer onClick={onToggleCommnet}>
             <FaRegCommentDots color="#3498db"/>
           </IconsContainer>
-          <Amount>{post.Comments.length}</Amount> ``
+          <Amount>{post.Comments.length}</Amount>
         </UnderSideContainer>
         {commentFormOpend && (
           <>
-            {post.Comments && <Comment comment={post.Comments} />}
+            <CommentContainer>
+              {post.Comments.map((v) => <Comment comment={v} />)}
+            </CommentContainer>
             <CommentForm />
           </>
         )}

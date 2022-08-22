@@ -14,8 +14,8 @@ const UpsideContainer = styled.div`
 `;
 
 const ProfileImageContainer = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   margin-right: 18px;
   border-radius: 50px;
   overflow: hidden;

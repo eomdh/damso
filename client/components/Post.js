@@ -63,9 +63,8 @@ const ContentContainer = styled.div`
   align-items: center;
 `;
 
-const Description = styled.span`
-  width: 85%;
-  padding-left: 10px;
+const Content = styled.span`
+  width: 88%;
   overflow: auto;
   min-height: 20px;
   margin-top: 20px;
@@ -143,9 +142,9 @@ const PostCard = ({ post }) => {
         </PostInformationContainer>
         <ContentContainer>
           {post.Images && <PostImages images={post.Images} />}
-          <Description>
+          <Content>
             {post.content}
-          </Description>
+          </Content>
         </ContentContainer>
         <UnderSideContainer>
           <IconsContainer onClick={onToggleLike}>
@@ -164,7 +163,7 @@ const PostCard = ({ post }) => {
             <CommentContainer>
               {post.Comments.map((v) => <Comment comment={v} />)}
             </CommentContainer>
-            <CommentForm />
+            <CommentForm post={post}/>
           </>
         )}
       </Container>

@@ -53,8 +53,9 @@ const SubmitButton = styled.button`
 `;
 
 
-const CommentForm = () => {
+const CommentForm = ({ post }) => {
   const { isLoggedIn } = useSelector((state) => state.user);
+  const id = useSelector((state) => state.user.me?.id);
 
   const [content, setContent] = useState('');
   const onChangeContent = useCallback((e) => {
@@ -78,6 +79,7 @@ const CommentForm = () => {
     if (!content || !content.trim()) {
       return alert("댓글을 작성해주세요.");
     }
+    console.log(post.id, content);
   }, [content])
 
   return (

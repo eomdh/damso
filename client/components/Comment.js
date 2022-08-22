@@ -1,5 +1,5 @@
 import React from 'react';
-import styeld from 'styled-components';
+import styled from 'styled-components';
 
 const Comment = () => {
   return (

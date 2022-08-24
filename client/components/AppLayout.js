@@ -1,12 +1,14 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../reducers/user';
 
 import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
 import { FaUser, FaSearch } from 'react-icons/fa';
+import device from '../utils/device';
 
 const Container = styled.div`
   width: 100%;
@@ -20,6 +22,10 @@ const Container = styled.div`
   background-color: white;
   z-index: 5;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+
+  @media ${device.mobile} {
+    position: static;
+  }
 `;
 
 const IconContainer = styled.div`
@@ -40,6 +46,9 @@ const Icon = styled.div`
   &:hover {
     opacity: 1;
   }
+  @media ${device.tablet} {
+    width: 40px;
+  }
 `;
 
 const SearchForm = styled.form`
@@ -55,6 +64,10 @@ const SearchForm = styled.form`
   opacity: 0.7;
   &:hover {
     opacity: 1;
+  }
+
+  @media ${device.mobileL} {
+    display: none;
   }
 `;
 
@@ -108,6 +121,7 @@ const AppLayout = ({ children }) => {
 
   const onLogout = useCallback(() => {
     dispatch(logoutAction());
+    Router.push("/");
   }, [])
 
   return (

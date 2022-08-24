@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import device from '../utils/device';
 
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const Container = styled.div`
-  margin: 15px 0;
-  width: 100%;
+  margin: 15px 15px 15px 0px;
+  width: 90%;
   overflow: hidden;
 `;
 
@@ -18,7 +19,11 @@ const StyledSlider = styled(Slider)`
 `;
 
 const ImageContainer = styled.div`
-  margin: 0 150px;
+  margin-left: 110px;
+
+  @media ${device.mobile} {
+    margin-left: 0px;
+  }
 `;
 
 const Image = styled.img`

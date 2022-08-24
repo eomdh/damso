@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import device from '../utils/device';
 
 import Slider from "react-slick";
@@ -19,9 +19,13 @@ const StyledSlider = styled(Slider)`
 `;
 
 const ImageContainer = styled.div`
-  margin-left: 110px;
+  margin-left: 100px;
 
-  @media ${device.mobile} {
+  @media ${device.tablet} {
+    margin-left: 140px;
+  }
+
+  @media ${device.mobileL} {
     margin-left: 0px;
   }
 `;

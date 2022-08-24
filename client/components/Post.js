@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
 import PostImages from './PostImages';
+import PostContent from './PostContent';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
@@ -138,7 +139,7 @@ const Post = ({ post }) => {
         <ContentContainer>
           {post.Images && <PostImages images={post.Images} />}
           <Content>
-            {post.content}
+            <PostContent content={post.content} />
           </Content>
         </ContentContainer>
         <UnderSideContainer>

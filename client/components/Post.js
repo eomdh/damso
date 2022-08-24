@@ -10,7 +10,6 @@ import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 
 const Container = styled.div`
   width: 100%;
-  max-height: 700px;
   border-bottom: 5px solid #e6ecf0;
   padding: 10px;
 `; 
@@ -70,10 +69,6 @@ const Content = styled.span`
   margin-top: 20px;
   white-space: pre;
   line-height: 18px;
-  -ms-overflow-style: none; // IE에서 스크롤바 감춤
-  &::-webkit-scrollbar {
-    display: none !important; // 윈도우 크롬 등
-  }
 `;
 
 const UnderSideContainer = styled.div`
@@ -112,7 +107,7 @@ const CommentContainer = styled.div`
   border-top: 2px solid #e6ecf0;
 `;
 
-const PostCard = ({ post }) => {
+const Post = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
   const [liked, setLiked] = useState(false);
   const [commentFormOpend, setCommentFormOpend] = useState(false);
@@ -171,4 +166,4 @@ const PostCard = ({ post }) => {
   )
 };
 
-export default PostCard;
+export default Post;

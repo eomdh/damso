@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import Router from "next/router";
 import useInput from '../hooks/useInput';
 import { loginAction } from '../reducers/user';
 
@@ -84,6 +85,7 @@ const LoginForm = () => {
     e.preventDefault();
     console.log(email, password);
     dispatch(loginAction({ email, password }));
+    Router.push("/");
   },[email, password]);
 
   return (

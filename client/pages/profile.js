@@ -5,7 +5,6 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import UserProfile from '../components/UserProfile';
-import IsNotLoggedIn from '../components/IsNotLoggedIn';
 
 const Container = styled.div`
   width: 100%;
@@ -16,7 +15,6 @@ const Container = styled.div`
 `;
 
 const Profile = () => {
-  const { isLoggedIn } = useSelector((state) => state.user); 
   const { me } = useSelector((state) => state.user);
 
   useEffect(() => {

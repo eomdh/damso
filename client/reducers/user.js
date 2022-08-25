@@ -8,6 +8,7 @@ export const initialState = {
 const dummyUser = {
   id: 1,
   nickname: 'eomdh',
+  profileImagePath: [],
   Posts: [],
   Followings: [],
   Followers: [],

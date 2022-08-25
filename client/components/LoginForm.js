@@ -57,7 +57,7 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button`
+const SubmitButton = styled.button`
   all: unset;
   border-radius: 10px;
   width: 85%;
@@ -110,7 +110,7 @@ const LoginForm = () => {
           placeholder="Password"
           onChange={onChangePassword}>
         </Input>
-        <Button type="submit">LOGIN</Button>
+        <SubmitButton type="submit">LOGIN</SubmitButton>
       </Form>
     </Container>
   )

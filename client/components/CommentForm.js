@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const FormContainer = styled.form`
+const Form = styled.form`
   width: 100%;
   min-height: 50px;
   padding: 10px;
@@ -84,7 +84,7 @@ const CommentForm = ({ post }) => {
 
   return (
     <Container>
-      <FormContainer onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <ContentInput
           placeholder={isLoggedIn ? "댓글을 남겨주세요." : "로그인 후 사용해주세요."}
           disabled={isLoggedIn ? false : true}
@@ -97,7 +97,7 @@ const CommentForm = ({ post }) => {
           }}
         />
         <SubmitButton type="submit" isAvailableUpload={isAvailablePosting}>입력</SubmitButton>
-      </FormContainer>
+      </Form>
     </Container>
   )
 }

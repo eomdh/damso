@@ -62,7 +62,7 @@ const CheckBoxContainer = styled.div`
 
 const CheckBox = styled.input``;
 
-const Button = styled.button`
+const SubmitButton = styled.button`
   all: unset;
   border-radius: 10px;
   width: 85%;
@@ -159,7 +159,7 @@ const SignupForm = () => {
         </CheckBoxContainer>
         {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
         {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
-        <Button type="submit">SIGNUP</Button>
+        <SubmitButton type="submit">SIGNUP</SubmitButton>
       </Form>
     </Container>  
   )

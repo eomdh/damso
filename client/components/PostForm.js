@@ -12,7 +12,7 @@ const Container = styled.div`
   max-height: 500px;
 `;
 
-const FormContainer = styled.form`
+const Form = styled.form`
   width: 100%;
   min-height: 120px;
   border-bottom: 5px solid #e6ecf0;
@@ -152,7 +152,7 @@ const PostForm = () => {
 
   return (
     <Container>
-      <FormContainer onSubmit={onSubmit} encType="multipart/form-data">
+      <Form onSubmit={onSubmit} encType="multipart/form-data">
         <FormUpSideContainer>
           <ProfileImageContainer>
             <ProfileImage src={require('../image/user.png')} />
@@ -196,7 +196,7 @@ const PostForm = () => {
             </ImageContainer>
           ))}
         </ImageUploadContainer>
-      </FormContainer>
+      </Form>
     </Container>
   );
 };

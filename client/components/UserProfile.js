@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import PropType from 'prop-types';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
-import { BsPlusCircleFill } from 'react-icons/bs';
+import { BsPlusCircleFill, BsPencilFill } from 'react-icons/bs';
 
 const Container = styled.div`
   width: 700px;
@@ -25,11 +25,11 @@ const ProfileImageContainer = styled.div`
   overflow: hidden;
 `;
 
-const FormContainer = styled.form`
+const Form = styled.form`
   margin-left: 100px;
 `;
 
-const IconContainer = styled.div`
+const PlusIconContainer = styled.div`
   font-size: 27px;
   color: #1864ab;
   opacity: 0.6;
@@ -44,13 +44,55 @@ const NicknameContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const Nickname = styled.div`
   font-weight: 600;
   font-size: 25px;
   color: #212529;
+`;
+
+const IntroduceContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Introduce = styled.div`
+  margin-right: 7px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #868e96;
+`;
+
+const PencileIconContainer = styled.div`
+  font-size: 15px;
+  margin-top: 2px;
+  opacity: 0.6;
+  cursor: pointer;
+  :hover {
+    opacity: 1;
+  }
+`;
+
+const Button = styled.button`
+  all: unset;
+  border-radius: 10px;
+  width: 20%;
+  height: 30px;
+  padding: 8px 15px;
+  margin-top: 25px;
+  background-color: #1864ab;
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.8;
+  outline: none;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const UserProfile = ({ me }) => {
@@ -69,7 +111,11 @@ const UserProfile = ({ me }) => {
   });
 
 
-  const onSubmit = useCallback(() => {
+  const onSubmitProfileImage = useCallback(() => {
+
+  }, []);
+
+  const onSubmitIntroduce = useCallback(() => {
 
   }, []);
 
@@ -78,7 +124,7 @@ const UserProfile = ({ me }) => {
       <ProfileImageContainer>
         <ProfileImage />
       </ProfileImageContainer>
-      <FormContainer onSubmit={onSubmit} encType="multipart/form-data">
+      <Form onSubmit={onSubmitProfileImage} encType="multipart/form-data">
         <input
           type="file"
           multiple
@@ -86,13 +132,20 @@ const UserProfile = ({ me }) => {
           ref={imageInput}
           onChange={onChangeImages}
         />
-        <IconContainer onClick={onClickImageUpload}>
+        <PlusIconContainer onClick={onClickImageUpload}>
           <BsPlusCircleFill />
-        </IconContainer>
-      </FormContainer>
+        </PlusIconContainer>
+      </Form>
       <NicknameContainer>
         <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
+      <IntroduceContainer>
+        <Introduce>{ me.introduce }</Introduce>
+        <PencileIconContainer><BsPencilFill /></PencileIconContainer>
+      </IntroduceContainer>
+      <Button>
+        내 게시글
+      </Button>
     </Container>
   )
 };

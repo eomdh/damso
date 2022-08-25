@@ -102,8 +102,9 @@ const Amount = styled.div`
 `;
 
 const CommentContainer = styled.div`
-  width: 100%;
+  width: 1500px;
   max-height: 500px;
+  margin-left: -15px;
   margin-top: 10px;
   padding-top: 10px;
   border-top: 2px solid #e6ecf0;

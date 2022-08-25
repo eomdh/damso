@@ -18,14 +18,14 @@ const Image = styled.img`
   object-fit: cover; 
 `;
 
-const ProfileImage = ({ profileSrc }) => {
+const ProfileImage = ({ profileImagePath }) => {
   return (
-    <Container profileSrc={profileSrc ? `%{profileSrc}` : require('../image/user.png')} />
+    <Container profileSrc={profileImagePath ? `%{profileImagePath}` : require('../image/user.png')} />
   );
 };
 
 ProfileImage.propTypes = {
-  profileSrc: PropTypes.string.isRequired,
+  profileImagePath: PropTypes.string.isRequired,
 };
 
 export default ProfileImage;

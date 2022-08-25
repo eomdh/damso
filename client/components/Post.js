@@ -6,6 +6,7 @@ import PostImages from './PostImages';
 import PostContent from './PostContent';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
+
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 

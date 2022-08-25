@@ -1,4 +1,5 @@
 import React from 'react';
+import PropType from 'prop-types';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
 

@@ -1,9 +1,11 @@
 import React from 'react';
+import PropType from 'prop-types';
 import styled from 'styled-components';
+import ProfileImage from './ProfileImage';
 
 const Container = styled.div`
   width: 700px;
-  height: 500px;
+  height: 400px;
   background-color: white;
   border-radius: 20px;
   display: flex;
@@ -21,12 +23,6 @@ const ProfileImageContainer = styled.div`
   overflow: hidden;
 `;
 
-const ProfileImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-`;
-
 const NicknameContainer = styled.div`
   width: 100%;
   display: flex;
@@ -41,15 +37,14 @@ const Nickname = styled.div`
   color: #212529;
 `;
 
-const UserProfile = () => {
-
+const UserProfile = ({ me }) => {
   return (
     <Container>
       <ProfileImageContainer>
-        <ProfileImage src={require('../image/me.png')} />
+        <ProfileImage />
       </ProfileImageContainer>
       <NicknameContainer>
-        <Nickname>Eomdh</Nickname>
+        <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
     </Container>
   )

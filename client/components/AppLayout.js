@@ -124,6 +124,14 @@ const AppLayout = ({ children }) => {
     Router.push("/");
   }, [])
 
+  // const onClickProfilePage = useCallback(() => {
+  //   if (!isLoggedIn) {
+  //     alert("로그인이 필요합니다.");
+  //   } else {
+  //     Router.push('/profile');
+  //   }
+  // }, []);
+
   return (
     <>
       <Container>

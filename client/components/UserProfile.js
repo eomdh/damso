@@ -142,7 +142,7 @@ const UserProfile = ({ me }) => {
         <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
       {onEditForm 
-      ? <IntroduceEditForm setOnEditForm={ setOnEditForm } data={ me.introduce } />
+      ? <IntroduceEditForm setOnEditForm={ setOnEditForm } />
       : (
         <IntroduceContainer>
           <Introduce>{ me.introduce }</Introduce>

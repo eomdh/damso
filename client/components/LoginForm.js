@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import Router from "next/router";
 import useInput from '../hooks/useInput';
-import { loginAction } from '../reducers/user';
-
-import styled from 'styled-components';
+import { loginRequestAction } from '../reducers/user';
 
 const Container = styled.div`
   width: 450px;
@@ -81,19 +80,19 @@ const LoginForm = () => {
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
 
-  const onLoginSubmit = useCallback((e) => {
+  const onLogin = useCallback((e) => {
     e.preventDefault();
+    dispatch(loginRequestAction({email, password}));
     console.log(email, password);
-    dispatch(loginAction({email, password}));
     Router.push("/");
-  },[email, password]);
+  }, [email, password]);
 
   return (
     <Container>
       <TitleContainer>
         <Title>Login</Title>
       </TitleContainer>
-      <Form onSubmit={onLoginSubmit}>
+      <Form onSubmit={onLogin}>
         <Input
           type="email"
           name="user-email"

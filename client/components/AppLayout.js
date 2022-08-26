@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction } from '../reducers/user';
+import { logoutRequestAction } from '../reducers/user';
 
 import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
@@ -120,8 +120,7 @@ const AppLayout = ({ children }) => {
   const { isLoggedIn } = useSelector((state) => state.user);
 
   const onLogout = useCallback(() => {
-    dispatch(logoutAction());
-    Router.push("/");
+    dispatch(logoutRequestAction());
   }, [])
 
   return (

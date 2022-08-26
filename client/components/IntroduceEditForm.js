@@ -36,7 +36,7 @@ const IconContainer = styled.button`
   }
 `;
 
-const IntroduceEditForm = ({ setOnEditForm, data }) => {
+const IntroduceEditForm = ({ setOnEditForm }) => {
   const onClickEditForm = useCallback(() => {
     setOnEditForm(prev => !prev);
   }, []);
@@ -49,7 +49,6 @@ const IntroduceEditForm = ({ setOnEditForm, data }) => {
     <FormContainer>
       <Form onSubmit={onSubmit}>
         <Input
-          placeholder={ data }
           style={{
             resize: "none",
             outline: "none",

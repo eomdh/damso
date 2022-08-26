@@ -2,10 +2,10 @@ import React, { useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
-import { FaRegImage } from 'react-icons/fa';
-import { IoMdRemove } from "react-icons/io";
 import { addPost } from "../reducers/post";
 import ProfileImage from "./ProfileImage";
+import { FaRegImage } from 'react-icons/fa';
+import { IoMdRemove } from "react-icons/io";
 
 const Container = styled.div`
   width: 100%;
@@ -113,7 +113,7 @@ const ImageDeleteContainer = styled.div`
 `;
 
 const PostForm = () => {
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const { me, isLoggedIn } = useSelector((state) => state.user);
   const { imagePaths } = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
@@ -188,7 +188,7 @@ const PostForm = () => {
               <Image 
                 src={`${path}`} 
                 alt={path}
-                style={{ width: "50px" }}
+                style={{width: "50px"}}
               />
               <ImageDeleteContainer onClick={onClickDeleteImage(i)}>
                 <IoMdRemove />

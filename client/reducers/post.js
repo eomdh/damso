@@ -4,6 +4,7 @@ export const initialState = {
     User: {
       id: 1,
       nickname: 'eomdh',
+      profileImagePath: '',
     },
     content: '첫 번째 게시글 #해시태그1 #해시태그2',
     Images: [

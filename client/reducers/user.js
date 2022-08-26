@@ -9,7 +9,7 @@ const dummyUser = {
   id: 1,
   nickname: 'eomdh',
   introduce: '안녕하세요~ 엄덕현입니다.',
-  profileImagePath: [],
+  profileImagePath: '',
   Posts: [],
   Followings: [],
   Followers: [],

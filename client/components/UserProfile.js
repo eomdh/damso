@@ -117,8 +117,8 @@ const UserProfile = ({ me }) => {
     setOnEditForm(prev => !prev);
   }, [onEditForm]);
 
-  const onSubmitProfileImage = useCallback(() => {
-
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
   }, []);
 
   return (
@@ -126,7 +126,7 @@ const UserProfile = ({ me }) => {
       <ProfileImageContainer>
         <ProfileImage />
       </ProfileImageContainer>
-      <Form onSubmit={onSubmitProfileImage} encType="multipart/form-data">
+      <Form onSubmit={ onSubmit } encType="multipart/form-data">
         <input
           type="file"
           multiple
@@ -134,7 +134,7 @@ const UserProfile = ({ me }) => {
           ref={imageInput}
           onChange={onChangeImages}
         />
-        <PlusIconContainer onClick={onClickImageUpload}>
+        <PlusIconContainer onClick={ onClickImageUpload }>
           <BsPlusCircleFill />
         </PlusIconContainer>
       </Form>
@@ -142,11 +142,11 @@ const UserProfile = ({ me }) => {
         <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
       {onEditForm 
-      ? <IntroduceEditForm setOnEditForm={ setOnEditForm} data={me.introduce} />
+      ? <IntroduceEditForm setOnEditForm={ setOnEditForm } data={ me.introduce } />
       : (
         <IntroduceContainer>
           <Introduce>{ me.introduce }</Introduce>
-          <PencilIconContainer onClick={onClickEditForm}>
+          <PencilIconContainer onClick={ onClickEditForm }>
             <BsPencilFill />
           </PencilIconContainer>
         </IntroduceContainer>)}

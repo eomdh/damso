@@ -86,9 +86,9 @@ const CommentForm = ({ post }) => {
     <Container>
       <Form onSubmit={onSubmit}>
         <ContentInput
-          placeholder={isLoggedIn ? "댓글을 남겨주세요." : "로그인 후 이용해주세요."}
-          disabled={isLoggedIn ? false : true}
-          value={content}
+          placeholder={ isLoggedIn ? "댓글을 남겨주세요." : "로그인 후 이용해주세요." }
+          disabled={ isLoggedIn ? false : true }
+          value={ content }
           onChange={onChangeContent}
           style={{
             resize: "none",

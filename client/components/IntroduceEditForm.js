@@ -23,7 +23,8 @@ const Input = styled(TextArea)`
   border-radius: 5px;
 `;
 
-const IconContainer = styled.div`
+const IconContainer = styled.button`
+  all: unset;
   margin-top: 2px;
   margin-left: 8px;
   font-size: 22px;
@@ -40,17 +41,22 @@ const IntroduceEditForm = ({ setOnEditForm, data }) => {
     setOnEditForm(prev => !prev);
   }, []);
 
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+  });
+  
   return (
     <FormContainer>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Input
+          placeholder={ data }
           style={{
             resize: "none",
             outline: "none",
             overflow: "hidden",
           }}/>
-          <IconContainer onClick={onClickEditForm}>
-            <BsCheckCircleFill />
+          <IconContainer type="submit">
+            <BsCheckCircleFill onClick={onClickEditForm}/>
           </IconContainer>
       </Form>
     </FormContainer>

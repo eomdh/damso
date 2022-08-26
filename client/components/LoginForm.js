@@ -84,7 +84,7 @@ const LoginForm = () => {
   const onLoginSubmit = useCallback((e) => {
     e.preventDefault();
     console.log(email, password);
-    dispatch(loginAction({ email, password }));
+    dispatch(loginAction({email, password}));
     Router.push("/");
   },[email, password]);
 

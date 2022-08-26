@@ -130,7 +130,7 @@ const Post = ({ post }) => {
           <ProfileImage src={require('../image/user.png')} />
         </ProfileImageContainer>
         <PostInformationContainer>
-          <Nickname>{ post.User.nickname }</Nickname>
+          <Nickname>{post.User.nickname}</Nickname>
           {id && post.User.id === id
             ? ( <DeleteButton>
                   <FaTrashAlt />

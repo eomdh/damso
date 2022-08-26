@@ -158,7 +158,7 @@ const PostForm = () => {
             <ProfileImage src={require('../image/user.png')} />
           </ProfileImageContainer>
           <ContentInput 
-            placeholder={isLoggedIn ? "오늘은 어떤 일이 있었나요?" : "로그인 후 사용해주세요."}
+            placeholder={isLoggedIn ? "오늘은 어떤 일이 있었나요?" : "로그인 후 이용해주세요."}
             disabled={isLoggedIn ? false : true}
             value={content}
             onChange={onChangeContent}

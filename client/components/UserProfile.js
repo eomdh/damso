@@ -1,8 +1,9 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import PropType from 'prop-types';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
 import { BsPlusCircleFill, BsPencilFill } from 'react-icons/bs';
+import IntroduceEditForm from './IntroduceEditForm';
 
 const Container = styled.div`
   width: 700px;
@@ -56,6 +57,7 @@ const Nickname = styled.div`
 const IntroduceContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 30px;
 `;
 
 const Introduce = styled.div`
@@ -65,7 +67,7 @@ const Introduce = styled.div`
   color: #868e96;
 `;
 
-const PencileIconContainer = styled.div`
+const PencilIconContainer = styled.div`
   font-size: 15px;
   margin-top: 2px;
   opacity: 0.6;
@@ -81,7 +83,6 @@ const Button = styled.button`
   width: 20%;
   height: 30px;
   padding: 8px 15px;
-  margin-top: 25px;
   background-color: #1864ab;
   color: white;
   font-weight: 700;
@@ -96,6 +97,8 @@ const Button = styled.button`
 `;
 
 const UserProfile = ({ me }) => {
+  const [onEditForm, setOnEditForm] = useState(false);
+
   const imageInput = useRef();
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
@@ -110,12 +113,11 @@ const UserProfile = ({ me }) => {
     console.log(imageFormData);
   });
 
+  const onClickEditForm = useCallback(() => {
+    setOnEditForm(prev => !prev);
+  }, [onEditForm]);
 
   const onSubmitProfileImage = useCallback(() => {
-
-  }, []);
-
-  const onSubmitIntroduce = useCallback(() => {
 
   }, []);
 
@@ -139,10 +141,15 @@ const UserProfile = ({ me }) => {
       <NicknameContainer>
         <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
-      <IntroduceContainer>
-        <Introduce>{ me.introduce }</Introduce>
-        <PencileIconContainer><BsPencilFill /></PencileIconContainer>
-      </IntroduceContainer>
+      {onEditForm 
+      ? <IntroduceEditForm setOnEditForm={ setOnEditForm} data={me.introduce} />
+      : (
+        <IntroduceContainer>
+          <Introduce>{ me.introduce }</Introduce>
+          <PencilIconContainer onClick={onClickEditForm}>
+            <BsPencilFill />
+          </PencilIconContainer>
+        </IntroduceContainer>)}
       <Button>
         내 게시글
       </Button>

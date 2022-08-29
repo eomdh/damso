@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import device from '../utils/device';
 
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
@@ -12,29 +11,16 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const StyledSlider = styled(Slider)`
-  .slick-slide div{
-    outline: none;
-  }
-`;
-
 const ImageContainer = styled.div`
-  margin-left: 100px;
-
-  @media ${device.tablet} {
-    margin-left: 140px;
-  }
-
-  @media ${device.mobileL} {
-    margin-left: 0px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Image = styled.img`
   max-width: 400px;
   width: 100%;
   height: 500px;
-  border-radius: 5px;
 `;
 
 const PostImages = ({ images }) => {
@@ -57,7 +43,7 @@ const PostImages = ({ images }) => {
   if (images.length > 1) {
     return (
       <Container>
-        <StyledSlider {...settings}>
+        <Slider {...settings}>
           {images.map(image => (
             <div key={image.src}>
               <ImageContainer>
@@ -65,7 +51,7 @@ const PostImages = ({ images }) => {
               </ImageContainer>
             </div>
           ))}
-        </StyledSlider>
+        </Slider>
       </Container>
     );
   };

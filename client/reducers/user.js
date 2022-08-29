@@ -134,6 +134,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         changeIntroduceLoading: false,
         changeIntroduceDone: true,
+        introduce: action.data,
       };
     case CHANGE_INTRODUCE_FAILURE:
       return {

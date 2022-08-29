@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeIntroduce } from '../reducers/user';
 import styled from 'styled-components';
@@ -42,7 +42,7 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
   const dispatch = useDispatch();
   
   const { introduce } = useSelector((state) => state.user.me);
-  const [introduceInput, setIntroduceInput] = useState({ introduce });
+  const [introduceInput, setIntroduceInput] = useState(introduce);
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
   const onClickEditForm = useCallback(() => {
@@ -65,8 +65,9 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
       return alert("글자수가 너무 많습니다.");
     }
     dispatch(changeIntroduce(introduceInput));
-  });
-  
+    setOnEditForm(prev => !prev);
+  }, [introduceInput]);
+
   return (
     <FormContainer>
       <Form onSubmit={onSubmit}>
@@ -79,7 +80,7 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
             overflow: "hidden",
           }}/>
           <IconContainer type="submit">
-            <BsCheckCircleFill onClick={onClickEditForm}/>
+            <BsCheckCircleFill />
           </IconContainer>
       </Form>
     </FormContainer>

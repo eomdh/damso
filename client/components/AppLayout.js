@@ -116,7 +116,7 @@ const Button = styled.div`
 const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
 
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   const onLogout = useCallback(() => {
     dispatch(logOutRequestAction());
@@ -148,7 +148,7 @@ const AppLayout = ({ children }) => {
           </SearchIconContainer>
         </SearchForm>
         <ButtonContainer>
-          {isLoggedIn ? (
+          {me ? (
             <Link href="/">
               <Button 
                 backgroundColor="#1864ab" 

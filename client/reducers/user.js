@@ -8,6 +8,9 @@ export const initialState = {
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
+  changeIntroduceLoading: false,
+  changeIntroduceDone: false,
+  changeIntroduceError: null,
   me: null,
   signUpData: {},
   loginData: {},
@@ -24,6 +27,10 @@ export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
 export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
+
+export const CHANGE_INTRODUCE_REQUEST = "CHANGE_INTRODUCE_REQUEST";
+export const CHANGE_INTRODUCE_SUCCESS = "CHANGE_INTRODUCE_SUCCESS";
+export const CHANGE_INTRODUCE_FAILURE = "CHANGE_INTRODUCE_FAILURE";
 
 const dummyUser = (data) => ({
   ...data,
@@ -44,6 +51,13 @@ export const logInRequestAction = (data) => {
 export const logOutRequestAction = () => {
   return {
     type: LOG_OUT_REQUEST,
+  }
+};
+
+export const changeIntroduce = (data) => {
+  return {
+    type: CHANGE_INTRODUCE_REQUEST,
+    data,
   }
 };
 
@@ -107,6 +121,25 @@ const reducer = (state = initialState, action) => {
         ...state,
         signUpLoading: false,
         signUpError: action.error,
+      };
+    case CHANGE_INTRODUCE_REQUEST:
+      return {
+        ...state,
+        changeIntroduceLoading: true,
+        changeIntroduceDone: false,
+        changeIntroduceError: null,
+      };
+    case CHANGE_INTRODUCE_SUCCESS:
+      return {
+        ...state,
+        changeIntroduceLoading: false,
+        changeIntroduceDone: true,
+      };
+    case CHANGE_INTRODUCE_FAILURE:
+      return {
+        ...state,
+        changeIntroduceLoading: false,
+        changeIntroduceError: action.error,
       };
     default:
       return state;

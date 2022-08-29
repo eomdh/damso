@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
+import { ADD_COMMENT_REQUEST } from '../reducers/post';
 
 const Container = styled.div`
   width: 100%;
@@ -54,10 +55,19 @@ const SubmitButton = styled.button`
 
 
 const CommentForm = ({ post }) => {
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
-
+  const { addCommentDone } = useSelector((state) => state.post);
+  
   const [content, setContent] = useState('');
+  const [isAvailablePosting, setIsAvailablePosting] = useState(false);
+
+  useEffect(() => {
+    if (addCommentDone) {
+      setContent('');
+    }
+  }, [addCommentDone])
+
   const onChangeContent = useCallback((e) => {
     const {target: {value}} = e;
     setContent(e.target.value);
@@ -68,8 +78,6 @@ const CommentForm = ({ post }) => {
     };
   }, [content]);
 
-  const [isAvailablePosting, setIsAvailablePosting] = useState(false);
-
   const onSubmit = useCallback((e) => {
     e.preventDefault();
     if (content.length > 500) {
@@ -79,17 +87,20 @@ const CommentForm = ({ post }) => {
     if (!content || !content.trim()) {
       return alert("댓글을 작성해주세요.");
     }
-    console.log(post.id, content);
+    dispatch({
+      type: ADD_COMMENT_REQUEST,
+      data: { content: content, postId: post.id, userId: id }
+    });
   }, [content])
 
   return (
     <Container>
       <Form onSubmit={onSubmit}>
         <ContentInput
-          placeholder={ isLoggedIn ? "댓글을 남겨주세요." : "로그인 후 이용해주세요." }
-          disabled={ isLoggedIn ? false : true }
-          value={ content }
-          onChange={onChangeContent}
+          placeholder={id ? "댓글을 남겨주세요." : "로그인 후 이용해주세요."}
+          disabled={id ? false : true}
+          value={content}
+          onChange={onChangeContent }
           style={{
             resize: "none",
             outline: "none",

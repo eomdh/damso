@@ -3,6 +3,7 @@ import {
   LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
   LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE,
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
+  CHANGE_INTRODUCE_REQUEST, CHANGE_INTRODUCE_SUCCESS, CHANGE_INTRODUCE_FAILURE,
 } from '../reducers/user';
 
 function logInAPI(data) {
@@ -44,8 +45,8 @@ function* logOut() {
   };
 };
 
-function signUpAPI() {
-  return axios.post('/api/signup');
+function signUpAPI(data) {
+  return axios.post('/api/signup', data);
 };
 
 function* signUp(action) {
@@ -64,6 +65,26 @@ function* signUp(action) {
   };
 };
 
+function changeIntroduceAPI(data) {
+  return axios.post('/api/changeIntroduce', data);
+};
+
+function* changeIntroduce(action) {
+  try {
+    // const result = yield call(changeIntroduceAPI);
+    yield delay(500);
+    yield put({
+      type: CHANGE_INTRODUCE_SUCCESS,
+      data: action.data,
+    });  
+  } catch (err) {
+    yield put({
+      type: CHANGE_INTRODUCE_FAILURE,
+      error: err.response.data,
+    });
+  };
+};
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 };
@@ -76,10 +97,15 @@ function* watchSignUp() {
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 };
 
+function* watchChangeIntroduce() {
+  yield takeLatest(CHANGE_INTRODUCE_REQUEST, changeIntroduce);
+};
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
     fork(watchLogOut),
-    fork(watchSignUp)
+    fork(watchSignUp),
+    fork(watchChangeIntroduce),
   ]);
 };

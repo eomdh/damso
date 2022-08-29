@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
@@ -113,11 +113,19 @@ const ImageDeleteContainer = styled.div`
 `;
 
 const PostForm = () => {
-  const { me, isLoggedIn } = useSelector((state) => state.user);
-  const { imagePaths } = useSelector((state) => state.post);
+  const { me } = useSelector((state) => state.user);
+  const { imagePaths, addPostDone } = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
   const [content, setContent] = useState('');
+  const [isAvailablePosting, setIsAvailablePosting] = useState(false);
+
+  useEffect(() => {
+    if (addPostDone) {
+      setContent('');
+    };
+  }, [addPostDone]);
+
   const onChangeContent = useCallback((e) => {
     const {target: {value}} = e;
     setContent(e.target.value);
@@ -142,13 +150,10 @@ const PostForm = () => {
     console.log(imageFormData);
   });
 
-  const [isAvailablePosting, setIsAvailablePosting] = useState(false);
-
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    dispatch(addPost);
-    setContent('');
-  }, []);
+    dispatch(addPost(content));
+  }, [content]);
 
   return (
     <Container>
@@ -158,8 +163,8 @@ const PostForm = () => {
             <ProfileImage src={require('../image/user.png')} />
           </ProfileImageContainer>
           <ContentInput 
-            placeholder={isLoggedIn ? "오늘은 어떤 일이 있었나요?" : "로그인 후 이용해주세요."}
-            disabled={isLoggedIn ? false : true}
+            placeholder={me ? "오늘은 어떤 일이 있었나요?" : "로그인 후 이용해주세요."}
+            disabled={me ? false : true}
             value={content}
             onChange={onChangeContent}
             style={{

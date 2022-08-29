@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import useInput from '../hooks/useInput';
+import { SIGN_UP_REQUEST } from '../reducers/user';
 
 const Container = styled.div`
   width: 450px;
@@ -88,6 +90,7 @@ const ErrorMessage = styled.span`
 `;
 
 const SignupForm = () => {
+  const dispatch = useDispatch();
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
@@ -114,7 +117,11 @@ const SignupForm = () => {
     if (!term) {
       return setTermError(true);
     }
-    console.log(email, nickname, password )
+    dispatch({
+      type: SIGN_UP_REQUEST,
+      data: { email, password, nickname },
+    })
+    console.log(email, password, nickname);
   }, [email, password, verifyPassword, term]);
 
   return (

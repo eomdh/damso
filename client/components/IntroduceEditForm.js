@@ -1,4 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeIntroduce } from '../reducers/user';
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
 import { BsCheckCircleFill } from 'react-icons/bs';
@@ -37,18 +39,40 @@ const IconContainer = styled.button`
 `;
 
 const IntroduceEditForm = ({ setOnEditForm }) => {
+  const dispatch = useDispatch();
+  
+  const { introduce } = useSelector((state) => state.user.me);
+  const [introduceInput, setIntroduceInput] = useState({ introduce });
+  const [isAvailablePosting, setIsAvailablePosting] = useState(false);
+
   const onClickEditForm = useCallback(() => {
     setOnEditForm(prev => !prev);
   }, []);
 
+  const onChangeIntroduce = useCallback((e) => {
+    const {target: {value}} = e;
+    setIntroduceInput(e.target.value);
+    if (value.trim()) {
+      setIsAvailablePosting(true);
+    } else if (value.length === 0 || value.length > 100) {
+      setIsAvailablePosting(false);
+    };
+  }, [introduceInput]);
+
   const onSubmit = useCallback((e) => {
     e.preventDefault();
+    if (!isAvailablePosting) {
+      return alert("글자수가 너무 많습니다.");
+    }
+    dispatch(changeIntroduce(introduceInput));
   });
   
   return (
     <FormContainer>
       <Form onSubmit={onSubmit}>
         <Input
+          value={introduceInput}
+          onChange={onChangeIntroduce}
           style={{
             resize: "none",
             outline: "none",

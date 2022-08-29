@@ -41,14 +41,14 @@ const dummyUser = (data) => ({
   Posts: [],
 });
 
-export const logInRequestAction = (data) => {
+export const logIn = (data) => {
   return {
     type: LOG_IN_REQUEST,
     data,
   }
 };
 
-export const logOutRequestAction = () => {
+export const logOut = () => {
   return {
     type: LOG_OUT_REQUEST,
   }

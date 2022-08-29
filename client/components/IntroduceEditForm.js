@@ -45,10 +45,6 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
   const [introduceInput, setIntroduceInput] = useState(introduce);
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
-  const onClickEditForm = useCallback(() => {
-    setOnEditForm(prev => !prev);
-  }, []);
-
   const onChangeIntroduce = useCallback((e) => {
     const {target: {value}} = e;
     setIntroduceInput(e.target.value);

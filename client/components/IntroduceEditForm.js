@@ -44,14 +44,12 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
   
   const { introduce } = useSelector((state) => state.user.me);
   const [introduceInput, setIntroduceInput] = useState(introduce);
-  const [isAvailablePosting, setIsAvailablePosting] = useState(false);
+  const [isAvailablePosting, setIsAvailablePosting] = useState(true);
 
   const onChangeIntroduce = useCallback((e) => {
     const {target: {value}} = e;
     setIntroduceInput(e.target.value);
-    if (value.trim()) {
-      setIsAvailablePosting(true);
-    } else if (value.length === 0 || value.length > 100) {
+    if (value.length > 100) {
       setIsAvailablePosting(false);
     };
   }, [introduceInput]);

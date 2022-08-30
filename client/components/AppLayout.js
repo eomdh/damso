@@ -22,9 +22,9 @@ const Container = styled.div`
   z-index: 5;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 
-  // @media ${device.mobile} {
-  //   position: static;
-  // }
+  @media ${device.mobile} {
+    position: static;
+  }
 `;
 
 const IconContainer = styled.div`

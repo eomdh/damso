@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
 import { BsPlusCircleFill, BsPencilFill } from 'react-icons/bs';
 import IntroduceEditForm from './IntroduceEditForm';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
   width: 700px;
@@ -97,6 +98,7 @@ const Button = styled.button`
 `;
 
 const UserProfile = ({ me }) => {
+  const id = useSelector((state) => state.user.me?.id);
   const [onEditForm, setOnEditForm] = useState(false);
 
   const imageInput = useRef();
@@ -134,9 +136,10 @@ const UserProfile = ({ me }) => {
           ref={imageInput}
           onChange={onChangeImages}
         />
+        { id && 
         <PlusIconContainer onClick={ onClickImageUpload }>
           <BsPlusCircleFill />
-        </PlusIconContainer>
+        </PlusIconContainer> }
       </Form>
       <NicknameContainer>
         <Nickname>{ me.nickname }</Nickname>
@@ -146,12 +149,13 @@ const UserProfile = ({ me }) => {
       : (
         <IntroduceContainer>
           <Introduce>{ me.introduce }</Introduce>
+          { id && 
           <PencilIconContainer onClick={ onClickEditForm }>
             <BsPencilFill />
-          </PencilIconContainer>
+          </PencilIconContainer> }
         </IntroduceContainer>)}
       <Button>
-        내 게시글
+        게시글보기
       </Button>
     </Container>
   );

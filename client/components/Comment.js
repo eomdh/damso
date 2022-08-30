@@ -15,8 +15,7 @@ const InformationContainer = styled.div`
   display: flex;
   height: 20px;
   justify-content: space-between;
-  margin-left: 10px;
-  margin-top: 3px;
+  margin: 3px 10px 0px 10px;
 `;
 
 const ProfileImageContainer = styled.div`

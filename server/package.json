@@ -1,0 +1,14 @@
+{
+  "name": "bluejay-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": ""
+  },
+  "author": "Eom Deokhyeon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

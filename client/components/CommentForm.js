@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
 import { ADD_COMMENT_REQUEST } from '../reducers/post';
+import device from '../utils/device';
 
 const Container = styled.div`
   width: 100%;
@@ -31,6 +32,10 @@ const ContentInput = styled(TextArea)`
   max-height: 300px;
   border-radius: 10px;
   background-color: #f8f9fa;
+
+  @media ${device.mobileL} {
+    width: 72%;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -52,8 +57,13 @@ const SubmitButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
 
+  @media ${device.mobileL} {
+    font-size: 12px;
+    width: 50px;
+    height: 30px;
+  }
+`;
 
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();

@@ -7,7 +7,7 @@ import PostImages from './PostImages';
 import PostContent from './PostContent';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
-import { REMOVE_POST_REQUEST } from '../reducers/post';
+import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 
@@ -95,8 +95,7 @@ const IconsContainer = styled.div`
 `;
 
 const Amount = styled.div`
-  margin-left: -2px;
-  margin-bottom: 5px;
+  margin: 0px 10px 5px -3px;
   font-size: 16px;
   opacity: 0.7;
 `;
@@ -112,7 +111,7 @@ const CommentContainer = styled.div`
 const Post = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
-  const [liked, setLiked] = useState(false);
+  const liked = post.Likers.find((v) => v.id === id);
   const [commentFormOpend, setCommentFormOpend] = useState(false);
   
   const onRemovePost = useCallback(() => {
@@ -122,9 +121,31 @@ const Post = ({ post }) => {
     })
   }, []);
 
-  const onToggleLike = useCallback(() => {
-    setLiked((prev) => !prev);
-  }, [liked]);
+  const onLike = useCallback(() => {
+    if (!id) {
+      return alert("로그인이 필요합니다");
+    };
+    return dispatch({
+      type: LIKE_POST_REQUEST,
+      data: {
+        postId: post.id,
+        userId: id,
+      }
+    });
+  }, [id]);
+
+  const onUnlike = useCallback(() => {
+    if (!id) {
+      return alert("로그인이 필요합니다");
+    };
+    return dispatch({
+      type: UNLIKE_POST_REQUEST,
+      data: {
+        postId: post.id,
+        userId: id,
+      }
+    });
+  }, [id]);
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpend((prev) => !prev);
@@ -152,12 +173,13 @@ const Post = ({ post }) => {
           </Content>
         </ContentContainer>
         <UnderSideContainer>
-          <IconsContainer onClick={onToggleLike}>
+          <IconsContainer>
             {liked 
-             ? <IoIosHeartEmpty color="red" />
-             : <IoIosHeart color="red" />
+             ? <IoIosHeart color="red" onClick={onUnlike}/>
+             : <IoIosHeartEmpty color="red" onClick={onLike} />
             }
           </IconsContainer>
+          <Amount>{post.Likers.length}</Amount>
           <IconsContainer onClick={onToggleComment}>
             <FaRegCommentDots color="#3498db"/>
           </IconsContainer>

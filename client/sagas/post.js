@@ -7,6 +7,8 @@ import {
   REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE,
   ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
   REMOVE_COMMENT_REQUEST, REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAILURE,
+  LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE,
+  UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE,
   generateDummyPost,
 } from '../reducers/post';
 import { ADD_POST_OF_ME, REMOVE_POST_OF_ME } from '../reducers/user';
@@ -123,6 +125,46 @@ function* removeComment(action) {
   };
 };
 
+function likePostAPI(data) {
+  return axios.delete(`/api/post/${data}/like`);
+};
+
+function* likePost(action) {
+  try {
+    // const result = yield call(likePostAPI, action.data);
+    yield delay(500);
+    yield put({
+      type: LIKE_POST_SUCCESS,
+      data: action.data,
+    });  
+  } catch (err) {
+    yield put({
+      type: LIKE_POST_FAILURE,
+      error: err.response.data,
+    });
+  };
+};
+
+function unlikePostAPI(data) {
+  return axios.delete(`/api/post/${data}/unlike`);
+};
+
+function* unlikePost(action) {
+  try {
+    // const result = yield call(unlikePostAPI, action.data);
+    yield delay(500);
+    yield put({
+      type: UNLIKE_POST_SUCCESS,
+      data: action.data,
+    });  
+  } catch (err) {
+    yield put({
+      type: UNLIKE_POST_FAILURE,
+      error: err.response.data,
+    });
+  };
+};
+
 function* watchLoadPosts() {
   yield takeLatest(LOAD_POSTS_REQUEST, loadPosts);
 };
@@ -143,6 +185,14 @@ function* watchRemoveComment() {
   yield takeLatest(REMOVE_COMMENT_REQUEST, removeComment);
 };
 
+function* watchLikePost() {
+  yield takeLatest(LIKE_POST_REQUEST, likePost);
+};
+
+function* watchUnlikePost() {
+  yield takeLatest(UNLIKE_POST_REQUEST, unlikePost);
+};
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadPosts),
@@ -150,5 +200,7 @@ export default function* postSaga() {
     fork(watchRemovePost),
     fork(watchAddComment),
     fork(watchRemoveComment),
+    fork(watchLikePost),
+    fork(watchUnlikePost)
   ])
 }

@@ -3,22 +3,7 @@ import faker from 'faker';
 import produce from 'immer';  
 
 export const initialState = {
-  mainPosts: [{
-    id: 1,
-    User: {
-      id: 1,
-      nickname: 'eomdh',
-    },
-    images: [],
-    content: '댓글 삭제 기능',
-    Comments: [{
-      User: {
-        id: 1,
-        nickname: 'eomdh',
-      },
-      content: '댓글 삭제 기능',
-    }]
-  }],
+  mainPosts: [],
   hasMorePosts: true,
   loadPostsLoading: false,
   loadPostsDone: false,
@@ -35,6 +20,12 @@ export const initialState = {
   removeCommentLoading: false,
   removeCommentDone: false,
   removeCommentError: null,
+  likePostLoading: false,
+  likePostDone: false,
+  likePostError: null,
+  unlikePostLoading: false,
+  unlikePostDone: false,
+  unlikePostError: null,
 };
 
 export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
@@ -57,6 +48,14 @@ export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
 export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
 export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
 
+export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST';
+export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';
+export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE';
+
+export const UNLIKE_POST_REQUEST = 'UNLIKE_POST_REQUEST';
+export const UNLIKE_POST_SUCCESS = 'UNLIKE_POST_SUCCESS';
+export const UNLIKE_POST_FAILURE = 'UNLIKE_POST_FAILURE';
+
 export const generateDummyPost = (number) => Array(number).fill().map(() => ({
   id: shortId.generate(),
   User: {
@@ -75,6 +74,7 @@ export const generateDummyPost = (number) => Array(number).fill().map(() => ({
     },
     content: faker.lorem.sentence(),
   }],
+  Likers: [],
 }));
 
 const dummyPost = (data) => ({
@@ -86,6 +86,7 @@ const dummyPost = (data) => ({
   content: data.content,
   images: [],
   Comments: [],
+  Likers: [],
 });
 
 const dummyComment = (data) => ({
@@ -121,10 +122,10 @@ const reducer = (state = initialState, action) => {
         draft.loadPostsError = null;
         break;
       case LOAD_POSTS_SUCCESS:
-        draft.loadPostsLoading = false;
-        draft.loadPostsDone = true;
         draft.mainPosts = draft.mainPosts.concat(action.data);
         draft.hasMorePosts = draft.mainPosts.length < 50;
+        draft.loadPostsLoading = false;
+        draft.loadPostsDone = true;
         break;
       case LOAD_POSTS_FAILURE:
         draft.loadPostsLoading = false;
@@ -136,9 +137,9 @@ const reducer = (state = initialState, action) => {
         draft.addPostError = null;
         break;
       case ADD_POST_SUCCESS:
+        draft.mainPosts.unshift(dummyPost(action.data));
         draft.addPostLoading = false;
         draft.addPostDone = true;
-        draft.mainPosts.unshift(dummyPost(action.data));
         break;
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;
@@ -150,9 +151,9 @@ const reducer = (state = initialState, action) => {
         draft.removePostError = null;
         break;
       case REMOVE_POST_SUCCESS:
+        draft.mainPosts = draft.mainPosts.filter((v) => v.id !== action.data);
         draft.removePostLoading = false;
         draft.removePostDone = false;
-        draft.mainPosts = draft.mainPosts.filter((v) => v.id !== action.data);
         break;
       case REMOVE_POST_FAILURE:
         draft.removePostLoading = false;
@@ -163,12 +164,13 @@ const reducer = (state = initialState, action) => {
         draft.addCommentDone = false;
         draft.addCommentError = null;
         break;
-      case ADD_COMMENT_SUCCESS:
+      case ADD_COMMENT_SUCCESS: {
+        const post  = draft.mainPosts.find((v) => v.id === action.data.postId);
+        post.Comments.push(dummyComment(action.data.content));
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
-        const addCommentPost  = draft.mainPosts.find((v) => v.id === action.data.postId);
-        addCommentPost.Comments.push(dummyComment(action.data.content));
         break;
+      }
       case ADD_COMMENT_FAILURE:
         draft.addCommentLoading = false;
         draft.addCommentError = action.data;
@@ -178,15 +180,48 @@ const reducer = (state = initialState, action) => {
         draft.removeCommentDone = false;
         draft.removeCommentError = null;
         break;
-      case REMOVE_COMMENT_SUCCESS:
+      case REMOVE_COMMENT_SUCCESS: {
+        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
+        post.Comments = post.Comments.filter((v) => v.id !== action.data.commentId);
         draft.removeCommentLoading = false;
         draft.removeCommentDone = true;
-        const removeCommentPost = draft.mainPosts.find((v) => v.id === action.data.postId);
-        removeCommentPost.Comments = removeCommentPost.Comments.filter((v) => v.id !== action.data.commentId);
         break;
+      }
       case REMOVE_COMMENT_FAILURE:
         draft.removeCommentLoading = false;
         draft.removeCommentError = action.data;
+        break;
+      case LIKE_POST_REQUEST:
+        draft.likePostLoading = true;
+        draft.likePostDone = false;
+        draft.likePostError = null;
+        break;
+      case LIKE_POST_SUCCESS: {
+        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
+        post.Likers.push({ id: action.data.userId });
+        draft.likePostLoading = false;
+        draft.likePostDone = true;
+        break;
+      }
+      case LIKE_POST_FAILURE:
+        draft.likePostLoading = false;
+        draft.likePostError = action.data;
+        break;
+      case UNLIKE_POST_REQUEST:
+        draft.unlikePostLoading = true;
+        draft.unlikePostDone = false;
+        draft.unlikePostError = null;
+        break;
+      case UNLIKE_POST_SUCCESS: {
+        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
+        post.Likers = post.Likers.filter((v) => v.id !== action.data.userId);
+        draft.unlikePostLoading = false;
+        draft.unlikePostDone = true;
+        break;
+      }
+      case UNLIKE_POST_FAILURE:
+        draft.unlikePostLoading = false;
+        draft.unlikePostError = action.data;
         break;
       default:
         break;

@@ -15,7 +15,7 @@ const Container = styled.div`
 const Form = styled.form`
   width: 100%;
   min-height: 120px;
-  border-bottom: 5px solid #e6ecf0;
+  border-bottom: 10px solid #e6ecf0;
   padding: 10px;
   position: relative;
 `;

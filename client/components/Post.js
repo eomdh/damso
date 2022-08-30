@@ -13,7 +13,7 @@ import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 
 const Container = styled.div`
   width: 100%;
-  border-bottom: 5px solid #e6ecf0;
+  border-bottom: 10px solid #e6ecf0;
   padding: 10px;
 `; 
 

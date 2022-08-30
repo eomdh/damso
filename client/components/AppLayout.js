@@ -111,6 +111,10 @@ const Button = styled.div`
     transform: scale(0.98);
     opacity: 1;
   }
+  @media ${device.tablet} {
+    width: 50px;
+    font-size: 12px;
+  }
 `;
 
 const AppLayout = ({ children }) => {

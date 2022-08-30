@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
 import PostImages from './PostImages';
 import PostContent from './PostContent';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
-
+import { REMOVE_POST_REQUEST } from '../reducers/post';
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 
@@ -111,15 +111,23 @@ const CommentContainer = styled.div`
 `;
 
 const Post = ({ post }) => {
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const [liked, setLiked] = useState(false);
   const [commentFormOpend, setCommentFormOpend] = useState(false);
   
+  const onRemovePost = useCallback(() => {
+    dispatch({
+      type: REMOVE_POST_REQUEST,
+      data: post.id,
+    })
+  }, []);
+
   const onToggleLike = useCallback(() => {
     setLiked((prev) => !prev);
   }, [liked]);
 
-  const onToggleCommnet = useCallback(() => {
+  const onToggleComment = useCallback(() => {
     setCommentFormOpend((prev) => !prev);
   }, [commentFormOpend]);
 
@@ -131,10 +139,10 @@ const Post = ({ post }) => {
         </ProfileImageContainer>
         <PostInformationContainer>
           <Nickname>{post.User.nickname}</Nickname>
-          {id && post.User.id === id
-            ? ( <DeleteButton>
-                  <FaTrashAlt />
-                </DeleteButton> ) 
+          {id && post.User.id === parseInt(id)
+            ? ( <DeleteButton onClick={onRemovePost}>
+                  <FaTrashAlt />  게시물 삭제 15분
+                </DeleteButton> )
             : null 
           }
         </PostInformationContainer>
@@ -151,7 +159,7 @@ const Post = ({ post }) => {
              : <IoIosHeart color="red" />
             }
           </IconsContainer>
-          <IconsContainer onClick={onToggleCommnet}>
+          <IconsContainer onClick={onToggleComment}>
             <FaRegCommentDots color="#3498db"/>
           </IconsContainer>
           <Amount>{post.Comments.length}</Amount>

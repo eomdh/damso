@@ -32,6 +32,9 @@ export const CHANGE_INTRODUCE_REQUEST = "CHANGE_INTRODUCE_REQUEST";
 export const CHANGE_INTRODUCE_SUCCESS = "CHANGE_INTRODUCE_SUCCESS";
 export const CHANGE_INTRODUCE_FAILURE = "CHANGE_INTRODUCE_FAILURE";
 
+export const ADD_POST_OF_ME = "ADD_POST_OF_ME";
+export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
+
 const dummyUser = (data) => ({
   ...data,
   id: '1',
@@ -142,6 +145,22 @@ const reducer = (state = initialState, action) => {
         changeIntroduceLoading: false,
         changeIntroduceError: action.error,
       };
+    case ADD_POST_OF_ME:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          Posts: [{ id: action.data }, ...state.me.Posts],
+        }
+      }
+    case REMOVE_POST_OF_ME:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          Posts: state.me.filter((v) => v.id === action.data),
+        }
+      }
     default:
       return state;
   }

@@ -129,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _utils_device__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/device */ "./utils/device.js");
-var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\bluejay\\client\\components\\AppLayout.js";
+var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\damso\\client\\components\\AppLayout.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -142,35 +142,35 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 const Container = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "AppLayout__Container",
-  componentId: "sc-hi2pmq-0"
+  componentId: "sc-10lualo-0"
 })(["width:100%;height:55px;position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(var(--b6a,219,219,219),1);background-color:white;z-index:5;box-shadow:0 4px 12px 0 rgba(0,0,0,0.05);@media ", "{position:static;}"], _utils_device__WEBPACK_IMPORTED_MODULE_8__["default"].mobile);
 const IconContainer = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "AppLayout__IconContainer",
-  componentId: "sc-hi2pmq-1"
+  componentId: "sc-10lualo-1"
 })(["display:flex;justify-content:flex-start;"]);
 const Icon = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "AppLayout__Icon",
-  componentId: "sc-hi2pmq-2"
+  componentId: "sc-10lualo-2"
 })(["width:80px;height:70%;font-size:30px;margin-left:10px;color:#1864ab;display:flex;justify-content:center;cursor:pointer;opacity:0.8;&:hover{opacity:1;}@media ", "{width:40px;margin-left:5px;}"], _utils_device__WEBPACK_IMPORTED_MODULE_8__["default"].tablet);
 const SearchForm = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.form.withConfig({
   displayName: "AppLayout__SearchForm",
-  componentId: "sc-hi2pmq-3"
+  componentId: "sc-10lualo-3"
 })(["position:relative;justify-content:center;align-items:center;width:380px;height:20px;border:0.5px solid black;border-radius:10px;padding:10px;outline:none;opacity:0.7;&:hover{opacity:1;}@media ", "{width:300px;}@media ", "{width:100px;}"], _utils_device__WEBPACK_IMPORTED_MODULE_8__["default"].tablet, _utils_device__WEBPACK_IMPORTED_MODULE_8__["default"].mobileL);
 const SearchBar = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.input.withConfig({
   displayName: "AppLayout__SearchBar",
-  componentId: "sc-hi2pmq-4"
+  componentId: "sc-10lualo-4"
 })(["all:unset;width:100%;height:100%;font-size:16px;display:flex;"]);
 const SearchIconContainer = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "AppLayout__SearchIconContainer",
-  componentId: "sc-hi2pmq-5"
+  componentId: "sc-10lualo-5"
 })(["position:absolute;top:10px;right:10px;font-size:19px;display:flex;align-items:center;cursor:pointer;color:#1864ab;"]);
 const ButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "AppLayout__ButtonContainer",
-  componentId: "sc-hi2pmq-6"
+  componentId: "sc-10lualo-6"
 })(["display:flex;justify-content:flex-end;"]);
 const Button = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "AppLayout__Button",
-  componentId: "sc-hi2pmq-7"
+  componentId: "sc-10lualo-7"
 })(["width:80px;height:35px;border-radius:5px;text-align:center;background-color:", ";color:white;display:flex;justify-content:center;align-items:center;margin-right:15px;cursor:pointer;opacity:0.8;&:hover{transform:scale(0.98);opacity:1;}@media ", "{width:40px;font-size:10px;margin-right:5px;}"], props => props.backgroundColor, _utils_device__WEBPACK_IMPORTED_MODULE_8__["default"].tablet);
 
 const AppLayout = ({
@@ -397,7 +397,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_textarea_autosize__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_textarea_autosize__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/bs */ "react-icons/bs");
 /* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_icons_bs__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\bluejay\\client\\components\\IntroduceEditForm.js";
+var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\damso\\client\\components\\IntroduceEditForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -408,19 +408,19 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 const FormContainer = styled_components__WEBPACK_IMPORTED_MODULE_4___default.a.div.withConfig({
   displayName: "IntroduceEditForm__FormContainer",
-  componentId: "sc-aylvvj-0"
+  componentId: "sc-hl73kd-0"
 })(["height:53px;"]);
 const Form = styled_components__WEBPACK_IMPORTED_MODULE_4___default.a.form.withConfig({
   displayName: "IntroduceEditForm__Form",
-  componentId: "sc-aylvvj-1"
+  componentId: "sc-hl73kd-1"
 })(["display:flex;align-items:center;justify-content:center;width:100%;margin-bottom:18px;"]);
 const Input = styled_components__WEBPACK_IMPORTED_MODULE_4___default()(react_textarea_autosize__WEBPACK_IMPORTED_MODULE_5___default.a).withConfig({
   displayName: "IntroduceEditForm__Input",
-  componentId: "sc-aylvvj-2"
+  componentId: "sc-hl73kd-2"
 })(["font-size:16px;width:350px;max-height:50px;border:1px solid gray;border-radius:5px;"]);
 const IconContainer = styled_components__WEBPACK_IMPORTED_MODULE_4___default.a.button.withConfig({
   displayName: "IntroduceEditForm__IconContainer",
-  componentId: "sc-aylvvj-3"
+  componentId: "sc-hl73kd-3"
 })(["all:unset;margin-top:2px;margin-left:8px;font-size:22px;color:#1864ab;cursor:pointer;opacity:0.6;:hover{opacity:1;}"]);
 
 const IntroduceEditForm = ({
@@ -531,18 +531,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\bluejay\\client\\components\\ProfileImage.js";
+var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\damso\\client\\components\\ProfileImage.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 const Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "ProfileImage__Container",
-  componentId: "sc-gjqf1o-0"
+  componentId: "sc-1gj710w-0"
 })(["width:100%;height:100%;border-radius:50px;background-image:url(", ");background-color:gray;background-size:cover;background-position:center center;"], props => props.path);
 const Image = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.img.withConfig({
   displayName: "ProfileImage__Image",
-  componentId: "sc-gjqf1o-1"
+  componentId: "sc-1gj710w-1"
 })(["width:100%;height:100%;object-fit:cover;"]);
 
 const ProfileImage = ({
@@ -587,7 +587,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _IntroduceEditForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./IntroduceEditForm */ "./components/IntroduceEditForm.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\bluejay\\client\\components\\UserProfile.js";
+var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\damso\\client\\components\\UserProfile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -598,43 +598,43 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 const Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__Container",
-  componentId: "sc-bk9zf9-0"
+  componentId: "sc-s6xozi-0"
 })(["width:700px;height:400px;background-color:white;border-radius:20px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);"]);
 const ProfileImageContainer = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__ProfileImageContainer",
-  componentId: "sc-bk9zf9-1"
+  componentId: "sc-s6xozi-1"
 })(["margin-top:50px;margin-bottom:-40px;width:150px;height:150px;border-radius:70%;overflow:hidden;"]);
 const Form = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.form.withConfig({
   displayName: "UserProfile__Form",
-  componentId: "sc-bk9zf9-2"
+  componentId: "sc-s6xozi-2"
 })(["margin-left:100px;"]);
 const PlusIconContainer = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__PlusIconContainer",
-  componentId: "sc-bk9zf9-3"
+  componentId: "sc-s6xozi-3"
 })(["font-size:27px;color:#1864ab;opacity:0.6;cursor:pointer;:hover{opacity:1;}"]);
 const NicknameContainer = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__NicknameContainer",
-  componentId: "sc-bk9zf9-4"
+  componentId: "sc-s6xozi-4"
 })(["width:100%;display:flex;justify-content:center;margin-top:15px;margin-bottom:5px;"]);
 const Nickname = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__Nickname",
-  componentId: "sc-bk9zf9-5"
+  componentId: "sc-s6xozi-5"
 })(["font-weight:600;font-size:25px;color:#212529;"]);
 const IntroduceContainer = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__IntroduceContainer",
-  componentId: "sc-bk9zf9-6"
+  componentId: "sc-s6xozi-6"
 })(["display:flex;justify-content:center;margin-bottom:30px;"]);
 const Introduce = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__Introduce",
-  componentId: "sc-bk9zf9-7"
+  componentId: "sc-s6xozi-7"
 })(["margin-right:7px;font-weight:500;font-size:18px;color:#868e96;"]);
 const PencilIconContainer = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "UserProfile__PencilIconContainer",
-  componentId: "sc-bk9zf9-8"
+  componentId: "sc-s6xozi-8"
 })(["font-size:15px;margin-top:2px;opacity:0.6;cursor:pointer;:hover{opacity:1;}"]);
 const Button = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
   displayName: "UserProfile__Button",
-  componentId: "sc-bk9zf9-9"
+  componentId: "sc-s6xozi-9"
 })(["all:unset;border-radius:10px;width:20%;height:30px;padding:8px 15px;background-color:#1864ab;color:white;font-weight:700;font-size:17px;text-align:center;cursor:pointer;opacity:0.8;outline:none;&:hover{opacity:1;}"]);
 
 const UserProfile = ({
@@ -3875,7 +3875,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_AppLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/AppLayout */ "./components/AppLayout.js");
 /* harmony import */ var _components_UserProfile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/UserProfile */ "./components/UserProfile.js");
-var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\bluejay\\client\\pages\\profile.js";
+var _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\damso\\client\\pages\\profile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 

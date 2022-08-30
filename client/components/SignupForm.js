@@ -159,8 +159,8 @@ const SignupForm = () => {
           onChange={onChangeVerifyPassword}>
         </Input>
         <CheckBoxContainer>
-          <CheckBox type="checkbox" value={term} onChange={onChangeTerm} />
-          <label htmlFor={CheckBox}>약관에 동의합니다.</label>
+          <input type="checkbox" value={term} onChange={onChangeTerm} />
+          <label>약관에 동의합니다.</label>
         </CheckBoxContainer>
         {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
         {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}

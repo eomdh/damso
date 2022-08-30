@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
-    password: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
     nickname: {
       type: DataTypes.STRING(30),
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     introduce: {

@@ -1,4 +1,4 @@
-import { all, delay, fork, put, takeLatest } from "redux-saga/effects";
+import { all, delay, fork, put, takeLatest, throttle } from "redux-saga/effects";
 import axios from 'axios';
 import shortId from "shortid";
 import {
@@ -13,7 +13,7 @@ function loadPostAPI(data) {
   return axios.get('/api/post', data);
 };
 
-function* loadPosts(action) {
+function* loadPosts() {
   try {
     // const result = yield call(loadPostAPI, action.data);
     yield delay(500);

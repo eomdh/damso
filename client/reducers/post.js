@@ -4,7 +4,7 @@ import produce from 'immer';
 
 export const initialState = {
   mainPosts: [],
-  hasMorePost: true,
+  hasMorePosts: true,
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
@@ -35,32 +35,24 @@ export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
-export const generateDummyPost = (num) => {
-  initialState.mainPosts = initialState.mainPosts.concat(
-    Array(num).fill().map(() => ({
+export const generateDummyPost = (number) => Array(number).fill().map(() => ({
+  id: shortId.generate(),
+  User: {
+    id: shortId.generate(),
+    nickname: faker.name.findName(),
+  },
+  content: faker.lorem.paragraph(),
+  Images: [{
+    src: faker.image.image(),
+  }],
+  Comments: [{
+    User: {
       id: shortId.generate(),
-      User: {
-        id: shortId.generate(),
-        nickname: faker.name.findName(),
-      },
-      content: faker.lorem.paragraph(),
-      Images: [{
-        src: faker.image.image(),
-      }, {
-        src: faker.image.image(),
-      },{
-        src: faker.image.image(),
-      }],
-      Comments: [{
-        User: {
-          id: shortId.generate(),
-          nickname: faker.name.findName(),
-        },
-        content: faker.lorem.sentence(),
-      }],
-    }))
-  );
-};
+      nickname: faker.name.findName(),
+    },
+    content: faker.lorem.sentence(),
+  }],
+}));
 
 const dummyPost = (data) => ({
   id: data.id,
@@ -108,8 +100,8 @@ const reducer = (state = initialState, action) => {
       case LOAD_POSTS_SUCCESS:
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
-        draft.mainPosts = action.data.concat(draft.mainPosts);
-        draft.hasMorePost = draft.mainPosts.length < 50;
+        draft.mainPosts = draft.mainPosts.concat(action.data);
+        draft.hasMorePosts = draft.mainPosts.length < 50;
         break;
       case LOAD_POSTS_FAILURE:
         draft.loadPostsLoading = false;

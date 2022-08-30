@@ -43,13 +43,30 @@ const GridContainer = styled.div`
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { mainPosts } = useSelector((state) => state.post);
+  const { mainPosts, hasMorePosts, loadPostsLoading } = useSelector((state) => state.post);
 
   useEffect(() => {
     dispatch({
       type: LOAD_POSTS_REQUEST,
     });
   }, []);
+
+  useEffect(() => {
+    function onScroll() {
+      if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
+        if (hasMorePosts && !loadPostsLoading) {
+          dispatch({
+            type: LOAD_POSTS_REQUEST,
+            data: mainPosts[mainPosts.length - 1].id,
+          });
+        }
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [hasMorePosts, loadPostsLoading]);
 
   return (
     <AppLayout>

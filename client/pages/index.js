@@ -1,9 +1,10 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import Post from '../components/Post';
 import PostForm from '../components/PostForm';
+import { LOAD_POSTS_REQUEST } from '../reducers/post';
 import device from '../utils/device';
 
 const Container = styled.div`
@@ -41,7 +42,14 @@ const GridContainer = styled.div`
 `;
 
 const Home = () => {
+  const dispatch = useDispatch();
   const { mainPosts } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_POSTS_REQUEST,
+    });
+  }, []);
 
   return (
     <AppLayout>

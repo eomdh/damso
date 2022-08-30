@@ -1,3 +1,5 @@
+import produce from "immer";
+
 export const initialState = {
   logInLoading: false,
   logInDone: false,
@@ -65,105 +67,73 @@ export const changeIntroduce = (data) => {
 };
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LOG_IN_REQUEST:
-      return {
-        ...state, 
-        logInLoading: true,
-        logInDone: false,
-        logInError: null,       
-      };
-    case LOG_IN_SUCCESS:
-      return {
-        ...state,
-        logInLoading: false,
-        logInDone: true,
-        me: dummyUser(action.data),
-      };
-    case LOG_IN_FAILURE:
-      return {
-        ...state,
-        logInLoading: false,
-        logInError: action.error,
-      };
-    case LOG_OUT_REQUEST:
-      return {
-        ...state,
-        logOutLoading: true,
-        logOutDone: false,
-        logOutError: null,
-      };
-    case LOG_OUT_SUCCESS:
-      return {
-        ...state,
-        logOutLoading: false,
-        logOutDone: true,
-        me: null,
-      };
-    case LOG_OUT_FAILURE:
-      return {
-        ...state,
-        logOutLoading: false,
-        logOutError: action.error,
-      };
-    case SIGN_UP_REQUEST:
-      return {
-        ...state,
-        signUpLoading: true,
-        signUpDone: false,
-        signUpError: null,
-      };
-    case SIGN_UP_SUCCESS:
-      return {
-        ...state,
-        signUpLoading: false,
-        signUpDone: true,
-      };
-    case SIGN_UP_FAILURE:
-      return {
-        ...state,
-        signUpLoading: false,
-        signUpError: action.error,
-      };
-    case CHANGE_INTRODUCE_REQUEST:
-      return {
-        ...state,
-        changeIntroduceLoading: true,
-        changeIntroduceDone: false,
-        changeIntroduceError: null,
-      };
-    case CHANGE_INTRODUCE_SUCCESS:
-      return {
-        ...state,
-        changeIntroduceLoading: false,
-        changeIntroduceDone: true,
-        introduce: action.data,
-      };
-    case CHANGE_INTRODUCE_FAILURE:
-      return {
-        ...state,
-        changeIntroduceLoading: false,
-        changeIntroduceError: action.error,
-      };
-    case ADD_POST_OF_ME:
-      return {
-        ...state,
-        me: {
-          ...state.me,
-          Posts: [{ id: action.data }, ...state.me.Posts],
-        }
-      }
-    case REMOVE_POST_OF_ME:
-      return {
-        ...state,
-        me: {
-          ...state.me,
-          Posts: state.me.filter((v) => v.id === action.data),
-        }
-      }
-    default:
-      return state;
-  }
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case LOG_IN_REQUEST:
+        draft.logInLoading = true;
+        draft.logInDone = false;
+        draft.logInError = null;
+        break;
+      case LOG_IN_SUCCESS:
+        draft.logInLoading = false;
+        draft.logInDone = true;
+        draft.me = dummyUser(action.data);
+        break;
+      case LOG_IN_FAILURE:
+        draft.logInLoading = false;
+        draft.logInError = action.error;
+        break;
+      case LOG_OUT_REQUEST:
+        draft.logOutLoading = true;
+        draft.logOutDone = false;
+        draft.logOutError = null;
+        break;
+      case LOG_OUT_SUCCESS:
+        draft.logOutLoading = false;
+        draft.logOutDone = true;
+        draft.me = null;
+        break;
+      case LOG_OUT_FAILURE:
+        draft.logOutLoading = false;
+        draft.logOutError = action.error;
+        break;
+      case SIGN_UP_REQUEST:
+        draft.signUpLoading = true;
+        draft.signUpDone = false;
+        draft.signUpError = null;
+        break;
+      case SIGN_UP_SUCCESS:
+        draft.logOutLoading = false;
+        draft.logOutDone = true;
+        break;
+      case SIGN_UP_FAILURE:
+        draft.logOutLoading = false;
+        draft.logOutError = action.error;
+        break;
+      case CHANGE_INTRODUCE_REQUEST:
+        draft.changeIntroduceLoading = true;
+        draft.changeIntroduceDone = false;
+        draft.changeIntroduceError = null;
+        break;
+      case CHANGE_INTRODUCE_SUCCESS:
+        draft.changeIntroduceLoading = false;
+        draft.changeIntroduceDone = true;
+        draft.me.introduce = action.data;
+        break;
+      case CHANGE_INTRODUCE_FAILURE:
+        draft.changeIntroduceLoading = false;
+        draft.changeIntroduceError = action.error;
+        break;
+      case ADD_POST_OF_ME:
+        draft.me.Posts.unshift({ id: action.data });
+        break;
+      case REMOVE_POST_OF_ME:
+        draft.me.Posts = draft.me.Posts.filter((v) => v.id === action.data);
+        break;
+      default:
+        break;
+    }
+  });
 };
 
 export default reducer;

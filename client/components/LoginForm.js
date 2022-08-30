@@ -112,7 +112,7 @@ const LoginForm = () => {
         <SubmitButton type="submit">LOGIN</SubmitButton>
       </Form>
     </Container>
-  )
+  );
 };
 
 export default LoginForm;

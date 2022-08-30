@@ -20,7 +20,7 @@ function* addPost(action) {
     yield put({
       type: ADD_POST_SUCCESS,
       data: {
-        id,
+        id: id,
         content: action.data,
       }
     });
@@ -95,7 +95,7 @@ function* watchAddComment() {
 export default function* postSaga() {
   yield all([
     fork(watchAddPost),
-    fork(watchAddComment),
     fork(watchRemoveComment),
+    fork(watchAddComment),
   ])
 }

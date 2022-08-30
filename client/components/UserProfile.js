@@ -154,7 +154,11 @@ const UserProfile = ({ me }) => {
         내 게시글
       </Button>
     </Container>
-  )
+  );
+};
+
+UserProfile.propType = {
+  me: PropType.object.isRequired,
 };
 
 export default UserProfile;

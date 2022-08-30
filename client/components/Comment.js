@@ -50,4 +50,8 @@ const Comment = ({ comment }) => {
   );
 };
 
+Comment.propType = {
+  comment: PropType.object.isRequired,
+};
+
 export default Comment;

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import PropType from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
@@ -110,7 +111,11 @@ const CommentForm = ({ post }) => {
         <SubmitButton type="submit" isAvailableUpload={isAvailablePosting}>입력</SubmitButton>
       </Form>
     </Container>
-  )
-}
+  );
+};
+
+CommentForm.propType = {
+  post: PropType.object.isRequired,
+};
 
 export default CommentForm;

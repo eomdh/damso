@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import PropType, { object } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
@@ -141,7 +142,7 @@ const Post = ({ post }) => {
           <Nickname>{post.User.nickname}</Nickname>
           {id && post.User.id === parseInt(id)
             ? ( <DeleteButton onClick={onRemovePost}>
-                  <FaTrashAlt />  게시물 삭제 15분
+                  <FaTrashAlt />
                 </DeleteButton> )
             : null 
           }
@@ -174,7 +175,11 @@ const Post = ({ post }) => {
         )}
       </Container>
     )
-  )
+  );
+};
+
+Post.propType = {
+  post: PropType.object.isRequired,
 };
 
 export default Post;

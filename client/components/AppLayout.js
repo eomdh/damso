@@ -175,7 +175,7 @@ const AppLayout = ({ children }) => {
       </Container>
       {children}
     </>
-  )
+  );
 };
 
 AppLayout.propTypes = {

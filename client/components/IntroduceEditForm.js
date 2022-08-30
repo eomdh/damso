@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import PropType from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeIntroduce } from '../reducers/user';
 import styled from 'styled-components';
@@ -81,6 +82,10 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
       </Form>
     </FormContainer>
   );
+};
+
+IntroduceEditForm.propType = {
+  setOnEditForm: PropType.func.isRequired,
 };
 
 export default IntroduceEditForm;

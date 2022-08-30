@@ -1,4 +1,5 @@
 import React from 'react';
+import PropType from 'prop-types';
 import styled from 'styled-components';
 
 import Slider from "react-slick";
@@ -53,8 +54,12 @@ const PostImages = ({ images }) => {
           ))}
         </Slider>
       </Container>
-    );
+    )
   };
+};
+
+PostImages.propType = {
+  images: PropType.object.isRequired,
 };
 
 export default PostImages;

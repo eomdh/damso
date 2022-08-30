@@ -90,7 +90,11 @@ const CommentForm = ({ post }) => {
     }
     dispatch({
       type: ADD_COMMENT_REQUEST,
-      data: { content: content, postId: post.id, userId: id }
+      data: { 
+        content: content, 
+        postId: post.id, 
+        userId: id 
+      }
     });
   }, [content])
 

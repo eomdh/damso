@@ -1,11 +1,13 @@
-import { all, delay, fork, put, takeLatest, throttle } from "redux-saga/effects";
+import { all, delay, fork, put, takeLatest } from "redux-saga/effects";
 import axios from 'axios';
 import shortId from "shortid";
 import {
   LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, LOAD_POSTS_FAILURE,
   ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE,
   REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE,
-  ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE, generateDummyPost,
+  ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
+  REMOVE_COMMENT_REQUEST, REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAILURE,
+  generateDummyPost,
 } from '../reducers/post';
 import { ADD_POST_OF_ME, REMOVE_POST_OF_ME } from '../reducers/user';
 
@@ -101,6 +103,26 @@ function* addComment(action) {
   };
 };
 
+function removeCommentAPI(data) {
+  return axios.delete(`/api/post/${data.postId}/comment`, data);
+};
+
+function* removeComment(action) {
+  try {
+    // const result = yield call(removeCommentAPI, action.data);
+    yield delay(500);
+    yield put({
+      type: REMOVE_COMMENT_SUCCESS,
+      data: action.data,
+    });  
+  } catch (err) {
+    yield put({
+      type: REMOVE_COMMENT_FAILURE,
+      error: err.response.data,
+    });
+  };
+};
+
 function* watchLoadPosts() {
   yield takeLatest(LOAD_POSTS_REQUEST, loadPosts);
 };
@@ -109,7 +131,7 @@ function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 };
 
-function* watchRemoveComment() {
+function* watchRemovePost() {
   yield takeLatest(REMOVE_POST_REQUEST, removePost);
 };
 
@@ -117,11 +139,16 @@ function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 };
 
+function* watchRemoveComment() {
+  yield takeLatest(REMOVE_COMMENT_REQUEST, removeComment);
+};
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadPosts),
     fork(watchAddPost),
-    fork(watchRemoveComment),
+    fork(watchRemovePost),
     fork(watchAddComment),
+    fork(watchRemoveComment),
   ])
 }

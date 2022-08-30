@@ -3,7 +3,22 @@ import faker from 'faker';
 import produce from 'immer';  
 
 export const initialState = {
-  mainPosts: [],
+  mainPosts: [{
+    id: 1,
+    User: {
+      id: 1,
+      nickname: 'eomdh',
+    },
+    images: [],
+    content: '댓글 삭제 기능',
+    Comments: [{
+      User: {
+        id: 1,
+        nickname: 'eomdh',
+      },
+      content: '댓글 삭제 기능',
+    }]
+  }],
   hasMorePosts: true,
   loadPostsLoading: false,
   loadPostsDone: false,
@@ -17,6 +32,9 @@ export const initialState = {
   addCommentLoading: false,
   addCommentDone: false,
   addCommentError: null,
+  removeCommentLoading: false,
+  removeCommentDone: false,
+  removeCommentError: null,
 };
 
 export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
@@ -35,6 +53,10 @@ export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
+export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
+export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
+export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
+
 export const generateDummyPost = (number) => Array(number).fill().map(() => ({
   id: shortId.generate(),
   User: {
@@ -46,6 +68,7 @@ export const generateDummyPost = (number) => Array(number).fill().map(() => ({
     src: faker.image.image(),
   }],
   Comments: [{
+    id: shortId.generate(),
     User: {
       id: shortId.generate(),
       nickname: faker.name.findName(),
@@ -143,12 +166,27 @@ const reducer = (state = initialState, action) => {
       case ADD_COMMENT_SUCCESS:
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
-        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
-        post.Comments.push(dummyComment(action.data.content));
+        const addCommentPost  = draft.mainPosts.find((v) => v.id === action.data.postId);
+        addCommentPost.Comments.push(dummyComment(action.data.content));
         break;
       case ADD_COMMENT_FAILURE:
         draft.addCommentLoading = false;
         draft.addCommentError = action.data;
+        break;
+      case REMOVE_COMMENT_REQUEST:
+        draft.removeCommentLoading = true;
+        draft.removeCommentDone = false;
+        draft.removeCommentError = null;
+        break;
+      case REMOVE_COMMENT_SUCCESS:
+        draft.removeCommentLoading = false;
+        draft.removeCommentDone = true;
+        const removeCommentPost = draft.mainPosts.find((v) => v.id === action.data.postId);
+        removeCommentPost.Comments = removeCommentPost.Comments.filter((v) => v.id !== action.data.commentId);
+        break;
+      case REMOVE_COMMENT_FAILURE:
+        draft.removeCommentLoading = false;
+        draft.removeCommentError = action.data;
         break;
       default:
         break;

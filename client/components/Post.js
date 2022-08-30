@@ -26,7 +26,7 @@ const ProfileImageContainer = styled.div`
   float: left;
 `;
 
-const PostInformationContainer = styled.div`
+const InformationContainer = styled.div`
   height: 52px;
   display: flex;
   justify-content: space-between;
@@ -137,7 +137,7 @@ const Post = ({ post }) => {
         <ProfileImageContainer>
           <ProfileImage src={require('../image/user.png')} />
         </ProfileImageContainer>
-        <PostInformationContainer>
+        <InformationContainer>
           <Nickname>{post.User.nickname}</Nickname>
           {id && post.User.id === parseInt(id)
             ? ( <DeleteButton onClick={onRemovePost}>
@@ -145,7 +145,7 @@ const Post = ({ post }) => {
                 </DeleteButton> )
             : null 
           }
-        </PostInformationContainer>
+        </InformationContainer>
         <ContentContainer>
           {post.Images && <PostImages images={post.Images} />}
           <Content>
@@ -167,7 +167,7 @@ const Post = ({ post }) => {
         {commentFormOpend && (
           <>
             <CommentContainer>
-              {post.Comments.map((v) => <Comment comment={v} />)}
+              {post.Comments.map((v) => <Comment comment={v} postId={post.id} />)}
             </CommentContainer>
             <CommentForm post={post}/>
           </>

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import PropType, { object } from 'prop-types';
+import PropType from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
@@ -65,13 +65,12 @@ const ContentContainer = styled.div`
   align-items: center;
 `;
 
-const Content = styled.span`
-  width: 88%;
-  overflow: auto;
+const Content = styled.div`
+  width: 85%;
   min-height: 20px;
   margin-top: 20px;
-  white-space: pre;
   line-height: 18px;
+  font-size: 17px;
 `;
 
 const UnderSideContainer = styled.div`

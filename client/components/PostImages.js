@@ -20,8 +20,9 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   max-width: 400px;
+  max-height: 430px;
   width: 100%;
-  height: 500px;
+  height: 100%;
 `;
 
 const PostImages = ({ images }) => {
@@ -36,7 +37,9 @@ const PostImages = ({ images }) => {
   if (images.length === 1) {
     return (
       <Container>
-        <Image src={images[0].src} alt="image" />
+        <ImageContainer>
+          <Image src={images[0].src} alt="image" />
+        </ImageContainer>
       </Container>
     );
   };

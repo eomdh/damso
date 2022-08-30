@@ -62,8 +62,6 @@ const CheckBoxContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const CheckBox = styled.input``;
-
 const SubmitButton = styled.button`
   all: unset;
   border-radius: 10px;

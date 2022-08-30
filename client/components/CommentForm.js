@@ -86,7 +86,7 @@ const CommentForm = ({ post }) => {
     setContent(e.target.value);
     if (value.trim()) {
       setIsAvailablePosting(true);
-    } else if (value.length === 0 || value.length > 500) {
+    } else if (value.length === 0 || value.length > 300) {
       setIsAvailablePosting(false);
     };
   }, [content]);

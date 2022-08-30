@@ -1,6 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
-    content: {},
+    content: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+    },
   }, {
     charset: 'utf8mb4',
     collate: 'utf8mb4_general_ci',

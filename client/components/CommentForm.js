@@ -8,6 +8,7 @@ import device from '../utils/device';
 
 const Container = styled.div`
   width: 100%;
+  margin-left: 10px;
   max-height: 500px;
   display: flex;
   justify-content: center;
@@ -24,7 +25,7 @@ const Form = styled.form`
 `;
 
 const ContentInput = styled(TextArea)`
-  width: 83%;
+  width: 80%;
   border: none;
   padding: 8px;
   font-size: 16px;
@@ -50,7 +51,7 @@ const SubmitButton = styled.button`
   height: 30px;
   border-radius: 6px;
   bottom: 22px;
-  right: 20px;
+  right: 45px;
   cursor: pointer;
   opacity: ${props => (props.isAvailableUpload ? 1 : 0.6)};
   transition: opacity 0.3s linear;
@@ -62,6 +63,7 @@ const SubmitButton = styled.button`
     font-size: 12px;
     width: 50px;
     height: 30px;
+    right: 30px;
   }
 `;
 

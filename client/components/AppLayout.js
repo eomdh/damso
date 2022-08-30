@@ -22,9 +22,9 @@ const Container = styled.div`
   z-index: 5;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 
-  @media ${device.mobile} {
-    position: static;
-  }
+  // @media ${device.mobile} {
+  //   position: static;
+  // }
 `;
 
 const IconContainer = styled.div`
@@ -42,11 +42,14 @@ const Icon = styled.div`
   justify-content: center;
   cursor: pointer;
   opacity: 0.8;
+
   &:hover {
     opacity: 1;
   }
+
   @media ${device.tablet} {
     width: 40px;
+    margin-left: 5px;
   }
 `;
 
@@ -65,8 +68,12 @@ const SearchForm = styled.form`
     opacity: 1;
   }
 
+  @media ${device.tablet} {
+    width: 300px;
+  }
+
   @media ${device.mobileL} {
-    display: none;
+    width: 100px;
   }
 `;
 
@@ -107,13 +114,16 @@ const Button = styled.div`
   margin-right: 15px;
   cursor: pointer;
   opacity: 0.8;
+
   &:hover {
     transform: scale(0.98);
     opacity: 1;
   }
+
   @media ${device.tablet} {
-    width: 50px;
-    font-size: 12px;
+    width: 40px;
+    font-size: 10px;
+    margin-right: 5px;
   }
 `;
 

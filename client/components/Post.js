@@ -20,7 +20,7 @@ const Container = styled.div`
 const ProfileImageContainer = styled.div`
   width: 55px;
   height: 55px;
-  margin-right: 18px;
+  margin-right: 10px;
   border-radius: 50px;
   overflow: hidden;
   float: left;
@@ -102,7 +102,7 @@ const Amount = styled.div`
 `;
 
 const CommentContainer = styled.div`
-  width: 1500px;
+  width: 100%;
   max-height: 500px;
   margin-left: -15px;
   margin-top: 10px;

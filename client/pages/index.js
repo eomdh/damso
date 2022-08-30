@@ -26,13 +26,15 @@ const GridContainer = styled.div`
     grid-gap: 0;
     width: 100%;
   }
+
   @media ${device.tablet} {
     grid-template-columns: 1fr 3fr 1fr;
     grid-gap: 0;
     width: 100%;
   }
+  
   @media ${device.mobile} {
-    grid-template-columns: 0 1fr 0%;
+    grid-template-columns: 0fr 1fr 0fr;
     width: 100%;
     display: flex;
   }

@@ -3,46 +3,7 @@ import faker from 'faker';
 import produce from 'immer';  
 
 export const initialState = {
-  mainPosts: [{
-    id: 1,
-    User: {
-      id: 1,
-      nickname: 'eomdh',
-      profileImagePath: '',
-    },
-    content: '첫 번째 게시글 #해시태그1 #해시태그2',
-    Images: [
-    {
-      id: shortId.generate(),
-      src: 'https://bookthumb-phinf.pstatic.net/cover/137/995/13799585.jpg?udate=20180726',
-    },
-    {
-      id: shortId.generate(),
-      src: 'https://gimg.gilbut.co.kr/book/BN001958/rn_view_BN001958.jpg',
-    }, 
-    {
-      id: shortId.generate(),
-      src: 'https://gimg.gilbut.co.kr/book/BN001998/rn_view_BN001998.jpg',
-    }
-    ],
-    Comments: [{
-      id: shortId.generate(),
-      User: {
-        id: shortId.generate(),
-        nickname: 'yeji',
-      },
-      content: '첫 번째 댓글'
-    }, {
-      id: shortId.generate(),
-      User: {
-        id: shortId.generate(),
-        nickname: 'deokhyeon',
-      },
-      content: '두 번째 댓글'
-    }],
-    Likers: [{}],
-    imagePaths: [],
-  }],
+  mainPosts: [],
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
@@ -66,6 +27,10 @@ export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
+export const generateDummyPost = (number) => {
+
+};
+
 initialState.mainPosts = initialState.mainPosts.concat(
   Array(20).fill().map(() => ({
     id: shortId.generate(),
@@ -75,7 +40,11 @@ initialState.mainPosts = initialState.mainPosts.concat(
     },
     content: faker.lorem.paragraph(),
     Images: [{
-      src: faker.image.image()
+      src: faker.image.image(),
+    }, {
+      src: faker.image.image(),
+    },{
+      src: faker.image.image(),
     }],
     Comments: [{
       User: {

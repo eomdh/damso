@@ -3,13 +3,12 @@ import PropType from 'prop-types';
 import styled from 'styled-components';
 
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Container = styled.div`
-  margin: 15px 15px 15px 0px;
+  margin: 15px 15px 25px 0px;
   width: 90%;
-  overflow: hidden;
 `;
 
 const ImageContainer = styled.div`

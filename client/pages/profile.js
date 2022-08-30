@@ -27,7 +27,7 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>Bluejay | Profile</title>
+        <title>Damso | Profile</title>
       </Head>
       {me && (
         <AppLayout>

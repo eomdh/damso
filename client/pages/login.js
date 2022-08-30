@@ -16,7 +16,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Bluejay | Login</title>
+        <title>Damso | Login</title>
       </Head>
       <AppLayout>
         <Container>

@@ -103,12 +103,12 @@ const reducer = (state = initialState, action) => {
         draft.signUpError = null;
         break;
       case SIGN_UP_SUCCESS:
-        draft.logOutLoading = false;
-        draft.logOutDone = true;
+        draft.signUpLoading = false;
+        draft.signUpDone = true;
         break;
       case SIGN_UP_FAILURE:
-        draft.logOutLoading = false;
-        draft.logOutError = action.error;
+        draft.signUpLoading = false;
+        draft.signUpError = action.error;
         break;
       case CHANGE_INTRODUCE_REQUEST:
         draft.changeIntroduceLoading = true;

@@ -1,4 +1,5 @@
 import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
+import axios from 'axios';
 import {
   LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
   LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE,
@@ -46,7 +47,7 @@ function* logOut() {
 };
 
 function signUpAPI(data) {
-  return axios.post('http://localhost:3065/user', data);
+  return axios.post('http://localhost:3065/user/signup', data);
 };
 
 function* signUp(action) {

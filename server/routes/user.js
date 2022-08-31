@@ -4,16 +4,17 @@ const { User } = require('../models');
 
 const router = express.Router();
 
-router.post('/', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   try {
     const usedEmail = await User.findOne({
       where: {
         email: req.body.email,
       }
     });
+
     const usedNickname = await User.findOne({
       where: {
-        email: req.body.nickname,
+        nickname: req.body.nickname,
       }
     });
 
@@ -31,7 +32,7 @@ router.post('/', async (req, res, next) => {
       password: hashedPassword,
     });
 
-    res.status(200).send('SignUp Success!');
+    res.status(201).send('SignUp Success!');
   } catch (error) {
     console.error(error);
     next(error);

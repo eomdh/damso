@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
+import Router from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import useInput from '../hooks/useInput';
 import { SIGN_UP_REQUEST } from '../reducers/user';
@@ -89,9 +90,22 @@ const ErrorMessage = styled.span`
 
 const SignupForm = () => {
   const dispatch = useDispatch();
+  const { signUpDone, signUpError } = useSelector((state) => state.user);
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
+
+  useEffect(() => {
+    if (signUpDone) {
+      Router.push('/');
+    }
+  }, [signUpDone]);
+  
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    };
+  }, [signUpError]);
 
   const [verifyPassword, setVerifyPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);

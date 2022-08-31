@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const db = require('./models');
 const cors = require('cors');
+const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passportConfig = require('./passport')
@@ -24,8 +25,12 @@ app.use(express.urlencoded({ extended: true }));
 
 passportConfig();
 
-app.use(cookieParser());
-app.use(session());
+app.use(cookieParser('damsosecret'));
+app.use(session({
+  saveUninitialized: false,
+  resave: false,
+  secret: 'damsosecret',
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

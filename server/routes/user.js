@@ -27,6 +27,12 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+router.post('/logout', (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.status(200).send('LogOut Success!')
+});
+
 router.post('/signup', async (req, res, next) => {
   try {
     const usedEmail = await User.findOne({

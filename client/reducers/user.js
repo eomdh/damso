@@ -37,15 +37,6 @@ export const CHANGE_INTRODUCE_FAILURE = "CHANGE_INTRODUCE_FAILURE";
 export const ADD_POST_OF_ME = "ADD_POST_OF_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
-const dummyUser = (data) => ({
-  ...data,
-  id: '1',
-  nickname: 'eomdh',
-  introduce: '안녕하세요~ 엄덕현입니다.',
-  profileImagePath: '',
-  Posts: [],
-});
-
 export const logIn = (data) => {
   return {
     type: LOG_IN_REQUEST,
@@ -77,7 +68,7 @@ const reducer = (state = initialState, action) => {
       case LOG_IN_SUCCESS:
         draft.logInLoading = false;
         draft.logInDone = true;
-        draft.me = dummyUser(action.data);
+        draft.me = action.data;
         break;
       case LOG_IN_FAILURE:
         draft.logInLoading = false;

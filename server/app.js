@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express();
+const dotenv = require('dotenv');
 const db = require('./models');
 const cors = require('cors');
 const passport = require('passport');
@@ -8,6 +8,9 @@ const cookieParser = require('cookie-parser');
 const passportConfig = require('./passport')
 const postRouter = require('./routes/post');
 const userRouter = require('./routes/user');
+
+const app = express();
+dotenv.config();
 
 db.sequelize.sync()
   .then(() => {
@@ -29,7 +32,7 @@ app.use(cookieParser('damsosecret'));
 app.use(session({
   saveUninitialized: false,
   resave: false,
-  secret: 'damsosecret',
+  secret: process.env.COOKIE_SECRET,
 }));
 app.use(passport.initialize());
 app.use(passport.session());

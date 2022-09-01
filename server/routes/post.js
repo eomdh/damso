@@ -10,7 +10,7 @@ router.post('/add', isLoggedIn, async (req, res, next) => {
       content: req.body.content,
       UserId: req.user.id,
     });
-
+    
     res.status(201).json(post);
   } catch (error) {
     console.error(error);

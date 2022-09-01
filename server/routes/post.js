@@ -15,12 +15,17 @@ router.post('/add', isLoggedIn, async (req, res, next) => {
       where: { id: post.id },
       include: [{
         model: User,
+        attributes: ['id', 'nickname'],
       }, {
         model: Comment,
         include: [{
           model: User,
           attributes: ['id', 'nickname'],
         }]
+      }, {
+        model: User,
+        as: 'Likers',
+        attributes: ['id'],
       }, {
         model: Image,
       }]
@@ -30,7 +35,7 @@ router.post('/add', isLoggedIn, async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(error);
-  }
+  };
 });
 
 router.delete('/:postId/delete', isLoggedIn, (req, res) => {
@@ -63,7 +68,41 @@ router.post('/:postId/comment/add', isLoggedIn, async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(error);    
-  }
+  };
+});
+
+router.patch('/:postId/like', async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    if (!post) {
+      return res.status(403).send('존재하지 않는 게시글입니다.');
+    };
+
+    await post.addLikers(req.user.id);
+    res.status(200).json({ PostId: post.id, UserId: req.user.id });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  };
+});
+
+router.delete('/:postId/like', async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    if (!post) {
+      return res.status(403).send('존재하지 않는 게시글입니다.');
+    };
+
+    await post.removeLikers(req.user.id);
+    res.status(200).json({ PostId: post.id, UserId: req.user.id });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  };
 });
 
 module.exports = router;

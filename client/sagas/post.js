@@ -78,7 +78,7 @@ function* removePost(action) {
 };
 
 function addCommentAPI(data) {
-  return axios.post(`/post/${data.postId}/comment`, data);
+  return axios.post(`/post/${data.postId}/comment/add`, data);
 };
 
 function* addComment(action) {
@@ -125,7 +125,7 @@ function* likePost(action) {
     const result = yield call(likePostAPI, action.data);
     yield put({
       type: LIKE_POST_SUCCESS,
-      data: action.data,
+      data: result.data,
     });  
   } catch (err) {
     yield put({
@@ -136,7 +136,7 @@ function* likePost(action) {
 };
 
 function unlikePostAPI(data) {
-  return axios.patch(`/post/${data}/unlike`);
+  return axios.delete(`/post/${data}/like`);
 };
 
 function* unlikePost(action) {
@@ -144,7 +144,7 @@ function* unlikePost(action) {
     const result = yield call(unlikePostAPI, action.data);
     yield put({
       type: UNLIKE_POST_SUCCESS,
-      data: action.data,
+      data: result.data,
     });  
   } catch (err) {
     yield put({

@@ -79,7 +79,7 @@ const reducer = (state = initialState, action) => {
         break;
       case LOAD_POSTS_SUCCESS:
         draft.mainPosts = draft.mainPosts.concat(action.data);
-        draft.hasMorePosts = draft.mainPosts.length < 50;
+        // draft.hasMorePosts = draft.mainPosts.length < 50;
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
         break;
@@ -153,8 +153,8 @@ const reducer = (state = initialState, action) => {
         draft.likePostError = null;
         break;
       case LIKE_POST_SUCCESS: {
-        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
-        post.Likers.push({ id: action.data.userId });
+        const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        post.Likers.push({ id: action.data.UserId });
         draft.likePostLoading = false;
         draft.likePostDone = true;
         break;
@@ -169,8 +169,8 @@ const reducer = (state = initialState, action) => {
         draft.unlikePostError = null;
         break;
       case UNLIKE_POST_SUCCESS: {
-        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
-        post.Likers = post.Likers.filter((v) => v.id !== action.data.userId);
+        const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        post.Likers = post.Likers.filter((v) => v.id !== action.data.UserId);
         draft.unlikePostLoading = false;
         draft.unlikePostDone = true;
         break;
@@ -181,8 +181,8 @@ const reducer = (state = initialState, action) => {
         break;
       default:
         break;
-    }
+    };
   });
-}
+};
 
 export default reducer;

@@ -161,7 +161,7 @@ const Post = ({ post }) => {
           }
         </InformationContainer>
         <ContentContainer>
-          {post.Images && <PostImages images={post.Images} />}
+          {post.Images.length >= 1 && <PostImages images={post.Images} />}
           <Content>
             <PostContent content={post.content} />
           </Content>
@@ -182,7 +182,7 @@ const Post = ({ post }) => {
         {commentFormOpend && (
           <>
             <CommentContainer>
-              {post.Comments.map((v) => <Comment comment={v} postId={post.id} />)}
+              {post.Comments.map((v) => <Comment key={v.id} comment={v} postId={post.id} />)}
             </CommentContainer>
             <CommentForm post={post}/>
           </>
@@ -199,6 +199,7 @@ Post.propTypes = {
     content: PropTypes.string,
     createdAt: PropTypes.string,
     Comments: PropTypes.arrayOf(PropTypes.object),
+    Likers: PropTypes.arrayOf(PropTypes.object),
     Images: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };

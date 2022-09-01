@@ -101,7 +101,7 @@ router.post('/signup', isNotLoggedIn, async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(error);
-  }
+  };
 });
 
 module.exports = router;

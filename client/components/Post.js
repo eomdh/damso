@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage';
@@ -127,10 +127,7 @@ const Post = ({ post }) => {
     };
     return dispatch({
       type: LIKE_POST_REQUEST,
-      data: {
-        postId: post.id,
-        userId: id,
-      }
+      data: post.id,
     });
   }, [id]);
 
@@ -140,10 +137,7 @@ const Post = ({ post }) => {
     };
     return dispatch({
       type: UNLIKE_POST_REQUEST,
-      data: {
-        postId: post.id,
-        userId: id,
-      }
+      data: post.id,
     });
   }, [id]);
 
@@ -198,8 +192,15 @@ const Post = ({ post }) => {
   );
 };
 
-Post.propType = {
-  post: PropType.object.isRequired,
+Post.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    User: PropTypes.object,
+    content: PropTypes.string,
+    createdAt: PropTypes.string,
+    Comments: PropTypes.arrayOf(PropTypes.object),
+    Images: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
 export default Post;

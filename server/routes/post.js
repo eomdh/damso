@@ -17,6 +17,10 @@ router.post('/add', isLoggedIn, async (req, res, next) => {
         model: User,
       }, {
         model: Comment,
+        include: [{
+          model: User,
+          attributes: ['id', 'nickname'],
+        }]
       }, {
         model: Image,
       }]
@@ -42,12 +46,20 @@ router.post('/:postId/comment/add', isLoggedIn, async (req, res, next) => {
     }
 
     const comment = await Comment.create({
-      PostId: req.params.postId,
+      PostId: parseInt(req.params.postId),
       UserId: req.user.id,
       content: req.body.content,
     });
+
+    const allInfoComment = await Comment.findOne({
+      where: { id: comment.id },
+      include: [{
+        model: User,
+        attributes: ['id', 'nickname'],
+      }]
+    })
   
-    res.status(201).json(comment);
+    res.status(201).json(allInfoComment);
   } catch (error) {
     console.error(error);
     next(error);    

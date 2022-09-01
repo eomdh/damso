@@ -8,21 +8,19 @@ import {
   REMOVE_COMMENT_REQUEST, REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAILURE,
   LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE,
   UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE,
-  generateDummyPost,
 } from '../reducers/post';
 import { ADD_POST_OF_ME, REMOVE_POST_OF_ME } from '../reducers/user';
 
-function loadPostAPI(data) {
-  return axios.get('/api/posts', data);
+function loadPostsAPI() {
+  return axios.get('/posts');
 };
 
 function* loadPosts() {
   try {
-    // const result = yield call(loadPostAPI, action.data);
-    yield delay(500);
+    const result = yield call(loadPostsAPI);
     yield put({
       type: LOAD_POSTS_SUCCESS,
-      data: generateDummyPost(10),
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -119,13 +117,12 @@ function* removeComment(action) {
 };
 
 function likePostAPI(data) {
-  return axios.delete(`/api/post/${data}/like`);
+  return axios.patch(`/post/${data}/like`);
 };
 
 function* likePost(action) {
   try {
-    // const result = yield call(likePostAPI, action.data);
-    yield delay(500);
+    const result = yield call(likePostAPI, action.data);
     yield put({
       type: LIKE_POST_SUCCESS,
       data: action.data,
@@ -139,13 +136,12 @@ function* likePost(action) {
 };
 
 function unlikePostAPI(data) {
-  return axios.delete(`/api/post/${data}/unlike`);
+  return axios.patch(`/post/${data}/unlike`);
 };
 
 function* unlikePost(action) {
   try {
-    // const result = yield call(unlikePostAPI, action.data);
-    yield delay(500);
+    const result = yield call(unlikePostAPI, action.data);
     yield put({
       type: UNLIKE_POST_SUCCESS,
       data: action.data,

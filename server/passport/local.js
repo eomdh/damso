@@ -13,12 +13,12 @@ module.exports = () => {
         where: { email }
       });
       if (!user) {
-        return done(null, false, { reaseon: "가입되지 않은 이메일입니다." });
+        return done(null, false, { reason: "가입되지 않은 이메일입니다." });
       }
   
       const comparePassword = await bcrypt.compare(password, user.password)
       if (!comparePassword) {
-        return done(null, false, { reaseon: "비밀번호가 일치하지 않습니다." });
+        return done(null, false, { reason: "비밀번호가 일치하지 않습니다." });
       }
   
       return done(null, user);

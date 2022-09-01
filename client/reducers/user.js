@@ -1,6 +1,7 @@
 import produce from "immer";
 
 export const initialState = {
+  me: null,
   logInLoading: false,
   logInDone: false,
   logInError: null,
@@ -13,9 +14,6 @@ export const initialState = {
   changeIntroduceLoading: false,
   changeIntroduceDone: false,
   changeIntroduceError: null,
-  me: null,
-  signUpData: {},
-  loginData: {},
 };
 
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
@@ -82,6 +80,7 @@ const reducer = (state = initialState, action) => {
       case LOG_OUT_SUCCESS:
         draft.logOutLoading = false;
         draft.logOutDone = true;
+        draft.logInDone = false;
         draft.me = null;
         break;
       case LOG_OUT_FAILURE:

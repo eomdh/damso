@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Router from "next/router";
 import useInput from '../hooks/useInput';
 import { logIn } from '../reducers/user';
@@ -77,14 +77,22 @@ const SubmitButton = styled.button`
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const { logInDone, logInError } = useSelector((state) => state.user);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
+  
+  useEffect(() => {
+    if (logInDone) {
+      Router.replace('/');
+    } else if (logInError) {
+      alert(logInError);
+    };
+  }, [logInDone, logInError]);
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
     dispatch(logIn({email, password}));
     console.log(email, password);
-    Router.push("/");
   }, [email, password]);
 
   return (

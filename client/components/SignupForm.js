@@ -97,15 +97,11 @@ const SignupForm = () => {
 
   useEffect(() => {
     if (signUpDone) {
-      Router.push('/');
-    }
-  }, [signUpDone]);
-  
-  useEffect(() => {
-    if (signUpError) {
+      Router.replace('/');
+    } else if (signUpError) {
       alert(signUpError);
     };
-  }, [signUpError]);
+  }, [signUpDone, signUpError]);
 
   const [verifyPassword, setVerifyPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);

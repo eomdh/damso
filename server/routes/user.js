@@ -1,28 +1,38 @@
 const express = require('express');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const { User } = require('../models');
+const { User, Post } = require('../models');
 
 const router = express.Router();
 
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      console.error(err);
-      return next(err);
+  passport.authenticate('local', (error, user, info) => {
+    if (error) {
+      console.error(error);
+      return next(error);
     };
     
     if (info) {
       return res.status(401).send(info.reason);
     };
     
-    return req.login(user, async (loginErr) => {
-      if (loginErr) {
+    return req.login(user, async (loginError) => {
+      if (loginError) {
         console.error(error);
-        return next(loginErr);
+        return next(loginError);
       };
       
-      return res.status(200).json(user);
+      const userWithoutPassword = await User.findOne({
+        where: { id: user.id },
+        attributes: {
+          exclude: ['password', 'createdAt', 'updatedAt']
+        },
+        include: [{
+          model: Post,
+        }]
+      });
+
+      return res.status(200).json(userWithoutPassword);
     });
   })(req, res, next);
 });
@@ -30,7 +40,7 @@ router.post('/login', (req, res, next) => {
 router.post('/logout', (req, res) => {
   req.logout();
   req.session.destroy();
-  res.status(200).send('LogOut Success!')
+  res.status(200).send('LogOut Success!');
 });
 
 router.post('/signup', async (req, res, next) => {

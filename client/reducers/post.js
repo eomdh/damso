@@ -77,27 +77,6 @@ export const generateDummyPost = (number) => Array(number).fill().map(() => ({
   Likers: [],
 }));
 
-const dummyPost = (data) => ({
-  id: data.id,
-  User: {
-    id: 1,
-    nickname: 'eomdh',
-  },
-  content: data.content,
-  images: [],
-  Comments: [],
-  Likers: [],
-});
-
-const dummyComment = (data) => ({
-  id: shortId.generate(),
-  User: {
-    id: 1,
-    nickname: 'eomdh',
-  },
-  content: data,
-});
-
 export const addPost = (data) => ({
   type: ADD_POST_REQUEST,
   data,
@@ -137,7 +116,7 @@ const reducer = (state = initialState, action) => {
         draft.addPostError = null;
         break;
       case ADD_POST_SUCCESS:
-        draft.mainPosts.unshift(dummyPost(action.data));
+        draft.mainPosts.unshift(action.data);
         draft.addPostLoading = false;
         draft.addPostDone = true;
         break;
@@ -165,8 +144,8 @@ const reducer = (state = initialState, action) => {
         draft.addCommentError = null;
         break;
       case ADD_COMMENT_SUCCESS: {
-        const post  = draft.mainPosts.find((v) => v.id === action.data.postId);
-        post.Comments.push(dummyComment(action.data.content));
+        const post  = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        post.Comments.push(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         break;

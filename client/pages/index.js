@@ -5,6 +5,7 @@ import AppLayout from '../components/AppLayout';
 import Post from '../components/Post';
 import PostForm from '../components/PostForm';
 import { LOAD_POSTS_REQUEST } from '../reducers/post';
+import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import device from '../utils/device';
 
 const Container = styled.div`
@@ -46,6 +47,9 @@ const Home = () => {
   const { mainPosts, hasMorePosts, loadPostsLoading } = useSelector((state) => state.post);
 
   useEffect(() => {
+    dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    })
     dispatch({
       type: LOAD_POSTS_REQUEST,
     });

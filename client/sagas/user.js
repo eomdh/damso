@@ -1,11 +1,31 @@
 import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import axios from 'axios';
 import {
+  LOAD_MY_INFO_REQUEST, LOAD_MY_INFO_SUCCESS, LOAD_MY_INFO_FAILURE,
   LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
   LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE,
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
-  CHANGE_INTRODUCE_REQUEST, CHANGE_INTRODUCE_SUCCESS, CHANGE_INTRODUCE_FAILURE,
+  CHANGE_INTRODUCE_REQUEST, CHANGE_INTRODUCE_SUCCESS, CHANGE_INTRODUCE_FAILURE
 } from '../reducers/user';
+
+function loadMyInfoAPI() {
+  return axios.get('/user');
+};
+
+function* loadMyInfo() {
+  try {
+    const result = yield call(loadMyInfoAPI);
+    yield put({ 
+      type: LOAD_MY_INFO_SUCCESS,
+      data: result.data,
+    });  
+  } catch (err) {
+    yield put({
+      type: LOAD_MY_INFO_FAILURE,
+      error: err.response.data,
+    });
+  };
+};
 
 function logInAPI(data) {
   return axios.post('/user/login', data);
@@ -83,6 +103,10 @@ function* changeIntroduce(action) {
   };
 };
 
+function* watchLoadMyInfo() {
+  yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
+};
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 };
@@ -101,6 +125,7 @@ function* watchChangeIntroduce() {
 
 export default function* userSaga() {
   yield all([
+    fork(watchLoadMyInfo),
     fork(watchLogIn),
     fork(watchLogOut),
     fork(watchSignUp),

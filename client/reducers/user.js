@@ -2,6 +2,9 @@ import produce from "immer";
 
 export const initialState = {
   me: null,
+  loadMyInfoLoading: false,
+  loadMyInfoDone: false,
+  loadMyInfoError: null,
   logInLoading: false,
   logInDone: false,
   logInError: null,
@@ -15,6 +18,10 @@ export const initialState = {
   changeIntroduceDone: false,
   changeIntroduceError: null,
 };
+
+export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
+export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
+export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
 
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
@@ -58,15 +65,29 @@ export const changeIntroduce = (data) => {
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
+      case LOAD_MY_INFO_REQUEST:
+        draft.loadMyInfoLoading = true;
+        draft.loadMyInfoDone = false;
+        draft.loadMyInfoError = null;
+        break;
+      case LOAD_MY_INFO_SUCCESS:
+        draft.me = action.data;
+        draft.loadMyInfoLoading = false;
+        draft.loadMyInfoDone = true;
+        break;
+      case LOAD_MY_INFO_FAILURE:
+        draft.loadMyInfoLoading = false;
+        draft.loadMyInfoError = action.error;
+        break;
       case LOG_IN_REQUEST:
         draft.logInLoading = true;
         draft.logInDone = false;
         draft.logInError = null;
         break;
       case LOG_IN_SUCCESS:
+        draft.me = action.data;
         draft.logInLoading = false;
         draft.logInDone = true;
-        draft.me = action.data;
         break;
       case LOG_IN_FAILURE:
         draft.logInLoading = false;
@@ -106,9 +127,9 @@ const reducer = (state = initialState, action) => {
         draft.changeIntroduceError = null;
         break;
       case CHANGE_INTRODUCE_SUCCESS:
+        draft.me.introduce = action.data;
         draft.changeIntroduceLoading = false;
         draft.changeIntroduceDone = true;
-        draft.me.introduce = action.data;
         break;
       case CHANGE_INTRODUCE_FAILURE:
         draft.changeIntroduceLoading = false;

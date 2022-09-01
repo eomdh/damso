@@ -104,4 +104,19 @@ router.post('/signup', isNotLoggedIn, async (req, res, next) => {
   };
 });
 
+router.patch('/introduce', isLoggedIn, async (req, res, next) => {
+  try {
+    await User.update({
+      introduce: req.body.introduce,
+    }, {
+      where: { id: req.user.id },
+    });
+
+    res.status(200).json({ introduce: req.body.introduce });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  };
+});
+
 module.exports = router;

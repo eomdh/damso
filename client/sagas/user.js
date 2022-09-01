@@ -84,16 +84,15 @@ function* signUp(action) {
 };
 
 function changeIntroduceAPI(data) {
-  return axios.post('/api/changeIntroduce', data);
+  return axios.patch('/user/introduce', { introduce: data });
 };
 
 function* changeIntroduce(action) {
   try {
-    // const result = yield call(changeIntroduceAPI);
-    yield delay(500);
+    const result = yield call(changeIntroduceAPI, action.data);
     yield put({
       type: CHANGE_INTRODUCE_SUCCESS,
-      data: action.data,
+      data: result.data,
     });  
   } catch (err) {
     yield put({

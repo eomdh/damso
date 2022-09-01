@@ -127,7 +127,7 @@ const reducer = (state = initialState, action) => {
         draft.changeIntroduceError = null;
         break;
       case CHANGE_INTRODUCE_SUCCESS:
-        draft.me.introduce = action.data;
+        draft.me.introduce = action.data.introduce;
         draft.changeIntroduceLoading = false;
         draft.changeIntroduceDone = true;
         break;

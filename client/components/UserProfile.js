@@ -128,7 +128,7 @@ const UserProfile = ({ me }) => {
       <ProfileImageContainer>
         <ProfileImage />
       </ProfileImageContainer>
-      <Form onSubmit={ onSubmit } encType="multipart/form-data">
+      <Form onSubmit={onSubmit} encType="multipart/form-data">
         <input
           type="file"
           multiple
@@ -137,7 +137,7 @@ const UserProfile = ({ me }) => {
           onChange={onChangeImages}
         />
         { id && 
-        <PlusIconContainer onClick={ onClickImageUpload }>
+        <PlusIconContainer onClick={onClickImageUpload}>
           <BsPlusCircleFill />
         </PlusIconContainer> }
       </Form>
@@ -145,12 +145,12 @@ const UserProfile = ({ me }) => {
         <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
       {onEditForm 
-      ? <IntroduceEditForm setOnEditForm={ setOnEditForm } />
+      ? <IntroduceEditForm setOnEditForm={setOnEditForm} />
       : (
         <IntroduceContainer>
           <Introduce>{ me.introduce }</Introduce>
           { id && 
-          <PencilIconContainer onClick={ onClickEditForm }>
+          <PencilIconContainer onClick={onClickEditForm}>
             <BsPencilFill />
           </PencilIconContainer> }
         </IntroduceContainer>)}

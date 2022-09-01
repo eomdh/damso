@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import PropType from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeIntroduce } from '../reducers/user';
+import { CHANGE_INTRODUCE_REQUEST } from '../reducers/user';
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
 import { BsCheckCircleFill } from 'react-icons/bs';
@@ -58,8 +58,11 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
     e.preventDefault();
     if (!isAvailablePosting) {
       return alert("글자수가 너무 많습니다.");
-    }
-    dispatch(changeIntroduce(introduceInput));
+    };
+    dispatch({
+      type: CHANGE_INTRODUCE_REQUEST,
+      data: introduceInput,
+    });
     setOnEditForm(prev => !prev);
   }, [introduceInput]);
 

@@ -3,10 +3,11 @@ const dotenv = require('dotenv');
 const db = require('./models');
 const cors = require('cors');
 const passport = require('passport');
+const passportConfig = require('./passport')
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-const passportConfig = require('./passport')
+const path = require('path');
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 const postsRouter = require('./routes/posts');
@@ -39,6 +40,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', express.static(path.join(__dirname, 'postImages')));
 
 app.use('/user', userRouter);
 app.use('/post', postRouter);

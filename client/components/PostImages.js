@@ -37,7 +37,7 @@ const PostImages = ({ images }) => {
     return (
       <Container>
         <ImageContainer>
-          <Image src={images[0].src} alt="image" />
+          <Image src={`http://localhost:3065/${images[0].src}`} alt="image" />
         </ImageContainer>
       </Container>
     );
@@ -50,7 +50,7 @@ const PostImages = ({ images }) => {
           {images.map(image => (
             <div key={image.src}>
               <ImageContainer>
-                <Image src={image.src} alt="image" key={image.src} />
+                <Image src={`http://localhost:3065/${image.src}`} alt="image" key={image.src} />
               </ImageContainer>
             </div>
           ))}

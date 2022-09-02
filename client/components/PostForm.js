@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
-import { addPost } from "../reducers/post";
+import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from "../reducers/post";
 import ProfileImage from "./ProfileImage";
 import { FaRegImage } from 'react-icons/fa';
-import { IoMdRemove } from "react-icons/io";
+import { MdCancel } from "react-icons/md";
+import device from '../utils/device';
 
 const Container = styled.div`
   width: 100%;
@@ -35,6 +36,7 @@ const ProfileImageContainer = styled.div`
 
 const ContentInput = styled(TextArea)`
   width: 80%;
+  height: 200px;
   border: none;
   font-size: 16px;
   min-height: 50px;
@@ -53,6 +55,7 @@ const IconContainer = styled.div`
   font-size: 38px;
   opacity: 0.5;
   cursor: pointer;
+  pointer-events: ${props => (props.me ? null : "none")};
   &:hover {
     opacity: 1;
     transform: scale(0.98);
@@ -73,6 +76,7 @@ const SubmitButton = styled.button`
   bottom: 10px;
   right: 30px;
   cursor: pointer;
+  pointer-events: ${props => (props.me ? null : "none")};
   opacity: ${props => (props.isAvailablePosting ? 1 : 0.5)};
   transition: all 0.3s linear;
   display: flex;
@@ -87,23 +91,27 @@ const ImageUploadContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
+  margin-right: 15px;
   position: relative;
 `;
 
 const Image = styled.img`
-  width: 150px;
+  width: 80px;
+  height: 80px;
   margin-top: 5px;
+
+  @media ${device.mobileL} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const ImageDeleteContainer = styled.div`
   position: absolute;
   top: 2px;
-  right: 2px;
+  right: 1px;
   color: red;
-  font-size: 2px;
-  border: 1px solid red;
-  border-radius: 50%;
-  padding: 1px;
+  font-size: 20px;
   opacity: 0.7;
   cursor: pointer;
   &:hover {
@@ -142,18 +150,38 @@ const PostForm = () => {
   }, [imageInput.current]);
   
   const onChangeImages = useCallback((e) => {
+    console.log('postImages', e.target.files);
     const imageFormData = new FormData();
-    [].forEach.call(e.target.files, f => {
-      imageFormData.append("image", f);
+    [].forEach.call(e.target.files, (f) => {
+      imageFormData.append('postImages', f);
     });
 
-    console.log(imageFormData);
+    return dispatch({
+      type: UPLOAD_IMAGES_REQUEST,
+      data: imageFormData,
+    });
+  });
+
+  const onRemoveImage = useCallback((index) => () => {
+    dispatch({
+      type: REMOVE_IMAGE,
+      data: index,
+    })
   });
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    dispatch(addPost(content));
-  }, [content]);
+    const formData = new FormData();
+    imagePaths.forEach((p) => {
+      formData.append('postImages', p);
+    });
+    formData.append('content', content);
+
+    return dispatch({
+      type: ADD_POST_REQUEST,
+      data: formData
+    });
+  }, [content, imagePaths]);
 
   return (
     <Container>
@@ -175,28 +203,28 @@ const PostForm = () => {
           />
           <input
             type="file"
+            name="postImages"
             multiple
             hidden
             ref={imageInput}
             onChange={onChangeImages}
           />
-          <IconContainer onClick={onClickImageUpload}>
+          <IconContainer me={me} onClick={onClickImageUpload}>
             <FaRegImage />
           </IconContainer>
-          <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>
+          <SubmitButton type="submit" me={me} isAvailablePosting={isAvailablePosting}>
             게시
           </SubmitButton>
         </FormUpSideContainer>
         <ImageUploadContainer>
-          {imagePaths && imagePaths.map((path, i) => (
-            <ImageContainer key={path}>
+          {imagePaths && imagePaths.map((v, i) => (
+            <ImageContainer key={v}>
               <Image 
-                src={`${path}`} 
-                alt={path}
-                style={{width: "50px"}}
+                src={`http://localhost:3065/${v}`} 
+                alt={v}
               />
-              <ImageDeleteContainer onClick={onClickDeleteImage(i)}>
-                <IoMdRemove />
+              <ImageDeleteContainer onClick={onRemoveImage(i)}>
+                <MdCancel />
               </ImageDeleteContainer>
             </ImageContainer>
           ))}

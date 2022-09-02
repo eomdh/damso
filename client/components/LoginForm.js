@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from "next/router";
 import useInput from '../hooks/useInput';
-import { logIn } from '../reducers/user';
+import { LOG_IN_REQUEST } from '../reducers/user';
 
 const Container = styled.div`
   width: 450px;
@@ -91,7 +91,13 @@ const LoginForm = () => {
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    dispatch(logIn({email, password}));
+    dispatch({
+      type: LOG_IN_REQUEST,
+      data: {
+        email: email,
+        password: password,
+      }
+    });
     console.log(email, password);
   }, [email, password]);
 

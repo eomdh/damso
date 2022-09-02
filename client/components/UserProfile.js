@@ -1,10 +1,11 @@
-import React, { useCallback, useRef, useState } from 'react';
-import PropType from 'prop-types';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import ProfileImage from './ProfileImage';
-import { BsPlusCircleFill, BsPencilFill } from 'react-icons/bs';
-import IntroduceEditForm from './IntroduceEditForm';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import ProfileImage from './ProfileImage';
+import ProfileImageEditForm from './profileImageEditForm';
+import IntroduceEditForm from './IntroduceEditForm';
+import { BsPencilFill } from 'react-icons/bs';
 
 const Container = styled.div`
   width: 700px;
@@ -25,20 +26,6 @@ const ProfileImageContainer = styled.div`
   height: 150px;
   border-radius: 70%;
   overflow: hidden;
-`;
-
-const Form = styled.form`
-  margin-left: 100px;
-`;
-
-const PlusIconContainer = styled.div`
-  font-size: 27px;
-  color: #1864ab;
-  opacity: 0.6;
-  cursor: pointer;
-  :hover {
-    opacity: 1;
-  }
 `;
 
 const NicknameContainer = styled.div`
@@ -101,46 +88,16 @@ const UserProfile = ({ me }) => {
   const id = useSelector((state) => state.user.me?.id);
   const [onEditForm, setOnEditForm] = useState(false);
 
-  const imageInput = useRef();
-  const onClickImageUpload = useCallback(() => {
-    imageInput.current.click();
-  }, [imageInput.current]);
-
-  const onChangeImages = useCallback((e) => {
-    const imageFormData = new FormData();
-    [].forEach.call(e.target.files, f => {
-      imageFormData.append("image", f);
-    });
-
-    console.log(imageFormData);
-  });
-
   const onClickEditForm = useCallback(() => {
     setOnEditForm(prev => !prev);
   }, [onEditForm]);
-
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-  }, []);
 
   return (
     <Container>
       <ProfileImageContainer>
         <ProfileImage />
       </ProfileImageContainer>
-      <Form onSubmit={onSubmit} encType="multipart/form-data">
-        <input
-          type="file"
-          multiple
-          hidden
-          ref={imageInput}
-          onChange={onChangeImages}
-        />
-        { id && 
-        <PlusIconContainer onClick={onClickImageUpload}>
-          <BsPlusCircleFill />
-        </PlusIconContainer> }
-      </Form>
+      { id && <ProfileImageEditForm />}
       <NicknameContainer>
         <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
@@ -161,8 +118,8 @@ const UserProfile = ({ me }) => {
   );
 };
 
-UserProfile.propType = {
-  me: PropType.object.isRequired,
+UserProfile.propTypes = {
+  me: PropTypes.object.isRequired,
 };
 
 export default UserProfile;

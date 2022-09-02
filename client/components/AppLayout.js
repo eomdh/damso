@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../reducers/user';
+import { LOG_OUT_REQUEST } from '../reducers/user';
 
 import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
@@ -133,8 +133,10 @@ const AppLayout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
 
   const onLogout = useCallback(() => {
-    dispatch(logOut());
-  }, [])
+    dispatch({
+      type: LOG_OUT_REQUEST,
+    });
+  }, []);
 
   return (
     <>

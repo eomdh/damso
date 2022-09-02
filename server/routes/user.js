@@ -1,10 +1,34 @@
 const express = require('express');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const { User, Post } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
+
+try {
+  fs.accessSync('profileImage')
+} catch (error) {
+  console.log("Create folder for 'profileImage'.");
+  fs.mkdirSync('profileImage');
+};
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, 'postImages');
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      const basename = path.basename(file.originalname, ext);
+      done(null, basename + '_' + new Date().getTime() + ext);
+    },
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 },
+});
 
 router.get('/', async (req, res, next) => {
   try {
@@ -113,6 +137,15 @@ router.patch('/introduce', isLoggedIn, async (req, res, next) => {
     });
 
     res.status(200).json({ introduce: req.body.introduce });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  };
+});
+
+router.patch('/image', isLoggedIn, upload.single(), async (req, res, next) => {
+  try {
+
   } catch (error) {
     console.error(error);
     next(error);

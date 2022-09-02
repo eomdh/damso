@@ -39,28 +39,12 @@ export const CHANGE_INTRODUCE_REQUEST = "CHANGE_INTRODUCE_REQUEST";
 export const CHANGE_INTRODUCE_SUCCESS = "CHANGE_INTRODUCE_SUCCESS";
 export const CHANGE_INTRODUCE_FAILURE = "CHANGE_INTRODUCE_FAILURE";
 
+export const CHANGE_PROFILE_IMAGE_REQUEST = "CHANGE_PROFILE_IMAGE_REQUEST";
+export const CHANGE_PROFILE_IMAGE_SUCCESS = "CHANGE_PROFILE_IMAGE_SUCCESS";
+export const CHANGE_PROFILE_IMAGE_FAILURE = "CHANGE_PROFILE_IMAGE_FAILURE";
+
 export const ADD_POST_OF_ME = "ADD_POST_OF_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
-
-export const logIn = (data) => {
-  return {
-    type: LOG_IN_REQUEST,
-    data,
-  }
-};
-
-export const logOut = () => {
-  return {
-    type: LOG_OUT_REQUEST,
-  }
-};
-
-export const changeIntroduce = (data) => {
-  return {
-    type: CHANGE_INTRODUCE_REQUEST,
-    data,
-  }
-};
 
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
@@ -134,6 +118,20 @@ const reducer = (state = initialState, action) => {
       case CHANGE_INTRODUCE_FAILURE:
         draft.changeIntroduceLoading = false;
         draft.changeIntroduceError = action.error;
+        break;
+      case CHANGE_PROFILE_IMAGE_REQUEST:
+        draft.changeProfileImageLoading = true;
+        draft.changeProfileImageDone = false;
+        draft.changeProfileImageError = null;
+        break;
+      case CHANGE_PROFILE_IMAGE_SUCCESS:
+        draft.me.profileImagePath = action.data.profileImagePath;
+        draft.changeProfileImageLoading = false;
+        draft.changeProfileImageDone = true;
+        break;
+      case CHANGE_PROFILE_IMAGE_FAILURE:
+        draft.changeProfileImageLoading = false;
+        draft.changeProfileImageError = action.error;
         break;
       case ADD_POST_OF_ME:
         draft.me.Posts.unshift({ id: action.data });

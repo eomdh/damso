@@ -5,7 +5,8 @@ import {
   LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
   LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE,
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
-  CHANGE_INTRODUCE_REQUEST, CHANGE_INTRODUCE_SUCCESS, CHANGE_INTRODUCE_FAILURE
+  CHANGE_INTRODUCE_REQUEST, CHANGE_INTRODUCE_SUCCESS, CHANGE_INTRODUCE_FAILURE,
+  CHANGE_PROFILE_IMAGE_REQUEST, CHANGE_PROFILE_IMAGE_SUCCESS, CHANGE_PROFILE_IMAGE_FAILURE
 } from '../reducers/user';
 
 function loadMyInfoAPI() {
@@ -102,6 +103,29 @@ function* changeIntroduce(action) {
   };
 };
 
+function changeProfileImageAPI(data) {
+  return axios.patch('/user/image', data);
+};
+
+function* changeProfileImage(action) {
+  try {
+    const result = yield call(changeProfileImageAPI, action.data);
+    yield put({
+      type: CHANGE_PROFILE_IMAGE_SUCCESS,
+      data: result.data,
+    });  
+  } catch (err) {
+    yield put({
+      type: CHANGE_PROFILE_IMAGE_FAILURE,
+      error: err.response.data,
+    });
+  };
+};
+
+// 프로필 이미지 변경 할 차례
+// server 라우터 만들고, client 프로필 이미지 변경 폼 수정하기
+// ProfileImage 컴포넌트 이미지 받아오는거 수정하기
+
 function* watchLoadMyInfo() {
   yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
 };
@@ -122,6 +146,10 @@ function* watchChangeIntroduce() {
   yield takeLatest(CHANGE_INTRODUCE_REQUEST, changeIntroduce);
 };
 
+function* watchChangeProfileImage() {
+  yield takeLatest(CHANGE_PROFILE_IMAGE_REQUEST, changeProfileImage);
+};
+
 export default function* userSaga() {
   yield all([
     fork(watchLoadMyInfo),
@@ -129,5 +157,6 @@ export default function* userSaga() {
     fork(watchLogOut),
     fork(watchSignUp),
     fork(watchChangeIntroduce),
+    fork(watchChangeProfileImage),
   ]);
 };

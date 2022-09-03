@@ -91,7 +91,7 @@ router.delete('/:postId/delete', isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post('/images', isLoggedIn, upload.array('postImages'), (req, res, next) => {
+router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
     console.log(req.files);
     res.status(200).json(req.files.map((v) => v.filename));
 });

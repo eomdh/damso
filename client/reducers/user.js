@@ -125,7 +125,7 @@ const reducer = (state = initialState, action) => {
         draft.changeProfileImageError = null;
         break;
       case CHANGE_PROFILE_IMAGE_SUCCESS:
-        draft.me.profileImagePath = action.data.profileImagePath;
+        draft.me.profileImagePath = action.data.filename;
         draft.changeProfileImageLoading = false;
         draft.changeProfileImageDone = true;
         break;

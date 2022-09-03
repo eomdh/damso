@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -95,9 +95,9 @@ const UserProfile = ({ me }) => {
   return (
     <Container>
       <ProfileImageContainer>
-        <ProfileImage />
+        <ProfileImage path={ me.profileImagePath } />
       </ProfileImageContainer>
-      { id && <ProfileImageEditForm />}
+      { id && <ProfileImageEditForm /> }
       <NicknameContainer>
         <Nickname>{ me.nickname }</Nickname>
       </NicknameContainer>
@@ -110,7 +110,8 @@ const UserProfile = ({ me }) => {
           <PencilIconContainer onClick={onClickEditForm}>
             <BsPencilFill />
           </PencilIconContainer> }
-        </IntroduceContainer>)}
+        </IntroduceContainer>
+      )}
       <Button>
         게시글보기
       </Button>

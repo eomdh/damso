@@ -41,7 +41,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', express.static(path.join(__dirname, 'postImages')));
+app.use('/postImages', express.static(path.join(__dirname, 'postImages')));
+app.use('/profileImages', express.static(path.join(__dirname, 'profileImages')));
 
 app.use('/user', userRouter);
 app.use('/post', postRouter);

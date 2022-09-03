@@ -150,10 +150,10 @@ const PostForm = () => {
   }, [imageInput.current]);
   
   const onChangeImages = useCallback((e) => {
-    console.log('postImages', e.target.files);
+    console.log('image', e.target.files);
     const imageFormData = new FormData();
-    [].forEach.call(e.target.files, (f) => {
-      imageFormData.append('postImages', f);
+    [].forEach.call(e.target.files, (file) => {
+      imageFormData.append('image', file);
     });
 
     return dispatch({
@@ -172,8 +172,8 @@ const PostForm = () => {
   const onSubmit = useCallback((e) => {
     e.preventDefault();
     const formData = new FormData();
-    imagePaths.forEach((p) => {
-      formData.append('postImages', p);
+    imagePaths.forEach((path) => {
+      formData.append('postImages', path);
     });
     formData.append('content', content);
 
@@ -188,7 +188,7 @@ const PostForm = () => {
       <Form onSubmit={onSubmit} encType="multipart/form-data">
         <FormUpSideContainer>
           <ProfileImageContainer>
-            <ProfileImage src={require('../image/user.png')} />
+            <ProfileImage path={ me ? me.profileImagePath : null } />
           </ProfileImageContainer>
           <ContentInput 
             placeholder={me ? "오늘은 어떤 일이 있었나요?" : "로그인 후 이용해주세요."}
@@ -203,7 +203,7 @@ const PostForm = () => {
           />
           <input
             type="file"
-            name="postImages"
+            name="image"
             multiple
             hidden
             ref={imageInput}

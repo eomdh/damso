@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
       order: [[ 'createdAt', 'DESC' ]],
       include: [{
         model: User,
-        attributes: ['id', 'nickname'],
+        attributes: ['id', 'nickname', 'profileImagePath'],
       }, {
         model: Comment,
         include: [{

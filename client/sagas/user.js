@@ -104,7 +104,7 @@ function* changeIntroduce(action) {
 };
 
 function changeProfileImageAPI(data) {
-  return axios.patch('/user/image', data);
+  return axios.post('/user/image', data);
 };
 
 function* changeProfileImage(action) {
@@ -121,10 +121,6 @@ function* changeProfileImage(action) {
     });
   };
 };
-
-// 프로필 이미지 변경 할 차례
-// server 라우터 만들고, client 프로필 이미지 변경 폼 수정하기
-// ProfileImage 컴포넌트 이미지 받아오는거 수정하기
 
 function* watchLoadMyInfo() {
   yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);

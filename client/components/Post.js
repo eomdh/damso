@@ -149,7 +149,7 @@ const Post = ({ post }) => {
     post && (
       <Container>
         <ProfileImageContainer>
-          <ProfileImage src={require('../image/user.png')} />
+          <ProfileImage path={post.User.profileImagePath ? post.User.profileImagePath : null}/>
         </ProfileImageContainer>
         <InformationContainer>
           <Nickname>{post.User.nickname}</Nickname>

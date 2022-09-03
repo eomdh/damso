@@ -1,5 +1,7 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { CHANGE_PROFILE_IMAGE_REQUEST } from '../reducers/user';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
 const Form = styled.form`
@@ -17,34 +19,35 @@ const PlusIconContainer = styled.div`
 `;
 
 const ProfileImageEditForm = () => {
+  const dispatch = useDispatch();
+
+  const formData = new FormData();
+
   const imageInput = useRef();
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
 
-  const onChangeImages = useCallback((e) => {
-    const imageFormData = new FormData();
-    [].forEach.call(e.target.files, f => {
-      imageFormData.append("image", f);
+  const onChangeImage = useCallback((e) => {
+    console.log('image', e.target.files);
+    [].forEach.call(e.target.files, (file) => {
+      formData.append('image', file);
     });
 
-    console.log(imageFormData);
+    dispatch({
+      type: CHANGE_PROFILE_IMAGE_REQUEST,
+      data: formData,
+    });
   });
 
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-
-  }, []);
-
   return (
-    <Form onSubmit={onSubmit} encType="multipart/form-data">
+    <Form encType="multipart/form-data">
       <input
         type="file"
-        name="profileImage"
-        multiple
+        name="image"
         hidden
         ref={imageInput}
-        onChange={onChangeImages}
+        onChange={onChangeImage}
       />
       <PlusIconContainer onClick={onClickImageUpload}>
         <BsPlusCircleFill />

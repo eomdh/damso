@@ -10,21 +10,20 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 
 try {
-  fs.accessSync('profileImage')
+  fs.accessSync('profileImages')
 } catch (error) {
-  console.log("Create folder for 'profileImage'.");
-  fs.mkdirSync('profileImage');
+  console.log("Create folder for 'profileImages'.");
+  fs.mkdirSync('profileImages');
 };
 
 const upload = multer({
   storage: multer.diskStorage({
     destination(req, file, done) {
-      done(null, 'postImages');
+      done(null, 'profileImages');
     },
     filename(req, file, done) {
       const ext = path.extname(file.originalname);
-      const basename = path.basename(file.originalname, ext);
-      done(null, basename + '_' + new Date().getTime() + ext);
+      done(null, 'profile_image_' + req.user.id + ext);
     },
   }),
   limits: { fileSize: 20 * 1024 * 1024 },
@@ -143,13 +142,15 @@ router.patch('/introduce', isLoggedIn, async (req, res, next) => {
   };
 });
 
-router.patch('/image', isLoggedIn, upload.single(), async (req, res, next) => {
-  try {
+router.post('/image', isLoggedIn, upload.single('image'), async (req, res) => {
+  await User.update({
+    profileImagePath: req.file.filename,
+  }, {
+    where: { id: req.user.id },
+  });
 
-  } catch (error) {
-    console.error(error);
-    next(error);
-  };
+  console.log(req.file);
+  res.status(200).json(req.file);
 });
 
 module.exports = router;

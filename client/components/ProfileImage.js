@@ -7,20 +7,15 @@ const Container = styled.div`
   height: 100%;
   border-radius: 50px;
   background-image: url(${props => props.path});
-  background-color: gray;
   background-size: cover;
   background-position: center center;
 `;
 
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-`;
-
-const ProfileImage = ({ profileImagePath }) => {
+const ProfileImage = ({ path }) => {
   return (
-    <Container path={profileImagePath ? `%{profileImagePath}` : require('../image/user.png')} />
+    <Container path={path 
+      ? `http://localhost:3065/profileImages/${path}` 
+      : require('../image/user.png')} />
   );
 };
 

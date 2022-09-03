@@ -68,7 +68,9 @@ const Comment = ({ postId, comment }) => {
   return (
     <Container>
       <ProfileImageContainer>
-          <ProfileImage src={require('../image/user.png')} />
+          <ProfileImage path={comment.User.profileImagePath 
+                              ? comment.User.profileImagePath 
+                              : null} />
       </ProfileImageContainer>
       <InformationContainer>
         <Nickname>{comment.User.nickname}</Nickname>

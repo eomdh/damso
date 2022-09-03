@@ -117,7 +117,7 @@ const CommentForm = ({ post }) => {
           placeholder={id ? "댓글을 남겨주세요." : "로그인 후 이용해주세요."}
           disabled={id ? false : true}
           value={content}
-          onChange={onChangeContent }
+          onChange={onChangeContent}
           style={{
             resize: "none",
             outline: "none",

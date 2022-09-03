@@ -53,12 +53,12 @@ router.post('/add', isLoggedIn, upload.none(), async (req, res, next) => {
       where: { id: post.id },
       include: [{
         model: User,
-        attributes: ['id', 'nickname'],
+        attributes: ['id', 'nickname', 'profileImagePath'],
       }, {
         model: Comment,
         include: [{
           model: User,
-          attributes: ['id', 'nickname'],
+          attributes: ['id', 'nickname', 'profileImagePath'],
         }]
       }, {
         model: User,
@@ -115,7 +115,7 @@ router.post('/:postId/comment/add', isLoggedIn, async (req, res, next) => {
       where: { id: comment.id },
       include: [{
         model: User,
-        attributes: ['id', 'nickname'],
+        attributes: ['id', 'nickname', 'profileImagePath'],
       }]
     })
   

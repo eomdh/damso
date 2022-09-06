@@ -61,7 +61,6 @@ const Home = () => {
         if (hasMorePosts && !loadPostsLoading) {
           dispatch({
             type: LOAD_POSTS_REQUEST,
-            // data: mainPosts[mainPosts.length - 1]?.id,
           });
         }
       }
@@ -70,7 +69,7 @@ const Home = () => {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, [hasMorePosts, loadPostsLoading]);
+  }, [hasMorePosts, loadPostsLoading, mainPosts]);
 
   return (
     <AppLayout>

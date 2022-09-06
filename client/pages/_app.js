@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+
 import wrapper from '../store/configureStore';
 
-const App = ({ Component }) => {
+const Damso = ({ Component }) => {
   return (
     <>
       <Head>
@@ -15,8 +16,8 @@ const App = ({ Component }) => {
   );
 };
 
-App.propTypes = {
+Damso.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export default wrapper.withRedux(App);
+export default wrapper.withRedux(Damso);

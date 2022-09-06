@@ -61,7 +61,7 @@ const PostImages = ({ images }) => {
 };
 
 PostImages.propTypes = {
-  images: PropTypes.object.isRequired,
+  images: PropTypes.array,
 };
 
 export default PostImages;

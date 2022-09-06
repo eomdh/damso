@@ -8,6 +8,7 @@ const Container = styled.div`
   height: 100%;
   border-radius: 50px;
   background-image: url(${props => props.path});
+  background-color: #dee2e6;
   background-size: cover;
   background-position: center center;
 `;
@@ -21,7 +22,7 @@ const ProfileImage = ({ path }) => {
 };
 
 ProfileImage.propTypes = {
-  profileImagePath: PropTypes.string.isRequired,
+  profileImagePath: PropTypes.string,
 };
 
 export default ProfileImage;

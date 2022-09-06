@@ -1,4 +1,4 @@
-import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 import axios from 'axios';
 import {
   LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, LOAD_POSTS_FAILURE,
@@ -90,7 +90,7 @@ function* uploadImages(action) {
     });
   } catch (err) {
     yield put({
-      type: REMOVE_POST_FAILURE,
+      type: UPLOAD_IMAGES_FAILURE,
       error: err.response.data,
     });
   };

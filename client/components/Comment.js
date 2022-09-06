@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { REMOVE_COMMENT_REQUEST } from '../reducers/post';
 import ProfileImage from './ProfileImage';
+import moment from 'moment';
 
 import styled from 'styled-components';
 import { FaTrashAlt } from "react-icons/fa";
@@ -14,8 +15,9 @@ const Container = styled.div`
 
 const InformationContainer = styled.div`
   display: flex;
-  height: 20px;
   justify-content: space-between;
+  height: 20px;
+  align-items: center;
   margin: 3px 10px 0px 10px;
 `;
 
@@ -29,12 +31,17 @@ const ProfileImageContainer = styled.div`
 `;
 
 const Nickname = styled.span`
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
 `;
 
+const Date = styled.span`
+  margin-left: 8px;
+  color: #657785;
+  font-size: 13px;
+`;
+
 const DeleteButton = styled.div`
-  display: flex;
   color: #e8537c;
   opacity: 0.6;
   font-size: 16px;
@@ -49,7 +56,8 @@ const DeleteButton = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 10px;
+  padding-top: 15px;
+  font-size: 15px;
 `;
 
 const Comment = ({ postId, comment }) => {
@@ -74,7 +82,10 @@ const Comment = ({ postId, comment }) => {
                               : null} />
       </ProfileImageContainer>
       <InformationContainer>
-        <Nickname>{comment.User.nickname}</Nickname>
+        <div>
+          <Nickname>{comment.User.nickname}</Nickname>
+          <Date>{ moment(comment.createdAt).format('YYYY/MM/DD h:mm') }</Date>
+        </div>
         { id && comment.User.id === parseInt(id)
           ? ( <DeleteButton onClick={onRemoveComment}>
                 <FaTrashAlt />

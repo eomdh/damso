@@ -198,7 +198,7 @@ function* watchLoadPosts() {
 };
 
 function* watchLoadPost() {
-  yield takeLatest(LOAD_POSTS_REQUEST, loadPost);
+  yield takeLatest(LOAD_POST_REQUEST, loadPost);
 };
 
 function* watchAddPost() {

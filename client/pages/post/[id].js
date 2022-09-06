@@ -34,11 +34,11 @@ const Post = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
   const cookie = context.req ? context.req.headers.cookie : '';
-  console.log(context);
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
+
   context.store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
   });
@@ -46,6 +46,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     type: LOAD_POST_REQUEST,
     data: context.params.id,
   });
+  
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
 });

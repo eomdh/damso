@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Container = styled.div`
-  margin: 15px 15px 25px 0px;
+  margin: 25px 15px 0px 0px;
   width: 90%;
 `;
 

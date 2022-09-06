@@ -7,6 +7,7 @@ import PostImages from './PostImages';
 import PostContent from './PostContent';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
+import moment from 'moment';
 
 import styled from 'styled-components';
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
@@ -37,12 +38,18 @@ const InformationContainer = styled.div`
 `;
 
 const Nickname = styled.span`
-  margin-top: 3px;
+  margin-top: 2px;
   font-size: 18px;
   font-weight: 600;
 `;
 
 const Date = styled.span`
+  all: unset;
+  position: absolute;
+  margin-top: 28px;
+  margin-left: 2px;
+  color: #657785;
+  font-size: 15px;
 `;
 
 const DeleteButton = styled.div`
@@ -70,7 +77,7 @@ const ContentContainer = styled.div`
 const Content = styled.div`
   width: 85%;
   min-height: 20px;
-  margin-top: 20px;
+  margin-top: 35px;
   line-height: 18px;
   font-size: 17px;
 `;
@@ -159,6 +166,7 @@ const PostCard = ({ post }) => {
         </ProfileImageContainer>
         <InformationContainer>
           <Nickname>{post.User.nickname}</Nickname>
+          <Date>{ moment(post.createdAt).format('YYYY/MM/DD h:mm') }</Date>
           {id && post.User.id === parseInt(id)
             ? ( <DeleteButton onClick={onRemovePost}>
                   <FaTrashAlt />

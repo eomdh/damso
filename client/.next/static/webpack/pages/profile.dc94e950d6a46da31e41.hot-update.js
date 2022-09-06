@@ -1,0 +1,265 @@
+webpackHotUpdate_N_E("pages/profile",{
+
+/***/ "./components/UserProfile.js":
+/*!***********************************!*\
+  !*** ./components/UserProfile.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _ProfileImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProfileImage */ "./components/ProfileImage.js");
+/* harmony import */ var _profileImageEditForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./profileImageEditForm */ "./components/profileImageEditForm.js");
+/* harmony import */ var _IntroduceEditForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./IntroduceEditForm */ "./components/IntroduceEditForm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/bs */ "./node_modules/react-icons/bs/index.esm.js");
+var _this = undefined,
+    _jsxFileName = "C:\\Users\\DeokHyeon\\Desktop\\damso\\client\\components\\UserProfile.js",
+    _s = $RefreshSig$();
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+  displayName: "UserProfile__Container",
+  componentId: "sc-s6xozi-0"
+})(["width:700px;height:400px;background-color:white;border-radius:20px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);"]);
+_c = Container;
+var ProfileImageContainer = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+  displayName: "UserProfile__ProfileImageContainer",
+  componentId: "sc-s6xozi-1"
+})(["margin-top:50px;margin-bottom:-40px;width:150px;height:150px;border-radius:70%;overflow:hidden;"]);
+_c2 = ProfileImageContainer;
+var NicknameContainer = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+  displayName: "UserProfile__NicknameContainer",
+  componentId: "sc-s6xozi-2"
+})(["width:100%;display:flex;justify-content:center;margin-top:15px;margin-bottom:5px;"]);
+_c3 = NicknameContainer;
+var Nickname = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+  displayName: "UserProfile__Nickname",
+  componentId: "sc-s6xozi-3"
+})(["font-weight:600;font-size:25px;color:#212529;"]);
+_c4 = Nickname;
+var IntroduceContainer = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+  displayName: "UserProfile__IntroduceContainer",
+  componentId: "sc-s6xozi-4"
+})(["display:flex;justify-content:center;margin-bottom:30px;"]);
+_c5 = IntroduceContainer;
+var Introduce = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+  displayName: "UserProfile__Introduce",
+  componentId: "sc-s6xozi-5"
+})(["margin-right:7px;font-weight:500;font-size:18px;color:#868e96;"]);
+_c6 = Introduce;
+var PencilIconContainer = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+  displayName: "UserProfile__PencilIconContainer",
+  componentId: "sc-s6xozi-6"
+})(["font-size:15px;margin-top:2px;opacity:0.6;cursor:pointer;:hover{opacity:1;}"]);
+_c7 = PencilIconContainer;
+var Button = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].button.withConfig({
+  displayName: "UserProfile__Button",
+  componentId: "sc-s6xozi-7"
+})(["all:unset;border-radius:10px;width:20%;height:30px;padding:8px 15px;background-color:#1864ab;color:white;font-weight:700;font-size:17px;text-align:center;cursor:pointer;opacity:0.8;outline:none;&:hover{opacity:1;}"]);
+_c8 = Button;
+
+var UserProfile = function UserProfile(_ref) {
+  _s();
+
+  var user = _ref.user;
+  var me = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (state) {
+    return state.user.me.id === user.id;
+  });
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      onEditForm = _useState[0],
+      setOnEditForm = _useState[1];
+
+  var onClickEditForm = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
+    setOnEditForm(function (prev) {
+      return !prev;
+    });
+  }, [onEditForm]);
+  return __jsx(Container, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 97,
+      columnNumber: 5
+    }
+  }, __jsx(ProfileImageContainer, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 98,
+      columnNumber: 7
+    }
+  }, __jsx(_ProfileImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    path: user.profileImagePath,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 99,
+      columnNumber: 9
+    }
+  })), me && __jsx(_profileImageEditForm__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 101,
+      columnNumber: 15
+    }
+  }), __jsx(NicknameContainer, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 102,
+      columnNumber: 7
+    }
+  }, __jsx(Nickname, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 103,
+      columnNumber: 9
+    }
+  }, user.nickname)), onEditForm ? __jsx(_IntroduceEditForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    setOnEditForm: setOnEditForm,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 106,
+      columnNumber: 9
+    }
+  }) : __jsx(IntroduceContainer, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 108,
+      columnNumber: 9
+    }
+  }, __jsx(Introduce, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 109,
+      columnNumber: 11
+    }
+  }, user.introduce), me && __jsx(PencilIconContainer, {
+    onClick: onClickEditForm,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 111,
+      columnNumber: 11
+    }
+  }, __jsx(react_icons_bs__WEBPACK_IMPORTED_MODULE_7__["BsPencilFill"], {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 112,
+      columnNumber: 13
+    }
+  }))), __jsx(Button, {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 116,
+      columnNumber: 7
+    }
+  }, "\uAC8C\uC2DC\uAE00\uBCF4\uAE30"));
+};
+
+_s(UserProfile, "4pXDaMW0qxSTlplivr0m79FVbU4=", false, function () {
+  return [react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"]];
+});
+
+_c9 = UserProfile;
+UserProfile.propTypes = {
+  me: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (UserProfile);
+
+var _c, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9;
+
+$RefreshReg$(_c, "Container");
+$RefreshReg$(_c2, "ProfileImageContainer");
+$RefreshReg$(_c3, "NicknameContainer");
+$RefreshReg$(_c4, "Nickname");
+$RefreshReg$(_c5, "IntroduceContainer");
+$RefreshReg$(_c6, "Introduce");
+$RefreshReg$(_c7, "PencilIconContainer");
+$RefreshReg$(_c8, "Button");
+$RefreshReg$(_c9, "UserProfile");
+
+;
+    var _a, _b;
+    // Legacy CSS implementations will `eval` browser code in a Node.js context
+    // to extract CSS. For backwards compatibility, we need to check we're in a
+    // browser context before continuing.
+    if (typeof self !== 'undefined' &&
+        // AMP / No-JS mode does not inject these helpers:
+        '$RefreshHelpers$' in self) {
+        var currentExports = module.__proto__.exports;
+        var prevExports = (_b = (_a = module.hot.data) === null || _a === void 0 ? void 0 : _a.prevExports) !== null && _b !== void 0 ? _b : null;
+        // This cannot happen in MainTemplate because the exports mismatch between
+        // templating and execution.
+        self.$RefreshHelpers$.registerExportsForReactRefresh(currentExports, module.i);
+        // A module can be accepted automatically based on its exports, e.g. when
+        // it is a Refresh Boundary.
+        if (self.$RefreshHelpers$.isReactRefreshBoundary(currentExports)) {
+            // Save the previous exports on update so we can compare the boundary
+            // signatures.
+            module.hot.dispose(function (data) {
+                data.prevExports = currentExports;
+            });
+            // Unconditionally accept an update to this module, we'll check if it's
+            // still a Refresh Boundary later.
+            module.hot.accept();
+            // This field is set when the previous version of this module was a
+            // Refresh Boundary, letting us know we need to check for invalidation or
+            // enqueue an update.
+            if (prevExports !== null) {
+                // A boundary can become ineligible if its exports are incompatible
+                // with the previous exports.
+                //
+                // For example, if you add/remove/change exports, we'll want to
+                // re-execute the importing modules, and force those components to
+                // re-render. Similarly, if you convert a class component to a
+                // function, we want to invalidate the boundary.
+                if (self.$RefreshHelpers$.shouldInvalidateReactRefreshBoundary(prevExports, currentExports)) {
+                    module.hot.invalidate();
+                }
+                else {
+                    self.$RefreshHelpers$.scheduleUpdate();
+                }
+            }
+        }
+        else {
+            // Since we just executed the code for the module, it's possible that the
+            // new exports made it ineligible for being a boundary.
+            // We only care about the case when we were _previously_ a boundary,
+            // because we already accepted this update (accidental side effect).
+            var isNoLongerABoundary = prevExports !== null;
+            if (isNoLongerABoundary) {
+                module.hot.invalidate();
+            }
+        }
+    }
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ })
+
+})
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9fTl9FLy4vY29tcG9uZW50cy9Vc2VyUHJvZmlsZS5qcyJdLCJuYW1lcyI6WyJDb250YWluZXIiLCJzdHlsZWQiLCJkaXYiLCJQcm9maWxlSW1hZ2VDb250YWluZXIiLCJOaWNrbmFtZUNvbnRhaW5lciIsIk5pY2tuYW1lIiwiSW50cm9kdWNlQ29udGFpbmVyIiwiSW50cm9kdWNlIiwiUGVuY2lsSWNvbkNvbnRhaW5lciIsIkJ1dHRvbiIsImJ1dHRvbiIsIlVzZXJQcm9maWxlIiwidXNlciIsIm1lIiwidXNlU2VsZWN0b3IiLCJzdGF0ZSIsImlkIiwidXNlU3RhdGUiLCJvbkVkaXRGb3JtIiwic2V0T25FZGl0Rm9ybSIsIm9uQ2xpY2tFZGl0Rm9ybSIsInVzZUNhbGxiYWNrIiwicHJldiIsInByb2ZpbGVJbWFnZVBhdGgiLCJuaWNrbmFtZSIsImludHJvZHVjZSIsInByb3BUeXBlcyIsIlByb3BUeXBlcyIsIm9iamVjdCIsImlzUmVxdWlyZWQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUVBLElBQU1BLFNBQVMsR0FBR0MseURBQU0sQ0FBQ0MsR0FBVjtFQUFBO0VBQUE7QUFBQSxzTkFBZjtLQUFNRixTO0FBWU4sSUFBTUcscUJBQXFCLEdBQUdGLHlEQUFNLENBQUNDLEdBQVY7RUFBQTtFQUFBO0FBQUEsdUdBQTNCO01BQU1DLHFCO0FBU04sSUFBTUMsaUJBQWlCLEdBQUdILHlEQUFNLENBQUNDLEdBQVY7RUFBQTtFQUFBO0FBQUEseUZBQXZCO01BQU1FLGlCO0FBUU4sSUFBTUMsUUFBUSxHQUFHSix5REFBTSxDQUFDQyxHQUFWO0VBQUE7RUFBQTtBQUFBLHFEQUFkO01BQU1HLFE7QUFNTixJQUFNQyxrQkFBa0IsR0FBR0wseURBQU0sQ0FBQ0MsR0FBVjtFQUFBO0VBQUE7QUFBQSwrREFBeEI7TUFBTUksa0I7QUFNTixJQUFNQyxTQUFTLEdBQUdOLHlEQUFNLENBQUNDLEdBQVY7RUFBQTtFQUFBO0FBQUEsc0VBQWY7TUFBTUssUztBQU9OLElBQU1DLG1CQUFtQixHQUFHUCx5REFBTSxDQUFDQyxHQUFWO0VBQUE7RUFBQTtBQUFBLG1GQUF6QjtNQUFNTSxtQjtBQVVOLElBQU1DLE1BQU0sR0FBR1IseURBQU0sQ0FBQ1MsTUFBVjtFQUFBO0VBQUE7QUFBQSw2TkFBWjtNQUFNRCxNOztBQW1CTixJQUFNRSxXQUFXLEdBQUcsU0FBZEEsV0FBYyxPQUFjO0VBQUE7O0VBQUEsSUFBWEMsSUFBVyxRQUFYQSxJQUFXO0VBQ2hDLElBQU1DLEVBQUUsR0FBR0MsK0RBQVcsQ0FBQyxVQUFDQyxLQUFEO0lBQUEsT0FBV0EsS0FBSyxDQUFDSCxJQUFOLENBQVdDLEVBQVgsQ0FBY0csRUFBZCxLQUFxQkosSUFBSSxDQUFDSSxFQUFyQztFQUFBLENBQUQsQ0FBdEI7O0VBQ0EsZ0JBQW9DQyxzREFBUSxDQUFDLEtBQUQsQ0FBNUM7RUFBQSxJQUFPQyxVQUFQO0VBQUEsSUFBbUJDLGFBQW5COztFQUVBLElBQU1DLGVBQWUsR0FBR0MseURBQVcsQ0FBQyxZQUFNO0lBQ3hDRixhQUFhLENBQUMsVUFBQUcsSUFBSTtNQUFBLE9BQUksQ0FBQ0EsSUFBTDtJQUFBLENBQUwsQ0FBYjtFQUNELENBRmtDLEVBRWhDLENBQUNKLFVBQUQsQ0FGZ0MsQ0FBbkM7RUFJQSxPQUNFLE1BQUMsU0FBRDtJQUFBO0lBQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtFQUFBLEdBQ0UsTUFBQyxxQkFBRDtJQUFBO0lBQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtFQUFBLEdBQ0UsTUFBQyxxREFBRDtJQUFjLElBQUksRUFBR04sSUFBSSxDQUFDVyxnQkFBMUI7SUFBQTtJQUFBO01BQUE7TUFBQTtNQUFBO0lBQUE7RUFBQSxFQURGLENBREYsRUFJSVYsRUFBRSxJQUFJLE1BQUMsNkRBQUQ7SUFBQTtJQUFBO01BQUE7TUFBQTtNQUFBO0lBQUE7RUFBQSxFQUpWLEVBS0UsTUFBQyxpQkFBRDtJQUFBO0lBQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtFQUFBLEdBQ0UsTUFBQyxRQUFEO0lBQUE7SUFBQTtNQUFBO01BQUE7TUFBQTtJQUFBO0VBQUEsR0FBWUQsSUFBSSxDQUFDWSxRQUFqQixDQURGLENBTEYsRUFRR04sVUFBVSxHQUNULE1BQUMsMERBQUQ7SUFBbUIsYUFBYSxFQUFFQyxhQUFsQztJQUFBO0lBQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtFQUFBLEVBRFMsR0FHVCxNQUFDLGtCQUFEO0lBQUE7SUFBQTtNQUFBO01BQUE7TUFBQTtJQUFBO0VBQUEsR0FDRSxNQUFDLFNBQUQ7SUFBQTtJQUFBO01BQUE7TUFBQTtNQUFBO0lBQUE7RUFBQSxHQUFhUCxJQUFJLENBQUNhLFNBQWxCLENBREYsRUFFSVosRUFBRSxJQUNKLE1BQUMsbUJBQUQ7SUFBcUIsT0FBTyxFQUFFTyxlQUE5QjtJQUFBO0lBQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtFQUFBLEdBQ0UsTUFBQywyREFBRDtJQUFBO0lBQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtFQUFBLEVBREYsQ0FIRixDQVhKLEVBbUJFLE1BQUMsTUFBRDtJQUFBO0lBQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtFQUFBLG9DQW5CRixDQURGO0FBeUJELENBakNEOztHQUFNVCxXO1VBQ09HLHVEOzs7TUFEUEgsVztBQW1DTkEsV0FBVyxDQUFDZSxTQUFaLEdBQXdCO0VBQ3RCYixFQUFFLEVBQUVjLGlEQUFTLENBQUNDLE1BQVYsQ0FBaUJDO0FBREMsQ0FBeEI7QUFJZWxCLDBFQUFmIiwiZmlsZSI6InN0YXRpYy93ZWJwYWNrL3BhZ2VzL3Byb2ZpbGUuZGM5NGU5NTBkNmE0NmRhMzFlNDEuaG90LXVwZGF0ZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCwgeyB1c2VDYWxsYmFjaywgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCBQcm9wVHlwZXMgZnJvbSAncHJvcC10eXBlcyc7XHJcbmltcG9ydCB7IHVzZVNlbGVjdG9yIH0gZnJvbSAncmVhY3QtcmVkdXgnO1xyXG5pbXBvcnQgUHJvZmlsZUltYWdlIGZyb20gJy4vUHJvZmlsZUltYWdlJztcclxuaW1wb3J0IFByb2ZpbGVJbWFnZUVkaXRGb3JtIGZyb20gJy4vcHJvZmlsZUltYWdlRWRpdEZvcm0nO1xyXG5pbXBvcnQgSW50cm9kdWNlRWRpdEZvcm0gZnJvbSAnLi9JbnRyb2R1Y2VFZGl0Rm9ybSc7XHJcblxyXG5pbXBvcnQgc3R5bGVkIGZyb20gJ3N0eWxlZC1jb21wb25lbnRzJztcclxuaW1wb3J0IHsgQnNQZW5jaWxGaWxsIH0gZnJvbSAncmVhY3QtaWNvbnMvYnMnO1xyXG5cclxuY29uc3QgQ29udGFpbmVyID0gc3R5bGVkLmRpdmBcclxuICB3aWR0aDogNzAwcHg7XHJcbiAgaGVpZ2h0OiA0MDBweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICBib3JkZXItcmFkaXVzOiAyMHB4O1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcclxuYDtcclxuXHJcbmNvbnN0IFByb2ZpbGVJbWFnZUNvbnRhaW5lciA9IHN0eWxlZC5kaXZgXHJcbiAgbWFyZ2luLXRvcDogNTBweDtcclxuICBtYXJnaW4tYm90dG9tOiAtNDBweDtcclxuICB3aWR0aDogMTUwcHg7XHJcbiAgaGVpZ2h0OiAxNTBweDtcclxuICBib3JkZXItcmFkaXVzOiA3MCU7XHJcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuYDtcclxuXHJcbmNvbnN0IE5pY2tuYW1lQ29udGFpbmVyID0gc3R5bGVkLmRpdmBcclxuICB3aWR0aDogMTAwJTtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIG1hcmdpbi10b3A6IDE1cHg7XHJcbiAgbWFyZ2luLWJvdHRvbTogNXB4O1xyXG5gO1xyXG5cclxuY29uc3QgTmlja25hbWUgPSBzdHlsZWQuZGl2YFxyXG4gIGZvbnQtd2VpZ2h0OiA2MDA7XHJcbiAgZm9udC1zaXplOiAyNXB4O1xyXG4gIGNvbG9yOiAjMjEyNTI5O1xyXG5gO1xyXG5cclxuY29uc3QgSW50cm9kdWNlQ29udGFpbmVyID0gc3R5bGVkLmRpdmBcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIG1hcmdpbi1ib3R0b206IDMwcHg7XHJcbmA7XHJcblxyXG5jb25zdCBJbnRyb2R1Y2UgPSBzdHlsZWQuZGl2YFxyXG4gIG1hcmdpbi1yaWdodDogN3B4O1xyXG4gIGZvbnQtd2VpZ2h0OiA1MDA7XHJcbiAgZm9udC1zaXplOiAxOHB4O1xyXG4gIGNvbG9yOiAjODY4ZTk2O1xyXG5gO1xyXG5cclxuY29uc3QgUGVuY2lsSWNvbkNvbnRhaW5lciA9IHN0eWxlZC5kaXZgXHJcbiAgZm9udC1zaXplOiAxNXB4O1xyXG4gIG1hcmdpbi10b3A6IDJweDtcclxuICBvcGFjaXR5OiAwLjY7XHJcbiAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIDpob3ZlciB7XHJcbiAgICBvcGFjaXR5OiAxO1xyXG4gIH1cclxuYDtcclxuXHJcbmNvbnN0IEJ1dHRvbiA9IHN0eWxlZC5idXR0b25gXHJcbiAgYWxsOiB1bnNldDtcclxuICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gIHdpZHRoOiAyMCU7XHJcbiAgaGVpZ2h0OiAzMHB4O1xyXG4gIHBhZGRpbmc6IDhweCAxNXB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMxODY0YWI7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbiAgZm9udC1zaXplOiAxN3B4O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgb3BhY2l0eTogMC44O1xyXG4gIG91dGxpbmU6IG5vbmU7XHJcbiAgJjpob3ZlciB7XHJcbiAgICBvcGFjaXR5OiAxO1xyXG4gIH1cclxuYDtcclxuXHJcbmNvbnN0IFVzZXJQcm9maWxlID0gKHsgdXNlciB9KSA9PiB7XHJcbiAgY29uc3QgbWUgPSB1c2VTZWxlY3Rvcigoc3RhdGUpID0+IHN0YXRlLnVzZXIubWUuaWQgPT09IHVzZXIuaWQpO1xyXG4gIGNvbnN0IFtvbkVkaXRGb3JtLCBzZXRPbkVkaXRGb3JtXSA9IHVzZVN0YXRlKGZhbHNlKTtcclxuXHJcbiAgY29uc3Qgb25DbGlja0VkaXRGb3JtID0gdXNlQ2FsbGJhY2soKCkgPT4ge1xyXG4gICAgc2V0T25FZGl0Rm9ybShwcmV2ID0+ICFwcmV2KTtcclxuICB9LCBbb25FZGl0Rm9ybV0pO1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPENvbnRhaW5lcj5cclxuICAgICAgPFByb2ZpbGVJbWFnZUNvbnRhaW5lcj5cclxuICAgICAgICA8UHJvZmlsZUltYWdlIHBhdGg9eyB1c2VyLnByb2ZpbGVJbWFnZVBhdGggfSAvPlxyXG4gICAgICA8L1Byb2ZpbGVJbWFnZUNvbnRhaW5lcj5cclxuICAgICAgeyBtZSAmJiA8UHJvZmlsZUltYWdlRWRpdEZvcm0gLz4gfVxyXG4gICAgICA8Tmlja25hbWVDb250YWluZXI+XHJcbiAgICAgICAgPE5pY2tuYW1lPnsgdXNlci5uaWNrbmFtZSB9PC9OaWNrbmFtZT5cclxuICAgICAgPC9OaWNrbmFtZUNvbnRhaW5lcj5cclxuICAgICAge29uRWRpdEZvcm0gXHJcbiAgICAgID8gPEludHJvZHVjZUVkaXRGb3JtIHNldE9uRWRpdEZvcm09e3NldE9uRWRpdEZvcm19IC8+XHJcbiAgICAgIDogKFxyXG4gICAgICAgIDxJbnRyb2R1Y2VDb250YWluZXI+XHJcbiAgICAgICAgICA8SW50cm9kdWNlPnsgdXNlci5pbnRyb2R1Y2UgfTwvSW50cm9kdWNlPlxyXG4gICAgICAgICAgeyBtZSAmJiBcclxuICAgICAgICAgIDxQZW5jaWxJY29uQ29udGFpbmVyIG9uQ2xpY2s9e29uQ2xpY2tFZGl0Rm9ybX0+XHJcbiAgICAgICAgICAgIDxCc1BlbmNpbEZpbGwgLz5cclxuICAgICAgICAgIDwvUGVuY2lsSWNvbkNvbnRhaW5lcj4gfVxyXG4gICAgICAgIDwvSW50cm9kdWNlQ29udGFpbmVyPlxyXG4gICAgICApfVxyXG4gICAgICA8QnV0dG9uPlxyXG4gICAgICAgIOqyjOyLnOq4gOuztOq4sFxyXG4gICAgICA8L0J1dHRvbj5cclxuICAgIDwvQ29udGFpbmVyPlxyXG4gICk7XHJcbn07XHJcblxyXG5Vc2VyUHJvZmlsZS5wcm9wVHlwZXMgPSB7XHJcbiAgbWU6IFByb3BUeXBlcy5vYmplY3QuaXNSZXF1aXJlZCxcclxufTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IFVzZXJQcm9maWxlOyJdLCJzb3VyY2VSb290IjoiIn0=

@@ -85,8 +85,8 @@ const Button = styled.button`
   }
 `;
 
-const UserProfile = ({ me }) => {
-  const id = useSelector((state) => state.user.me?.id);
+const UserProfile = ({ user }) => {
+  const me = useSelector((state) => state.user.me.id === user.id);
   const [onEditForm, setOnEditForm] = useState(false);
 
   const onClickEditForm = useCallback(() => {
@@ -96,18 +96,18 @@ const UserProfile = ({ me }) => {
   return (
     <Container>
       <ProfileImageContainer>
-        <ProfileImage path={ me.profileImagePath } />
+        <ProfileImage path={ user.profileImagePath } />
       </ProfileImageContainer>
-      { id && <ProfileImageEditForm /> }
+      { me && <ProfileImageEditForm /> }
       <NicknameContainer>
-        <Nickname>{ me.nickname }</Nickname>
+        <Nickname>{ user.nickname }</Nickname>
       </NicknameContainer>
       {onEditForm 
       ? <IntroduceEditForm setOnEditForm={setOnEditForm} />
       : (
         <IntroduceContainer>
-          <Introduce>{ me.introduce }</Introduce>
-          { id && 
+          <Introduce>{ user.introduce }</Introduce>
+          { me && 
           <PencilIconContainer onClick={onClickEditForm}>
             <BsPencilFill />
           </PencilIconContainer> }

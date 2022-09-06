@@ -11,6 +11,7 @@ import CommentForm from './CommentForm';
 import styled from 'styled-components';
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
+import Link from 'next/link';
 
 const Container = styled.div`
   width: 100%;
@@ -150,7 +151,11 @@ const PostCard = ({ post }) => {
     post && (
       <Container>
         <ProfileImageContainer>
-          <ProfileImage path={post.User.profileImagePath ? post.User.profileImagePath : null}/>
+          <Link href="/profile/[id]" as={`/profile/${post.User.id}`}>
+            <a>
+              <ProfileImage path={post.User.profileImagePath ? post.User.profileImagePath : null}/>
+            </a>
+          </Link>
         </ProfileImageContainer>
         <InformationContainer>
           <Nickname>{post.User.nickname}</Nickname>

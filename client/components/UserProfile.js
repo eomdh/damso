@@ -33,7 +33,7 @@ const NicknameContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: ${props => props.me ? "15px" : "55px"};
   margin-bottom: 5px;
 `;
 
@@ -50,7 +50,7 @@ const IntroduceContainer = styled.div`
 `;
 
 const Introduce = styled.div`
-  margin-right: 7px;
+  margin-right: ${props => props.me ? "7px" : null};
   font-weight: 500;
   font-size: 18px;
   color: #868e96;
@@ -58,6 +58,7 @@ const Introduce = styled.div`
 
 const PencilIconContainer = styled.div`
   font-size: 15px;
+  margin-left: 4px;
   margin-top: 2px;
   opacity: 0.6;
   cursor: pointer;
@@ -99,7 +100,7 @@ const UserProfile = ({ user }) => {
         <ProfileImage path={ user.profileImagePath } />
       </ProfileImageContainer>
       { me && <ProfileImageEditForm /> }
-      <NicknameContainer>
+      <NicknameContainer me={me}>
         <Nickname>{ user.nickname }</Nickname>
       </NicknameContainer>
       {onEditForm 

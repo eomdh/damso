@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { LOAD_MY_INFO_REQUEST, LOAD_USER_REQUEST } from '../../reducers/user';
 import wrapper from '../../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
-import { LOAD_MY_INFO_REQUEST, LOAD_USER_REQUEST } from '../../reducers/user';
 import Profile from './';
 
 const UserProfile = () => {
@@ -19,7 +19,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {
     axios.defaults.headers.Cookie = cookie;
-  }
+  };
 
   context.store.dispatch({
     type: LOAD_MY_INFO_REQUEST,

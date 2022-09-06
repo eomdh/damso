@@ -16,7 +16,7 @@ const PlusIconContainer = styled.div`
   cursor: pointer;
   :hover {
     opacity: 1;
-  }
+  };
 `;
 
 const ProfileImageEditForm = () => {

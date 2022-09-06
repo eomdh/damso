@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import ProfileImage from './ProfileImage';
 import ProfileImageEditForm from './profileImageEditForm';
 import IntroduceEditForm from './IntroduceEditForm';
+
+import styled from 'styled-components';
 import { BsPencilFill } from 'react-icons/bs';
 
 const Container = styled.div`

@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import TextArea from 'react-textarea-autosize';
 import { ADD_COMMENT_REQUEST } from '../reducers/post';
+import TextArea from 'react-textarea-autosize';
+
+import styled from 'styled-components';
 import device from '../utils/device';
 
 const Container = styled.div`
@@ -130,8 +131,8 @@ const CommentForm = ({ post }) => {
   );
 };
 
-CommentForm.propType = {
-  post: PropType.object.isRequired,
+CommentForm.propTypes = {
+  post: PropTypes.object.isRequired,
 };
 
 export default CommentForm;

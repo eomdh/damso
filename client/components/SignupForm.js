@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import useInput from '../hooks/useInput';
 import { SIGN_UP_REQUEST } from '../reducers/user';
+import useInput from '../hooks/useInput';
+
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 450px;

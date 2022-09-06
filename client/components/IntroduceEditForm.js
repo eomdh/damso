@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE_INTRODUCE_REQUEST } from '../reducers/user';
-import styled from 'styled-components';
 import TextArea from 'react-textarea-autosize';
+
+import styled from 'styled-components';
 import { BsCheckCircleFill } from 'react-icons/bs';
 
 const FormContainer = styled.div`
@@ -85,8 +86,8 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
   );
 };
 
-IntroduceEditForm.propType = {
-  setOnEditForm: PropType.func.isRequired,
+IntroduceEditForm.propTypes = {
+  setOnEditForm: PropTypes.func.isRequired,
 };
 
 export default IntroduceEditForm;

@@ -1,13 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
 import ProfileImage from './ProfileImage';
 import PostImages from './PostImages';
 import PostContent from './PostContent';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
-import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
+
+import styled from 'styled-components';
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 

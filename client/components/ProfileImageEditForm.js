@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import React, { useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { CHANGE_PROFILE_IMAGE_REQUEST } from '../reducers/user';
+
+import styled from 'styled-components';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
 const Form = styled.form`

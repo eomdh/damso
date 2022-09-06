@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import Router from 'next/router';
 import Head from 'next/head';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import AppLayout from '../components/AppLayout';
 import UserProfile from '../components/UserProfile';
+
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;

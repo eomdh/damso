@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_OUT_REQUEST } from '../reducers/user';
+import Link from 'next/link';
 
 import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
@@ -68,12 +68,13 @@ const SearchForm = styled.form`
     opacity: 1;
   }
 
-  @media ${device.tablet} {
-    width: 300px;
+  @media ${device.mobileL} {
+    width: 175px;
   }
 
-  @media ${device.mobileL} {
-    width: 100px;
+  @media ${device.tablet} {
+    width: 350px;
+    margin-left: 70px;
   }
 `;
 

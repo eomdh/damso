@@ -1,8 +1,8 @@
 import React from 'react';
-import PropType from 'prop-types';
-import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 import Slider from "react-slick";
+
+import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -60,8 +60,8 @@ const PostImages = ({ images }) => {
   };
 };
 
-PostImages.propType = {
-  images: PropType.object.isRequired,
+PostImages.propTypes = {
+  images: PropTypes.object.isRequired,
 };
 
 export default PostImages;

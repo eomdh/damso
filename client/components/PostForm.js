@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from 'styled-components';
-import TextArea from 'react-textarea-autosize';
 import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from "../reducers/post";
+import TextArea from 'react-textarea-autosize';
 import ProfileImage from "./ProfileImage";
+
+import styled from 'styled-components';
 import { FaRegImage } from 'react-icons/fa';
 import { MdCancel } from "react-icons/md";
 import device from '../utils/device';

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import LoginForm from '../components/LoginForm';
+
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;

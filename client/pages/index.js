@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import { LOAD_POSTS_REQUEST } from '../reducers/post';
+import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import AppLayout from '../components/AppLayout';
 import Post from '../components/Post';
 import PostForm from '../components/PostForm';
-import { LOAD_POSTS_REQUEST } from '../reducers/post';
-import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
+
+import styled from 'styled-components';
 import device from '../utils/device';
 
 const Container = styled.div`

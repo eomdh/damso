@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
-import PropType from 'prop-types';
-import styled from 'styled-components';
-import ProfileImage from './ProfileImage';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaTrashAlt } from "react-icons/fa";
 import { REMOVE_COMMENT_REQUEST } from '../reducers/post';
+import ProfileImage from './ProfileImage';
+
+import styled from 'styled-components';
+import { FaTrashAlt } from "react-icons/fa";
 
 const Container = styled.div`
   min-height: 30px;
@@ -87,8 +88,8 @@ const Comment = ({ postId, comment }) => {
   );
 };
 
-Comment.propType = {
-  comment: PropType.object.isRequired,
+Comment.propTypes = {
+  comment: PropTypes.object.isRequired,
 };
 
 export default Comment;

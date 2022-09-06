@@ -28,6 +28,43 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 },
 });
 
+router.get('/:postId', async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    
+    if (!post) {
+      return res.status(404).send('존재하지 않는 게시글입니다.');
+    };
+
+    const allInfoPost = await Post.findOne({
+      where: { id: post.id },
+      include: [{
+        model: User,
+        attributes: ['id', 'nickname', 'profileImagePath'],
+      }, {
+        model: Comment,
+        include: [{
+          model: User,
+          attributes: ['id', 'nickname', 'profileImagePath'],
+        }]
+      }, {
+        model: User,
+        as: 'Likers',
+        attributes: ['id'],
+      }, {
+        model: Image,
+      }],
+    });
+
+    res.status(200).json(allInfoPost);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  };
+});
+
 router.post('/add', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
     const post = await Post.create({

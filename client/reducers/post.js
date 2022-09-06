@@ -160,8 +160,8 @@ const reducer = (state = initialState, action) => {
         draft.removeCommentError = null;
         break;
       case REMOVE_COMMENT_SUCCESS: {
-        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
-        post.Comments = post.Comments.filter((v) => v.id !== action.data.commentId);
+        const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        post.Comments = post.Comments.filter((v) => v.id !== action.data.CommentId);
         draft.removeCommentLoading = false;
         draft.removeCommentDone = true;
         break;

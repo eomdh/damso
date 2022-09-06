@@ -126,6 +126,24 @@ router.post('/:postId/comment/add', isLoggedIn, async (req, res, next) => {
   };
 });
 
+router.delete('/:postId/comment/:commentId/delete', isLoggedIn, async (req, res, next) => {
+  try {
+    await Comment.destroy({
+      where: {
+        id: req.params.commentId,
+        UserId: req.user.id,
+      },
+    });
+    res.status(200).json({
+      PostId: parseInt(req.params.postId),
+      CommentId: parseInt(req.params.commentId),
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  };
+});
+
 router.patch('/:postId/like', isLoggedIn, async (req, res, next) => {
   try {
     const post = await Post.findOne({

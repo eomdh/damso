@@ -171,6 +171,15 @@ const PostForm = () => {
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
+
+    if (!content || !content.trim() ) {
+      return alert('글을 작성해주세요.')
+    };
+    
+    if (content.length > 500) {
+      return alert('글자수가 너무 많습니다.');
+    };
+
     const formData = new FormData();
     imagePaths.forEach((path) => {
       formData.append('postImages', path);
@@ -220,7 +229,7 @@ const PostForm = () => {
           {imagePaths && imagePaths.map((v, i) => (
             <ImageContainer key={v}>
               <Image 
-                src={`http://localhost:3065/${v}`} 
+                src={`http://localhost:3065/postImages/${v}`} 
                 alt={v}
               />
               <ImageDeleteContainer onClick={onRemoveImage(i)}>

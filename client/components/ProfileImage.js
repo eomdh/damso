@@ -17,7 +17,7 @@ const ProfileImage = ({ path }) => {
   return (
     <Container path={path 
       ? `http://localhost:3065/profileImages/${path}` 
-      : require('../image/user.png')} />
+      : require('../public/user.png')} />
   );
 };
 

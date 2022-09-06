@@ -12,7 +12,7 @@ const Form = styled.form`
 const PlusIconContainer = styled.div`
   font-size: 27px;
   color: #1864ab;
-  opacity: 0.6;
+  opacity: 0.8;
   cursor: pointer;
   :hover {
     opacity: 1;

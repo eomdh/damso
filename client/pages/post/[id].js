@@ -19,7 +19,7 @@ const Post = () => {
     <AppLayout>
       <Head>
         <title>
-          {singlePost.User.nickname}님의 글
+          Damso | {singlePost.User.nickname}님의 글
         </title>
         <meta name="description" content={singlePost.content} />
         <meta property="og:title" content={`${singlePost.User.nickname}님의 게시글`} />
@@ -46,7 +46,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     type: LOAD_POST_REQUEST,
     data: context.params.id,
   });
-  
+
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
 });

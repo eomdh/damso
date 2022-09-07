@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import Link from 'next/link';
+import Router from 'next/router';
+import useInput from '../hooks/useInput';
 
 import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
@@ -86,14 +88,15 @@ const SearchBar = styled.input`
   display: flex;
 `;
 
-const SearchIconContainer = styled.div`
+const SearchIconContainer = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 19px;
-  display: flex;
+  top: 7px;
+  right: 6px;
+  font-size: 22px;
   align-items: center;
   cursor: pointer;
+  background: none;
+  border: none;
   color: #1864ab;
 `;
 
@@ -132,12 +135,18 @@ const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
 
   const { me } = useSelector((state) => state.user);
+  const [tag, onChangeTag] = useInput('');
 
   const onLogout = useCallback(() => {
     dispatch({
       type: LOG_OUT_REQUEST,
     });
   }, []);
+
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+    Router.push(`/hashtag/${tag}`);
+  }, [tag]); 
 
   return (
     <>
@@ -158,8 +167,13 @@ const AppLayout = ({ children }) => {
             </Icon>
           </Link>
         </IconContainer>
-        <SearchForm>
-          <SearchBar type="text" placeholder="Search..." />
+        <SearchForm onSubmit={onSubmit}>
+          <SearchBar
+            value={tag}
+            type="text"
+            placeholder="Search..."
+            onChange={onChangeTag}
+          />
           <SearchIconContainer>
             <FaSearch />
           </SearchIconContainer>

@@ -7,10 +7,10 @@ import { LOAD_POST_REQUEST } from '../../reducers/post';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import AppLayout from '../../components/AppLayout';
-import PostCard from '../../components/PostCard';
+import Post from '../../components/Post';
 import wrapper from '../../store/configureStore';
 
-const Post = () => {
+const SinglePost = () => {
   const router = useRouter();
   const { singlePost } = useSelector((state) => state.post);
   const { id } = router.query;
@@ -27,7 +27,7 @@ const Post = () => {
         <meta property="og:image" content={singlePost.Images[0] ? singlePost.Images[0].src : 'https://localhost:3065/favicon.ico'} />
         <meta property="og:url" content={`https://localhost:3065/post/${id}`} />
       </Head>
-      <PostCard post={ singlePost } />
+      <Post post={ singlePost } />
     </AppLayout>
   );
 };
@@ -51,4 +51,4 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   await context.store.sagaTask.toPromise();
 });
 
-export default Post;
+export default SinglePost;

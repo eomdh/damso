@@ -24,7 +24,7 @@ const Profile = ({ userInfo }) => {
     if (!me && !router.query.id) {
       alert("로그인이 필요합니다.");
       router.replace('/');
-    }
+    };
   }, [me, router.query.id]);
 
   return (
@@ -40,7 +40,7 @@ const Profile = ({ userInfo }) => {
         </AppLayout>
       )}
     </>
-  )
+  );
 };
 
 export default Profile;

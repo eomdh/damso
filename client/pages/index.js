@@ -5,7 +5,7 @@ import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import AppLayout from '../components/AppLayout';
-import PostCard from '../components/PostCard';
+import Post from '../components/Post';
 import PostForm from '../components/PostForm';
 import wrapper from '../store/configureStore';
 
@@ -73,7 +73,7 @@ const Home = () => {
       <Container>
         <GridContainer>
           <PostForm />
-          {mainPosts.map((post) => <PostCard key={post.id} post={post} />)}
+          {mainPosts.map((post) => <Post key={post.id} post={post} />)}
         </GridContainer>
       </Container>
     </AppLayout>

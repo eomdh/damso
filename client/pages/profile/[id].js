@@ -6,7 +6,7 @@ import axios from 'axios';
 import { END } from 'redux-saga';
 import Profile from './';
 
-const UserProfile = () => {
+const UserInfo = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   return (
@@ -33,4 +33,4 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   await context.store.sagaTask.toPromise();
 });
 
-export default UserProfile;
+export default UserInfo;

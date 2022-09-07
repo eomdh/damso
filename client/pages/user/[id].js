@@ -52,15 +52,22 @@ const TitleContainer = styled.div`
   width: 100%;
   height: 70px;
   border-bottom: 1px solid #e6ecf0;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  font-size: 20px;
+  font-size: 19px;
 `;
 
 const Nickname = styled.span`
   font-size: 23px;
   font-weight: 700;
   margin-left: 20px;
+`;
+
+const Amount = styled.span`
+  font-size: 17px;
+  color: #657785;
+  padding-top: 8px;
+  margin-right: 20px;
 `;
 
 const UserPosts = () => {
@@ -105,7 +112,10 @@ const UserPosts = () => {
         <Container>
           <GridContainer>
             <TitleContainer>
-              <Nickname>{userInfo.nickname}</Nickname>님의 게시글
+              <div>
+                <Nickname>{ userInfo.nickname }</Nickname>님의 게시글
+              </div>
+              <Amount>{ mainPosts.length }개</Amount>
             </TitleContainer>
             {mainPosts.map((post) => <Post key={post.id} post={post} />)}
           </GridContainer>

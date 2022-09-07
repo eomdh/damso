@@ -52,15 +52,22 @@ const TitleContainer = styled.div`
   width: 100%;
   height: 70px;
   border-bottom: 1px solid #e6ecf0;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   font-size: 20px;
 `;
 
 const Tag = styled.span`
-  font-size: 23px;
+  font-size: 24px;
   font-weight: 700;
-  margin-left: 20px;
+  margin-left: 23px;
+`;
+
+const Amount = styled.span`
+  font-size: 17px;
+  color: #657785;
+  padding-top: 8px;
+  margin-right: 20px;
 `;
 
 const HashtagPosts = () => {
@@ -102,7 +109,8 @@ const HashtagPosts = () => {
       <Container>
         <GridContainer>
           <TitleContainer>
-            <Tag>#{tag}</Tag>
+            <Tag>#{ tag }</Tag>
+            <Amount>{ mainPosts.length }개</Amount>
           </TitleContainer>
           {mainPosts.map((post) => <Post key={post.id} post={post} />)}
         </GridContainer>

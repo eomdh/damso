@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
 import ProfileImage from './ProfileImage';
@@ -12,7 +13,6 @@ import moment from 'moment';
 import styled from 'styled-components';
 import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
-import Link from 'next/link';
 
 const Container = styled.div`
   width: 100%;
@@ -35,6 +35,11 @@ const InformationContainer = styled.div`
   justify-content: space-between;
   margin-left: 10px;
   margin-top: 3px;
+`;
+
+const ALink = styled.a`
+  color: black;
+  cursor: pointer;
 `;
 
 const Nickname = styled.span`
@@ -165,7 +170,11 @@ const Post = ({ post }) => {
           </Link>
         </ProfileImageContainer>
         <InformationContainer>
-          <Nickname>{post.User.nickname}</Nickname>
+          <Link href="/profile/[id]" as={`/profile/${post.User.id}`}>
+            <ALink>
+              <Nickname>{post.User.nickname}</Nickname>
+            </ALink>
+          </Link>
           <Date>{ moment(post.createdAt).format('YYYY/MM/DD h:mm') }</Date>
           {id && post.User.id === parseInt(id)
             ? ( <DeleteButton onClick={onRemovePost}>

@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { REMOVE_COMMENT_REQUEST } from '../reducers/post';
 import ProfileImage from './ProfileImage';
@@ -28,6 +29,11 @@ const ProfileImageContainer = styled.div`
   border-radius: 50px;
   overflow: hidden;
   float: left;
+`;
+
+const ALink = styled.a`
+  color: black;
+  cursor: pointer;
 `;
 
 const Nickname = styled.span`
@@ -77,15 +83,19 @@ const Comment = ({ postId, comment }) => {
   return (
     <Container>
       <ProfileImageContainer>
-          <ProfileImage path={comment.User.profileImagePath 
-                              ? comment.User.profileImagePath 
-                              : null} />
+        <Link href="/profile/[id]" as={`/profile/${comment.User.id}`}>
+          <a>
+            <ProfileImage path={comment.User.profileImagePath ? comment.User.profileImagePath : null} />
+          </a>
+        </Link>
       </ProfileImageContainer>
       <InformationContainer>
-        <div>
-          <Nickname>{comment.User.nickname}</Nickname>
+        <>
+          <Link href="/profile/[id]" as={`/profile/${comment.User.id}`}>
+            <ALink><Nickname>{comment.User.nickname}</Nickname></ALink>
+          </Link>
           <Date>{ moment(comment.createdAt).format('YYYY/MM/DD h:mm') }</Date>
-        </div>
+        </>
         { id && comment.User.id === parseInt(id)
           ? ( <DeleteButton onClick={onRemoveComment}>
                 <FaTrashAlt />

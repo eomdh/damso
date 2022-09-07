@@ -1,0 +1,45 @@
+const express = require('express');
+const { Op } = require('sequelize');
+const { Post, User, Comment, Image, Hashtag } = require('../models');
+
+const router = express.Router();
+
+router.get('/:hashtag', async (req, res, next) => {
+  try {
+    const where = { UserId: req.params.userId };
+    if (parseInt(req.query.lastId, 10)) {
+      where.id = { [Op.lt]: parseInt(req.query.lastId, 10) }
+    };
+    const posts = await Post.findAll({
+      where,
+      limit: 10,
+      order: [[ 'createdAt', 'DESC' ]],
+      include: [{
+        model: Hashtag,
+        where: { name: req.params.hashtag },
+      }, {
+        model: User,
+        attributes: ['id', 'nickname', 'profileImagePath'],
+      }, {
+        model: Comment,
+        include: [{
+          model: User,
+          attributes: ['id', 'nickname', 'profileImagePath'],
+        }],
+      }, {
+        model: User,
+        as: 'Likers',
+        attributes: ['id'],
+      }, {
+        model: Image,
+      }]
+    });
+    
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+module.exports = router;   

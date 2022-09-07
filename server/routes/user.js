@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { User, Post } = require('../models');
+const { User, Post, Comment, Image } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
@@ -75,6 +75,41 @@ router.get('/:userId', async (req, res, next) => {
     console.error(error);
     next(error);
   };
+});
+
+router.get('/:userId/posts', async (req, res, next) => {
+  try {
+    const where = { UserId: req.params.userId };
+    if (parseInt(req.query.lastId, 10)) {
+      where.id = { [Op.lt]: parseInt(req.query.lastId, 10) }
+    };
+    const posts = await Post.findAll({
+      where,
+      limit: 10,
+      order: [[ 'createdAt', 'DESC' ]],
+      include: [{
+        model: User,
+        attributes: ['id', 'nickname', 'profileImagePath'],
+      }, {
+        model: Comment,
+        include: [{
+          model: User,
+          attributes: ['id', 'nickname', 'profileImagePath'],
+        }],
+      }, {
+        model: User,
+        as: 'Likers',
+        attributes: ['id'],
+      }, {
+        model: Image,
+      }]
+    });
+    
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 router.post('/login', isNotLoggedIn, (req, res, next) => {

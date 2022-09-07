@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOAD_MY_INFO_REQUEST, LOAD_USER_REQUEST } from '../reducers/user';
-import { LOAD_USER_POSTS_REQUEST } from '../reducers/post';
+import { LOAD_MY_INFO_REQUEST, LOAD_USER_REQUEST } from '../../reducers/user';
+import { LOAD_USER_POSTS_REQUEST } from '../../reducers/post';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import AppLayout from '../components/AppLayout';
-import Post from '../components/Post';
-import PostForm from '../components/PostForm';
-import wrapper from '../store/configureStore';
+import AppLayout from '../../components/AppLayout';
+import Post from '../../components/Post';
+import wrapper from '../../store/configureStore';
 
 import styled from 'styled-components';
-import device from '../utils/device';
+import device from '../../utils/device';
 
 const Container = styled.div`
   width: 100%;

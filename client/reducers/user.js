@@ -72,6 +72,7 @@ const reducer = (state = initialState, action) => {
         draft.loadMyInfoError = action.error;
         break;
       case LOAD_USER_REQUEST:
+        draft.userInfo = null;
         draft.loadUserLoading = true;
         draft.loadUserDone = false;
         draft.loadUserError = null;

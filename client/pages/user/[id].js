@@ -47,12 +47,28 @@ const GridContainer = styled.div`
   }
 `;
 
+const TitleContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px solid #e6ecf0;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 20px;
+`;
+
+const Nickname = styled.span`
+  font-size: 23px;
+  font-weight: 700;
+  margin-left: 20px;
+`;
+
 const UserPosts = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
-  const { mainPosts, hasMorePosts, loadPostsLoading } = useSelector((state) => state.post);
   const { userInfo } = useSelector((state) => state.user);
+  const { mainPosts, hasMorePosts, loadPostsLoading } = useSelector((state) => state.post);
 
   useEffect(() => {
     function onScroll() {
@@ -73,26 +89,31 @@ const UserPosts = () => {
   }, [hasMorePosts, loadPostsLoading, mainPosts]);
 
   return (
-    <AppLayout>
-      <Head>
-        <title>
-          Damso | {userInfo.nickname}님의 글
-        </title>
-        <meta name="description" content={`${userInfo.nickname}님의 게시글`} />
-        <meta property="og:title" content={`${userInfo.nickname}님의 게시글`} />
-        <meta property="og:description" content={`${userInfo.nickname}님의 게시글`} />
-        <meta property="og:image" content='https://localhost:3000/favicon.ico' />
-        <meta property="og:url" content={`https://localhost:3065/user/${id}`} />
-      </Head>
+    <>
       {userInfo ? (
+        <AppLayout>
+        <Head>
+          <title>
+            Damso | {userInfo.nickname}님의 게시글
+          </title>
+          <meta name="description" content={`${userInfo.nickname}님의 게시글`} />
+          <meta property="og:title" content={`${userInfo.nickname}님의 게시글`} />
+          <meta property="og:description" content={`${userInfo.nickname}님의 게시글`} />
+          <meta property="og:image" content='https://localhost:3000/favicon.ico' />
+          <meta property="og:url" content={`https://localhost:3065/user/${id}`} />
+        </Head>
         <Container>
           <GridContainer>
+            <TitleContainer>
+              <Nickname>{userInfo.nickname}</Nickname>님의 게시글
+            </TitleContainer>
             {mainPosts.map((post) => <Post key={post.id} post={post} />)}
           </GridContainer>
         </Container>
+      </AppLayout>
       ) : null}
-    </AppLayout>
-  )  
+    </>
+  );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
@@ -112,7 +133,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   context.store.dispatch({
     type: LOAD_USER_POSTS_REQUEST,
     data: context.params.id,
-  })
+  });
 
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();

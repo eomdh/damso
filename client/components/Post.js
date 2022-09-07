@@ -16,14 +16,15 @@ import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 
 const Container = styled.div`
   width: 100%;
+  background-color: white;
   border-bottom: 10px solid #e6ecf0;
-  padding: 10px;
+  padding: 15px 0px;
 `; 
 
 const ProfileImageContainer = styled.div`
   width: 55px;
   height: 55px;
-  margin-right: 10px;
+  margin: 0px 15px;
   border-radius: 50px;
   overflow: hidden;
   float: left;
@@ -117,7 +118,7 @@ const Amount = styled.div`
 const CommentContainer = styled.div`
   width: 100%;
   max-height: 500px;
-  margin: 10px 0px 0px -10px;
+  margin: 10px 0px 0px 0px;
   padding-top: 10px;
   border-top: 2px solid #e6ecf0;
 `;

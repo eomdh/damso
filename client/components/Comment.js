@@ -90,12 +90,12 @@ const Comment = ({ postId, comment }) => {
         </Link>
       </ProfileImageContainer>
       <InformationContainer>
-        <>
+        <div>
           <Link href="/profile/[id]" as={`/profile/${comment.User.id}`}>
             <ALink><Nickname>{comment.User.nickname}</Nickname></ALink>
           </Link>
           <Date>{ moment(comment.createdAt).format('YYYY/MM/DD h:mm') }</Date>
-        </>
+        </div>
         { id && comment.User.id === parseInt(id)
           ? ( <DeleteButton onClick={onRemoveComment}>
                 <FaTrashAlt />

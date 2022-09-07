@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import ProfileImage from './ProfileImage';
 import ProfileImageEditForm from './profileImageEditForm';
@@ -16,12 +17,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;
 
 const ProfileImageContainer = styled.div`
-  margin-top: 50px;
   margin-bottom: -40px;
   width: 150px;
   height: 150px;
@@ -67,10 +68,14 @@ const PencilIconContainer = styled.div`
   }
 `;
 
+const ALink = styled.a`
+  color: #228be6;
+  cursor: pointer;
+`;
+
 const Button = styled.button`
   all: unset;
   border-radius: 10px;
-  width: 20%;
   height: 30px;
   padding: 8px 15px;
   background-color: #1864ab;
@@ -114,15 +119,17 @@ const UserProfile = ({ user }) => {
           </PencilIconContainer> }
         </IntroduceContainer>
       )}
-      <Button>
-        게시글보기
-      </Button>
+      <Link href="/user/[id]" as={`/user/${user.id}`}>
+        <ALink>
+          <Button>게시글보기</Button>
+        </ALink>
+      </Link>
     </Container>
   );
 };
 
 UserProfile.propTypes = {
-  me: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default UserProfile;

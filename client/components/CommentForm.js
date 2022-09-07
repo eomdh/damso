@@ -9,7 +9,7 @@ import device from '../utils/device';
 
 const Container = styled.div`
   width: 100%;
-  margin-left: 10px;
+  margin-left: 20px;
   max-height: 500px;
   display: flex;
   justify-content: center;

@@ -22,7 +22,6 @@ const Container = styled.div`
 
 const GridContainer = styled.div`
   width: 45%;
-  background-color: white;
   display: gird;
   grid-template-columns: 1fr 2fr 1fr;
   grid-gap: 20px;

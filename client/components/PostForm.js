@@ -12,6 +12,7 @@ import device from '../utils/device';
 const Container = styled.div`
   width: 100%;
   max-height: 500px;
+  background-color: white;
 `;
 
 const Form = styled.form`
@@ -30,7 +31,7 @@ const FormUpSideContainer = styled.div`
 const ProfileImageContainer = styled.div`
   width: 55px;
   height: 55px;
-  margin-right: 15px;
+  margin: 0px 15px 0px 5px;
   border-radius: 50px;
   overflow: hidden;
 `;

@@ -10,6 +10,43 @@ import AppLayout from '../../components/AppLayout';
 import Post from '../../components/Post';
 import wrapper from '../../store/configureStore';
 
+import styled from 'styled-components';
+import device from '../../utils/device';
+
+const Container = styled.div`
+  width: 100%;
+  min-height: calc(100vh - 55px);
+  background-color: #e9ecef;
+  display: flex;
+  justify-content: center;
+`;
+
+const GridContainer = styled.div`
+  width: 45%;
+  background-color: white;
+  display: gird;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 20px;
+
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 2.5fr 1fr;
+    grid-gap: 0;
+    width: 100%;
+  }
+
+  @media ${device.tablet} {
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-gap: 0;
+    width: 100%;
+  }
+  
+  @media ${device.mobile} {
+    grid-template-columns: 0fr 1fr 0fr;
+    width: 100%;
+    display: flex;
+  }
+`;
+
 const SinglePost = () => {
   const router = useRouter();
   const { singlePost } = useSelector((state) => state.post);
@@ -27,7 +64,11 @@ const SinglePost = () => {
         <meta property="og:image" content={singlePost.Images[0] ? singlePost.Images[0].src : 'https://localhost:3000/favicon.ico'} />
         <meta property="og:url" content={`https://localhost:3065/post/${id}`} />
       </Head>
-      <Post post={ singlePost } />
+      <Container>
+        <GridContainer>
+            <Post post={ singlePost } />
+        </GridContainer>
+      </Container>
     </AppLayout>
   );
 };

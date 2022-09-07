@@ -86,7 +86,7 @@ const UserPosts = () => {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, [hasMorePosts, loadPostsLoading, mainPosts]);
+  }, [hasMorePosts, loadPostsLoading, mainPosts,id]);
 
   return (
     <>

@@ -22,8 +22,8 @@ const PostContent = ({ content }) => {
             <Link href={`/hashtag/${v.slice(1)}`} key={i}>
               <ALink>{v}</ALink>
             </Link>
-          )
-        }
+          );
+        };
         return v;
       })}
     </div>

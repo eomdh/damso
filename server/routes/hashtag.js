@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/:hashtag', async (req, res, next) => {
   try {
-    const where = { UserId: req.params.userId };
+    const where = {};
     if (parseInt(req.query.lastId, 10)) {
       where.id = { [Op.lt]: parseInt(req.query.lastId, 10) }
     };
@@ -16,7 +16,7 @@ router.get('/:hashtag', async (req, res, next) => {
       order: [[ 'createdAt', 'DESC' ]],
       include: [{
         model: Hashtag,
-        where: { name: req.params.hashtag },
+        where: { name: decodeURIComponent(req.params.hashtag) },
       }, {
         model: User,
         attributes: ['id', 'nickname', 'profileImagePath'],

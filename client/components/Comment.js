@@ -71,13 +71,17 @@ const Comment = ({ postId, comment }) => {
   const id = useSelector((state) => state.user.me?.id);
 
   const onRemoveComment = useCallback(() => {
-    dispatch({
-      type: REMOVE_COMMENT_REQUEST,
-      data: {
-        postId: postId,
-        commentId: comment.id,
-      }
-    })
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      dispatch({
+        type: REMOVE_COMMENT_REQUEST,
+        data: {
+          postId: postId,
+          commentId: comment.id,
+        }
+      });
+    } else {
+      return ;
+    } 
   }, []);
 
   return (

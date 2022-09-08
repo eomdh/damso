@@ -151,10 +151,14 @@ const Post = ({ post }) => {
   }, [editMode]);
 
   const onRemovePost = useCallback(() => {
-    dispatch({
-      type: REMOVE_POST_REQUEST,
-      data: post.id,
-    })
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      dispatch({
+        type: REMOVE_POST_REQUEST,
+        data: post.id,
+      });
+    } else {
+      return;
+    }
   }, []);
 
   const onLike = useCallback(() => {

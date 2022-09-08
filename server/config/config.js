@@ -8,20 +8,23 @@ module.exports = {
     "password": process.env.DB_PASSWORD,
     "database": "damso",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "+09:00"
   },
   "test": {
     "username": "root",
     "password": process.env.DB_PASSWORD,
     "database": "damso",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "+09:00"
   },
   "production": {
     "username": "root",
     "password": process.env.DB_PASSWORD,
     "database": "damso",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "+09:00"
   }
 }

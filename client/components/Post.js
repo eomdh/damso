@@ -144,6 +144,7 @@ const Post = ({ post }) => {
   const [editMode, setEditMode] = useState(false);
   const [commentFormOpend, setCommentFormOpend] = useState(false);
   const postDate = (post.createdAt === post.updatedAt) ? post.createdAt : post.updatedAt;
+  const updated = (post.createdAt === post.updatedAt) ? false : true;
 
   const onChangeEditMode = useCallback(() => {
     setEditMode(true);
@@ -196,7 +197,10 @@ const Post = ({ post }) => {
               <Nickname>{post.User.nickname}</Nickname>
             </ALink>
           </Link>
-          <Date>{ moment(postDate).format('YYYY/MM/DD h:mm') }</Date>
+          <Date>
+            {moment(postDate).format('YYYY/MM/DD h:mm')}
+            {updated ? " (수정됨)" : null}
+          </Date>
           {id && post.User.id === parseInt(id) && !editMode
             ? <Overicons>
                 <UpdateButton onClick={onChangeEditMode}>

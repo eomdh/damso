@@ -122,6 +122,41 @@ router.post('/add', isLoggedIn, upload.none(), async (req, res, next) => {
   };
 });
 
+router.patch('/:postId/update', isLoggedIn, async (req, res, next) => {
+  try {
+    await Post.update({
+      content: req.body.content,
+    }, {
+      where: { 
+        id: req.params.postId,
+        UserId: req.user.id,
+      },
+    });
+
+    const post = Post.findOne({
+      where: { id: req.params.postId },
+    });
+
+    const hashtags = req.body.content.match(/#[^\s#]+/g);
+    if (hashtags) {
+      const result = await Promise.all(hashtags.map((tag) => Hashtag.findOrCreate({
+        where: { name: tag.slice(1).toLowerCase() },
+      })));
+      
+      await post.addHashtags(result.map((v) => v[0]));
+    };
+
+    res.status(200).json({ 
+      PostId: parseInt(req.params.postId),
+      Content: req.body.content,
+      updatedAt: post.updatedAt,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.delete('/:postId/delete', isLoggedIn, async (req, res, next) => {
   try {
     await Post.destroy({

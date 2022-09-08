@@ -131,14 +131,10 @@ function* updatePost(action) {
       type: UPDATE_POST_SUCCESS,
       data: result.data,
     });
-    yield put({
-      type: UPDATE_POST_OF_ME,
-      data: action.data,
-    })
   } catch (err) {
     console.error(err);
     yield put({
-      type: REMOVE_POST_FAILURE,
+      type: UPDATE_POST_FAILURE,
       error: err.response.data,
     });
   };
@@ -323,6 +319,7 @@ export default function* postSaga() {
     fork(watchLoadUserPosts),
     fork(watchLoadHashtagPosts),
     fork(watchAddPost),
+    fork(watchUpdatePost),
     fork(watchRemovePost),
     fork(watchUploadImages),
     fork(watchAddComment),

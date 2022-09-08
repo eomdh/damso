@@ -143,7 +143,8 @@ const Post = ({ post }) => {
   const liked = post.Likers.find((v) => v.id === id);
   const [editMode, setEditMode] = useState(false);
   const [commentFormOpend, setCommentFormOpend] = useState(false);
-  
+  const postDate = (post.createdAt === post.updatedAt) ? post.createdAt : post.updatedAt;
+
   const onChangeEditMode = useCallback(() => {
     setEditMode(true);
   }, [editMode]);
@@ -195,8 +196,8 @@ const Post = ({ post }) => {
               <Nickname>{post.User.nickname}</Nickname>
             </ALink>
           </Link>
-          <Date>{ moment(post.createdAt).format('YYYY/MM/DD h:mm') }</Date>
-          {id && post.User.id === parseInt(id)
+          <Date>{ moment(postDate).format('YYYY/MM/DD h:mm') }</Date>
+          {id && post.User.id === parseInt(id) && !editMode
             ? <Overicons>
                 <UpdateButton onClick={onChangeEditMode}>
                   <FaPen />
@@ -210,7 +211,7 @@ const Post = ({ post }) => {
         </InformationContainer>
         {editMode
         ? <PostUpdateForm 
-            postId={post.Id}
+            postId={post.id}
             postContent={post.content}
             setEditMode={setEditMode}
           />

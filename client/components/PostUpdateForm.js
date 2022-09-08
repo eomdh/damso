@@ -137,7 +137,7 @@ const PostUpdateForm = ({ postId, postContent, setEditMode }) => {
 
 PostUpdateForm.propTypes = {
   postId: PropTypes.number.isRequired,
-  postContet: PropTypes.string.isRequired,
+  postContent: PropTypes.string.isRequired,
   setEditMode: PropTypes.func.isRequired,
 };
 

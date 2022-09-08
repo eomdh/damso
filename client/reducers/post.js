@@ -14,6 +14,9 @@ export const initialState = {
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
+  updatePostLoading: false,
+  updatePostDone: false,
+  updatePostError: null,
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,
@@ -138,18 +141,21 @@ const reducer = (state = initialState, action) => {
         draft.addPostError = action.error;
         break;
       case UPDATE_POST_REQUEST:
-        draft.removePostLoading = true;
-        draft.removePostDone = false;
-        draft.removePostError = null;
+        draft.updatePostLoading = true;
+        draft.updatePostDone = false;
+        draft.updatePostError = null;
         break;
-      case UPDATE_POST_SUCCESS:
-        draft.mainPosts.find((v) => v.id === action.data.PostId).content = action.data.content;
-        draft.removePostLoading = false;
-        draft.removePostDone = true;
+      case UPDATE_POST_SUCCESS: {
+        const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        post.content = action.data.Content;
+        post.updatedAt = action.data.updatedAt;
+        draft.updatePostLoading = false;
+        draft.updatePostDone = true;
         break;
+      }
       case UPDATE_POST_FAILURE:
-        draft.removePostLoading = false;
-        draft.removePostError = action.error;
+        draft.updatePostLoading = false;
+        draft.updatePostError = action.error;
         break;
       case REMOVE_POST_REQUEST:
         draft.removePostLoading = true;

@@ -6,6 +6,7 @@ import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../
 import ProfileImage from './ProfileImage';
 import PostImages from './PostImages';
 import PostContent from './PostContent';
+import PostUpdateForm from './PostContent';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import moment from 'moment';

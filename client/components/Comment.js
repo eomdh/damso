@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,8 @@ import ProfileImage from './ProfileImage';
 import moment from 'moment';
 
 import styled from 'styled-components';
-import { FaTrashAlt } from "react-icons/fa";
+import { FaPen, FaTrashAlt } from "react-icons/fa";
+import CommentUpdateForm from './CommentUpdateForm';
 
 const Container = styled.div`
   min-height: 30px;
@@ -47,12 +48,28 @@ const Date = styled.span`
   font-size: 13px;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-right: 2px;
+`;
+
+const UpdateButton = styled.div`
+  color: #1864ab;
+  opacity: 0.6;
+  font-size: 16px;
+  margin-right: 7px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
 const DeleteButton = styled.div`
   color: #e8537c;
   opacity: 0.6;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 50%;
   transition: all 0.2s linear;
   &:hover {
     opacity: 1;
@@ -69,6 +86,11 @@ const ContentContainer = styled.div`
 const Comment = ({ postId, comment }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
+  const [editMode, setEditMode] = useState(false);
+
+  const onChangeEditMode = useCallback(() => {
+    setEditMode(true);
+  }, [editMode]);
 
   const onRemoveComment = useCallback(() => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -101,14 +123,27 @@ const Comment = ({ postId, comment }) => {
           <Date>{ moment(comment.createdAt).format('YYYY/MM/DD h:mm') }</Date>
         </div>
         { id && comment.User.id === parseInt(id)
-          ? ( <DeleteButton onClick={onRemoveComment}>
+          ? <ButtonContainer>
+              <UpdateButton onClick={onChangeEditMode}>
+                <FaPen />
+              </UpdateButton>
+              <DeleteButton onClick={onRemoveComment}>
                 <FaTrashAlt />
-              </DeleteButton> )
-          : null }
+              </DeleteButton>
+            </ButtonContainer>
+          : null 
+        }
       </InformationContainer>
-      <ContentContainer>
-        {comment.content}
-      </ContentContainer>
+      {editMode 
+        ? <CommentUpdateForm 
+            commentId={comment.id}
+            commentContent={comment.content}
+            setEditMode={setEditMode}
+          />
+        : <ContentContainer>
+            {comment.content}
+          </ContentContainer>
+      }
     </Container>
   );
 };

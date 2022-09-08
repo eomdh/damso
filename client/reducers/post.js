@@ -54,6 +54,10 @@ export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 
+export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST';
+export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS';
+export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE';
+
 export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
@@ -132,6 +136,20 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;
         draft.addPostError = action.error;
+        break;
+      case UPDATE_POST_REQUEST:
+        draft.removePostLoading = true;
+        draft.removePostDone = false;
+        draft.removePostError = null;
+        break;
+      case UPDATE_POST_SUCCESS:
+        draft.mainPosts.find((v) => v.id === action.data.PostId).content = action.data.content;
+        draft.removePostLoading = false;
+        draft.removePostDone = true;
+        break;
+      case UPDATE_POST_FAILURE:
+        draft.removePostLoading = false;
+        draft.removePostError = action.error;
         break;
       case REMOVE_POST_REQUEST:
         draft.removePostLoading = true;

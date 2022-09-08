@@ -6,13 +6,13 @@ import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../
 import ProfileImage from './ProfileImage';
 import PostImages from './PostImages';
 import PostContent from './PostContent';
-import PostUpdateForm from './PostContent';
+import PostUpdateForm from './PostUpdateForm';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import moment from 'moment';
 
 import styled from 'styled-components';
-import { FaTrashAlt, FaRegCommentDots } from "react-icons/fa";
+import { FaTrashAlt, FaPen, FaRegCommentDots } from "react-icons/fa";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 
 const Container = styled.div`
@@ -59,15 +59,29 @@ const Date = styled.span`
   font-size: 15px;
 `;
 
-const DeleteButton = styled.div`
+const Overicons = styled.div`
   display: flex;
+  margin-top: 5px;
+  margin-right: 20px
+`;
+
+const UpdateButton = styled.div`
+  color: #1864ab;
+  opacity: 0.6;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 14px;
+  transition: all 0.2s linear;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const DeleteButton = styled.div`
   color: #e8537c;
   opacity: 0.6;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
-  margin-right: 16px;
   transition: all 0.2s linear;
   &:hover {
     opacity: 1;
@@ -97,11 +111,10 @@ const UnderSideContainer = styled.div`
   margin-right: 20px;
 `;
 
-const IconsContainer = styled.div`
+const UnderIcons = styled.div`
   color: ${props => props.color};
   opacity: 0.7;
   padding: 7px;
-  border-radius: 50%;
   font-size: 20px;
   transition: all 0.1s linear;
   cursor: pointer;
@@ -128,8 +141,13 @@ const Post = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const liked = post.Likers.find((v) => v.id === id);
+  const [editMode, setEditMode] = useState(false);
   const [commentFormOpend, setCommentFormOpend] = useState(false);
   
+  const onChangeEditMode = useCallback(() => {
+    setEditMode(true);
+  }, [editMode]);
+
   const onRemovePost = useCallback(() => {
     dispatch({
       type: REMOVE_POST_REQUEST,
@@ -179,31 +197,45 @@ const Post = ({ post }) => {
           </Link>
           <Date>{ moment(post.createdAt).format('YYYY/MM/DD h:mm') }</Date>
           {id && post.User.id === parseInt(id)
-            ? ( <DeleteButton onClick={onRemovePost}>
+            ? <Overicons>
+                <UpdateButton onClick={onChangeEditMode}>
+                  <FaPen />
+                </UpdateButton>
+                <DeleteButton onClick={onRemovePost}>
                   <FaTrashAlt />
-                </DeleteButton> )
+                </DeleteButton> 
+              </Overicons>
             : null 
           }
         </InformationContainer>
-        <ContentContainer>
-          {post.Images.length >= 1 && <PostImages images={post.Images} />}
-          <Content>
-            <PostContent content={post.content} />
-          </Content>
-        </ContentContainer>
-        <UnderSideContainer>
-          <IconsContainer>
-            {liked 
-             ? <IoIosHeart color="red" onClick={onUnlike}/>
-             : <IoIosHeartEmpty color="red" onClick={onLike} />
-            }
-          </IconsContainer>
-          <Amount>{post.Likers.length}</Amount>
-          <IconsContainer onClick={onToggleComment}>
-            <FaRegCommentDots color="#3498db"/>
-          </IconsContainer>
-          <Amount>{post.Comments.length}</Amount>
-        </UnderSideContainer>
+        {editMode
+        ? <PostUpdateForm 
+            postId={post.Id}
+            postContent={post.content}
+            setEditMode={setEditMode}
+          />
+        : <>
+            <ContentContainer>
+              {post.Images.length >= 1 && <PostImages images={post.Images} />}
+              <Content>
+                <PostContent content={post.content} />
+              </Content>
+            </ContentContainer>
+            <UnderSideContainer>
+              <UnderIcons>
+                {liked 
+                ? <IoIosHeart color="red" onClick={onUnlike} />
+                : <IoIosHeartEmpty color="red" onClick={onLike} />
+                }
+              </UnderIcons>
+              <Amount>{post.Likers.length}</Amount>
+              <UnderIcons onClick={onToggleComment}>
+                <FaRegCommentDots color="#3498db" />
+              </UnderIcons>
+              <Amount>{post.Comments.length}</Amount>
+            </UnderSideContainer>
+          </>
+        }
         {commentFormOpend && (
           <>
             <CommentContainer>

@@ -23,7 +23,7 @@ const Form = styled.form`
   position: relative;
 `;
 
-const FormUpSideContainer = styled.div`
+const InputContainer = styled.div`
   display: flex;
   width: 100%;
 `;
@@ -31,7 +31,7 @@ const FormUpSideContainer = styled.div`
 const ProfileImageContainer = styled.div`
   width: 55px;
   height: 55px;
-  margin: 0px 15px 0px 5px;
+  margin: 0px 20px 0px 10px;
   border-radius: 50px;
   overflow: hidden;
 `;
@@ -49,7 +49,7 @@ const ContentInput = styled(TextArea)`
   }
 `;
 
-const IconContainer = styled.div`
+const ImageUploadIcon = styled.div`
   position: absolute;
   bottom: -3.5px;
   right: 107px;
@@ -108,9 +108,9 @@ const Image = styled.img`
   }
 `;
 
-const ImageDeleteContainer = styled.div`
+const ImageDeleteIcon = styled.div`
   position: absolute;
-  top: 2px;
+  top: 4px;
   right: 1px;
   color: red;
   font-size: 20px;
@@ -197,7 +197,7 @@ const PostForm = () => {
   return (
     <Container>
       <Form onSubmit={onSubmit} encType="multipart/form-data">
-        <FormUpSideContainer>
+        <InputContainer>
           <ProfileImageContainer>
             <ProfileImage path={ me ? me.profileImagePath : null } />
           </ProfileImageContainer>
@@ -220,13 +220,13 @@ const PostForm = () => {
             ref={imageInput}
             onChange={onChangeImages}
           />
-          <IconContainer me={me} onClick={onClickImageUpload}>
+          <ImageUploadIcon me={me} onClick={onClickImageUpload}>
             <FaRegImage />
-          </IconContainer>
+          </ImageUploadIcon>
           <SubmitButton type="submit" me={me} isAvailablePosting={isAvailablePosting}>
             게시
           </SubmitButton>
-        </FormUpSideContainer>
+        </InputContainer>
         <ImageUploadContainer>
           {imagePaths && imagePaths.map((v, i) => (
             <ImageContainer key={v}>
@@ -234,9 +234,9 @@ const PostForm = () => {
                 src={`http://localhost:3065/postImages/${v}`} 
                 alt={v}
               />
-              <ImageDeleteContainer onClick={onRemoveImage(i)}>
+              <ImageDeleteIcon onClick={onRemoveImage(i)}>
                 <MdCancel />
-              </ImageDeleteContainer>
+              </ImageDeleteIcon>
             </ImageContainer>
           ))}
         </ImageUploadContainer>

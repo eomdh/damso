@@ -219,8 +219,7 @@ const Post = ({ post }) => {
         </InformationContainer>
         {editMode
         ? <PostUpdateForm 
-            postId={post.id}
-            postContent={post.content}
+            post={post}
             setEditMode={setEditMode}
           />
         : <>

@@ -72,6 +72,10 @@ export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
 export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 
+export const LOAD_IMAGE_PATHS = 'LOAD_IMAGE_PATHS';
+
+export const REMOVE_IMAGE_PATHS = 'LOAD_IMAGE_PATHS';
+
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
@@ -165,6 +169,7 @@ const reducer = (state = initialState, action) => {
         draft.updatePostError = action.error;
         break;
       case REMOVE_POST_REQUEST:
+        draft.mainPosts.find((v) => v.id === action.data.postId);
         draft.removePostLoading = true;
         draft.removePostDone = false;
         draft.removePostError = null;
@@ -184,13 +189,19 @@ const reducer = (state = initialState, action) => {
         draft.uploadImagesError = null;
         break;
       case UPLOAD_IMAGES_SUCCESS:
-        draft.imagePaths = action.data;
+        draft.imagePaths.push(action.data);
         draft.uploadImagesLoading = false;
         draft.uploadImagesDone = true;
         break;
       case UPLOAD_IMAGES_FAILURE:
         draft.uploadImagesLoading = false;
         draft.uploadImagesError = action.error;
+        break;
+      case LOAD_IMAGE_PATHS:
+        draft.imagePaths.push(action.data);
+        break;
+      case REMOVE_IMAGE_PATHS:
+        draft.imagePaths = [];
         break;
       case REMOVE_IMAGE:
         draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);

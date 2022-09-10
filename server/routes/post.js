@@ -146,6 +146,20 @@ router.patch('/:postId/update', isLoggedIn, async (req, res, next) => {
       await post.addHashtags(result.map((v) => v[0]));
     };
 
+    if (req.body.postImages) {
+      if (Array.isArray(req.body.postImages)) {
+        const images = await Promise.all(req.body.postImages.map((image) => Image.create({
+          src: image,
+        })));
+        await post.addImages(images);
+      } else {
+        const image = await Image.create({
+          src: req.body.postImages,
+        })
+        await post.addImages(image);
+      };
+    };
+
     res.status(200).json({ 
       PostId: parseInt(req.params.postId),
       Content: req.body.content,

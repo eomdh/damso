@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { REMOVE_IMAGE, UPDATE_POST_REQUEST } from '../reducers/post';
+import { useDispatch, useSelector } from 'react-redux';
+import { REMOVE_IMAGE, REMOVE_IMAGE_PATHS, UPDATE_POST_REQUEST, UPLOAD_IMAGES_REQUEST } from '../reducers/post';
 import TextArea from 'react-textarea-autosize';
 
 import styled from 'styled-components';
@@ -129,8 +129,7 @@ const CancelButton = styled.button`
 const PostUpdateForm = ({ post, setEditMode }) => {
   const dispatch = useDispatch();
 
-  const imagePaths = post.Images.map((v) => v.src);
-  console.log(post.Images);
+  const { imagePaths } = useSelector((state) => state.post);
   const [contentInput, setContentInput] = useState(post.content);
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
@@ -144,9 +143,23 @@ const PostUpdateForm = ({ post, setEditMode }) => {
     };
   }, [contentInput]);
 
-  const onCancelUpdate = useCallback(() => {
-    setEditMode(false);
-  }, []);
+  const imageInput = useRef();
+  const onClickImageUpload = useCallback(() => {
+    imageInput.current.click();
+  }, [imageInput.current]);
+  
+  const onChangeImages = useCallback((e) => {
+    console.log('image', e.target.files);
+    const imageFormData = new FormData();
+    [].forEach.call(e.target.files, (file) => {
+      imageFormData.append('image', file);
+    });
+
+    return dispatch({
+      type: UPLOAD_IMAGES_REQUEST,
+      data: imageFormData,
+    });
+  });
 
   const onRemoveImage = useCallback((index) => () => {
     dispatch({
@@ -154,6 +167,13 @@ const PostUpdateForm = ({ post, setEditMode }) => {
       data: index,
     })
   });
+
+  const onCancelUpdate = useCallback(() => {
+    dispatch({
+      type: REMOVE_IMAGE_PATHS,
+    });
+    setEditMode(false);
+  }, []);
 
   const onSubmit = useCallback(() => {
     if (!contentInput || !contentInput.trim() ) {
@@ -164,11 +184,17 @@ const PostUpdateForm = ({ post, setEditMode }) => {
       return alert('글자수가 너무 많습니다.');
     };
 
+    const formData = new FormData();
+    imagePaths.forEach((path) => {
+      formData.append('postImages', path);
+    });
+    formData.append('content', contentInput);
+
     dispatch({
       type: UPDATE_POST_REQUEST,
       data: {
         postId: post.id,
-        content: contentInput,
+        data: formData,
       }
     });
 
@@ -177,7 +203,7 @@ const PostUpdateForm = ({ post, setEditMode }) => {
 
   return (
     <Container>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} encType="multipart/form-data">
         <ContentInput
           value={contentInput}
           onChange={onChangeContent}
@@ -187,8 +213,18 @@ const PostUpdateForm = ({ post, setEditMode }) => {
             overflow: "hidden",
           }}
         />
+        <input
+            type="file"
+            name="image"
+            multiple
+            hidden
+            ref={imageInput}
+            onChange={onChangeImages}
+          />
         <ButtonContainer>
-          <ImageUploadIcon><FaRegImage /></ImageUploadIcon>
+          <ImageUploadIcon onClick={onClickImageUpload}>
+            <FaRegImage />
+          </ImageUploadIcon>
           <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>수정</SubmitButton>
           <CancelButton onClick={onCancelUpdate}>취소</CancelButton>
         </ButtonContainer>

@@ -207,6 +207,33 @@ router.post('/:postId/comment/add', isLoggedIn, async (req, res, next) => {
   };
 });
 
+router.patch('/:postId/comment/:commentId/update', isLoggedIn, async (req, res, next) => {
+  try {
+    await Comment.update({
+      content: req.body.content,
+    }, {
+      where: {
+        id: req.params.commentId,
+        UserId: req.user.id,
+      },
+    });
+
+    const comment = await Comment.findOne({
+      where: { id: req.params.commentId }
+    });
+
+    res.status(200).json({
+      PostId: parseInt(req.params.postId),
+      CommentId: parseInt(req.params.commentId),
+      Content: req.body.content,
+      updatedAt: comment.updatedAt,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  };
+});
+
 router.delete('/:postId/comment/:commentId/delete', isLoggedIn, async (req, res, next) => {
   try {
     await Comment.destroy({

@@ -59,7 +59,7 @@ const Date = styled.span`
   font-size: 15px;
 `;
 
-const Overicons = styled.div`
+const OverIcons = styled.div`
   display: flex;
   margin-top: 5px;
   margin-right: 20px
@@ -70,7 +70,7 @@ const UpdateButton = styled.div`
   opacity: 0.6;
   font-size: 20px;
   cursor: pointer;
-  margin-right: 14px;
+  margin-right: 12px;
   transition: all 0.2s linear;
   &:hover {
     opacity: 1;
@@ -158,7 +158,7 @@ const Post = ({ post }) => {
       });
     } else {
       return;
-    }
+    };
   }, []);
 
   const onLike = useCallback(() => {
@@ -206,14 +206,14 @@ const Post = ({ post }) => {
             {updated ? " (수정됨)" : null}
           </Date>
           {id && post.User.id === parseInt(id) && !editMode
-            ? <Overicons>
+            ? <OverIcons>
                 <UpdateButton onClick={onChangeEditMode}>
                   <FaPen />
                 </UpdateButton>
                 <DeleteButton onClick={onRemovePost}>
                   <FaTrashAlt />
                 </DeleteButton> 
-              </Overicons>
+              </OverIcons>
             : null 
           }
         </InformationContainer>

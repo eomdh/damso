@@ -80,7 +80,7 @@ const PostUpdateForm = ({ postId, postContent, setEditMode }) => {
   const [contentInput, setContentInput] = useState(postContent);
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
-  const onChangeEditContent = useCallback((e) => {
+  const onChangeContent = useCallback((e) => {
     const {target: {value}} = e;
     setContentInput(e.target.value);
     if (value.trim()) {
@@ -111,7 +111,7 @@ const PostUpdateForm = ({ postId, postContent, setEditMode }) => {
       }
     });
 
-    setEditMode(prev => !prev);
+    setEditMode(false);
   }, [contentInput]);
 
   return (
@@ -119,7 +119,7 @@ const PostUpdateForm = ({ postId, postContent, setEditMode }) => {
       <Form onSubmit={onSubmit}>
         <ContentInput
           value={contentInput}
-          onChange={onChangeEditContent}
+          onChange={onChangeContent}
           style={{
             resize: "none",
             outline: "none",

@@ -26,6 +26,9 @@ export const initialState = {
   addCommentLoading: false,
   addCommentDone: false,
   addCommentError: null,
+  updateCommentLoading: false,
+  updateCommentDone: false,
+  updateCommentError: null,
   removeCommentLoading: false,
   removeCommentDone: false,
   removeCommentError: null,
@@ -74,6 +77,10 @@ export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
+
+export const UPDATE_COMMENT_REQUEST = 'UPDATE_COMMENT_REQUEST';
+export const UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS';
+export const UPDATE_COMMENT_FAILURE = 'UPDATE_COMMENT_FAILURE';
 
 export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
 export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
@@ -203,6 +210,24 @@ const reducer = (state = initialState, action) => {
       case ADD_COMMENT_FAILURE:
         draft.addCommentLoading = false;
         draft.addCommentError = action.data;
+        break;
+      case UPDATE_COMMENT_REQUEST:
+        draft.updateCommentLoading = true;
+        draft.updateCommentDone = false;
+        draft.updateCommentError = null;
+        break;
+      case UPDATE_COMMENT_SUCCESS: {
+        const post  = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        const comment = post.Comments.find((v) => v.id === action.data.CommentId);
+        comment.content = action.data.Content;
+        comment.updatedAt = action.data.updatedAt;
+        draft.updateCommentLoading = false;
+        draft.updateCommentDone = true;
+        break;
+      }
+      case UPDATE_COMMENT_FAILURE:
+        draft.updateCommentLoading = false;
+        draft.updateCommentError = action.data;
         break;
       case REMOVE_COMMENT_REQUEST:
         draft.removeCommentLoading = true;

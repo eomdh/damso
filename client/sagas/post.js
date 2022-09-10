@@ -10,6 +10,7 @@ import {
   REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE,
   UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE,
   ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
+  UPDATE_COMMENT_REQUEST, UPDATE_COMMENT_SUCCESS, UPDATE_COMMENT_FAILURE,
   REMOVE_COMMENT_REQUEST, REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAILURE,
   LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE,
   UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE,
@@ -204,6 +205,26 @@ function* addComment(action) {
   };
 };
 
+function updateCommentAPI(data) {
+  return axios.patch(`/post/${data.postId}/comment/${data.commentId}/update`, data);
+};
+
+function* updateComment(action) {
+  try {
+    const result = yield call(updateCommentAPI, action.data);
+    yield put({
+      type: UPDATE_COMMENT_SUCCESS,
+      data: result.data,
+    });  
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UPDATE_COMMENT_FAILURE,
+      error: err.response.data,
+    });
+  };
+};
+
 function removeCommentAPI(data) {
   return axios.delete(`/post/${data.postId}/comment/${data.commentId}/delete`, data);
 };
@@ -300,6 +321,10 @@ function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 };
 
+function* watchUpdateComment() {
+  yield takeLatest(UPDATE_COMMENT_REQUEST, updateComment);
+};
+
 function* watchRemoveComment() {
   yield takeLatest(REMOVE_COMMENT_REQUEST, removeComment);
 };
@@ -323,6 +348,7 @@ export default function* postSaga() {
     fork(watchRemovePost),
     fork(watchUploadImages),
     fork(watchAddComment),
+    fork(watchUpdateComment),
     fork(watchRemoveComment),
     fork(watchLikePost),
     fork(watchUnlikePost)

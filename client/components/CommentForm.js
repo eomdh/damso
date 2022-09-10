@@ -94,13 +94,15 @@ const CommentForm = ({ post }) => {
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    if (content.length > 500) {
+    if (content.length > 200) {
       alert("글자수가 너무 많습니다.");
       return;
-    }
+    };
+
     if (!content || !content.trim()) {
       return alert("댓글을 작성해주세요.");
-    }
+    };
+
     dispatch({
       type: ADD_COMMENT_REQUEST,
       data: { 

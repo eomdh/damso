@@ -57,7 +57,7 @@ const UpdateButton = styled.div`
   color: #1864ab;
   opacity: 0.6;
   font-size: 16px;
-  margin-right: 7px;
+  margin-right: 8px;
   cursor: pointer;
   transition: all 0.2s linear;
   &:hover {
@@ -87,6 +87,8 @@ const Comment = ({ postId, comment }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const [editMode, setEditMode] = useState(false);
+  const commentDate = (comment.createdAt === comment.updatedAt) ? comment.createdAt : comment.updatedAt
+  const updated = (comment.createdAt === comment.updatedAt) ? false : true;
 
   const onChangeEditMode = useCallback(() => {
     setEditMode(true);
@@ -103,7 +105,7 @@ const Comment = ({ postId, comment }) => {
       });
     } else {
       return ;
-    } 
+    };
   }, []);
 
   return (
@@ -120,9 +122,9 @@ const Comment = ({ postId, comment }) => {
           <Link href="/profile/[id]" as={`/profile/${comment.User.id}`}>
             <ALink><Nickname>{comment.User.nickname}</Nickname></ALink>
           </Link>
-          <Date>{ moment(comment.createdAt).format('YYYY/MM/DD h:mm') }</Date>
+          <Date>{ moment(commentDate).format('YYYY/MM/DD h:mm') }</Date>
         </div>
-        { id && comment.User.id === parseInt(id)
+        { id && comment.User.id === parseInt(id) && !editMode
           ? <ButtonContainer>
               <UpdateButton onClick={onChangeEditMode}>
                 <FaPen />
@@ -135,7 +137,8 @@ const Comment = ({ postId, comment }) => {
         }
       </InformationContainer>
       {editMode 
-        ? <CommentUpdateForm 
+        ? <CommentUpdateForm
+            postId={postId}
             commentId={comment.id}
             commentContent={comment.content}
             setEditMode={setEditMode}

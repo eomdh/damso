@@ -1,7 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { REMOVE_IMAGE, REMOVE_IMAGE_PATHS, UPDATE_POST_REQUEST, UPLOAD_IMAGES_REQUEST } from '../reducers/post';
+import { 
+  LOAD_IMAGE_PATHS, REMOVE_IMAGE, REMOVE_IMAGE_PATHS, UPDATE_POST_REQUEST, UPLOAD_IMAGES_REQUEST 
+} from '../reducers/post';
 import TextArea from 'react-textarea-autosize';
 
 import styled from 'styled-components';
@@ -126,22 +128,38 @@ const CancelButton = styled.button`
   transition: all 0.2s linear;
 `;
 
-const PostUpdateForm = ({ post, setEditMode }) => {
+const PostUpdateForm = ({ post, editMode, setEditMode }) => {
   const dispatch = useDispatch();
 
   const { imagePaths } = useSelector((state) => state.post);
-  const [contentInput, setContentInput] = useState(post.content);
+  const [content, setContent] = useState(post.content);
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
+
+  useEffect(() => {
+    if (editMode && post.Images) {
+      const images = post.Images.map((v) => v.src);
+      dispatch({
+        type: LOAD_IMAGE_PATHS,
+        data: images,
+      })
+    } else if (!editMode) {
+      dispatch({
+        type: REMOVE_IMAGE_PATHS,
+      })
+    } else {
+      return;
+    }
+  }, [editMode]);
 
   const onChangeContent = useCallback((e) => {
     const {target: {value}} = e;
-    setContentInput(e.target.value);
+    setContent(e.target.value);
     if (value.trim()) {
       setIsAvailablePosting(true);
     } else if (value.length === 0 || value.length > 500) {
       setIsAvailablePosting(false);
     };
-  }, [contentInput]);
+  }, [content]);
 
   const imageInput = useRef();
   const onClickImageUpload = useCallback(() => {
@@ -169,18 +187,17 @@ const PostUpdateForm = ({ post, setEditMode }) => {
   });
 
   const onCancelUpdate = useCallback(() => {
-    dispatch({
-      type: REMOVE_IMAGE_PATHS,
-    });
     setEditMode(false);
   }, []);
 
-  const onSubmit = useCallback(() => {
-    if (!contentInput || !contentInput.trim() ) {
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+
+    if (!content || !content.trim() ) {
       return alert('글을 작성해주세요.')
     };
     
-    if (contentInput.length > 500) {
+    if (content.length > 500) {
       return alert('글자수가 너무 많습니다.');
     };
 
@@ -188,24 +205,22 @@ const PostUpdateForm = ({ post, setEditMode }) => {
     imagePaths.forEach((path) => {
       formData.append('postImages', path);
     });
-    formData.append('content', contentInput);
+    formData.append('content', content);
 
     dispatch({
       type: UPDATE_POST_REQUEST,
-      data: {
-        postId: post.id,
-        data: formData,
-      }
+      postId: post.id,
+      data: formData,
     });
 
     setEditMode(false);
-  }, [contentInput]);
+  }, [imagePaths, content]);
 
   return (
     <Container>
       <Form onSubmit={onSubmit} encType="multipart/form-data">
         <ContentInput
-          value={contentInput}
+          value={content}
           onChange={onChangeContent}
           style={{
             resize: "none",
@@ -226,7 +241,7 @@ const PostUpdateForm = ({ post, setEditMode }) => {
             <FaRegImage />
           </ImageUploadIcon>
           <SubmitButton type="submit" isAvailablePosting={isAvailablePosting}>수정</SubmitButton>
-          <CancelButton onClick={onCancelUpdate}>취소</CancelButton>
+          <CancelButton type="button" onClick={onCancelUpdate}>취소</CancelButton>
         </ButtonContainer>
         <ImageUploadContainer>
           {imagePaths && imagePaths.map((v, i) => (
@@ -248,6 +263,7 @@ const PostUpdateForm = ({ post, setEditMode }) => {
 
 PostUpdateForm.propTypes = {
   post: PropTypes.object.isRequired,
+  editMode: PropTypes.bool.isRequired,
   setEditMode: PropTypes.func.isRequired,
 };
 

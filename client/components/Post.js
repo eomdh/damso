@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, LOAD_IMAGE_PATHS } from '../reducers/post';
+import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
 import ProfileImage from './ProfileImage';
 import PostImages from './PostImages';
 import PostContent from './PostContent';
@@ -146,15 +146,7 @@ const Post = ({ post }) => {
   const postDate = (post.createdAt === post.updatedAt) ? post.createdAt : post.updatedAt;
   const updated = (post.createdAt === post.updatedAt) ? false : true;
 
-  const onChangeEditMode = useCallback(() => {
-    if (post.Images) {
-      const ImagePaths = post.Images.map((v) => v.src);
-      dispatch({
-        type: LOAD_IMAGE_PATHS,
-        data: ImagePaths,
-      });
-    };
-    
+  const onChangeEditMode = useCallback(() => {   
     setEditMode(true);
   }, [editMode]);
 
@@ -228,6 +220,7 @@ const Post = ({ post }) => {
         {editMode
         ? <PostUpdateForm 
             post={post}
+            editMode={editMode}
             setEditMode={setEditMode}
           />
         : <>

@@ -159,7 +159,20 @@ const reducer = (state = initialState, action) => {
       case UPDATE_POST_SUCCESS: {
         const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
         post.content = action.data.Content;
+        if (action.data.Images) {
+          if (Array.isArray(action.data.Images)) {
+            const images = action.data.Images.map((v) => {
+              return { id: null, src: v};
+            });
+            draft.mainPosts.find((v) => v.id === action.data.PostId).Images.concat(...images);
+          } else {
+            draft.mainPosts.find((v) => v.id === action.data.PostId).concat({
+              id: null, src: action.data.postImages
+            });
+          };
+        };
         post.updatedAt = action.data.updatedAt;
+        draft.imagePaths = [];
         draft.updatePostLoading = false;
         draft.updatePostDone = true;
         break;
@@ -198,7 +211,7 @@ const reducer = (state = initialState, action) => {
         draft.uploadImagesError = action.error;
         break;
       case LOAD_IMAGE_PATHS:
-        draft.imagePaths.push(action.data);
+        draft.imagePaths = action.data;
         break;
       case REMOVE_IMAGE_PATHS:
         draft.imagePaths = [];

@@ -55,6 +55,7 @@ router.get('/:postId', async (req, res, next) => {
         attributes: ['id'],
       }, {
         model: Image,
+        attributes: ['src'],
       }],
     });
 
@@ -124,7 +125,7 @@ router.post('/add', isLoggedIn, upload.none(), async (req, res, next) => {
 
 router.patch('/:postId/update', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
-    const post = await Post.update({
+    await Post.update({
       content: req.body.content,
     }, {
       where: {
@@ -132,6 +133,8 @@ router.patch('/:postId/update', isLoggedIn, upload.none(), async (req, res, next
         UserId: req.user.id,
       }
     });
+
+    const post = await Post.findOne({ where: { id: req.params.postId }});
 
     const hashtags = req.body.content.match(/#[^\s#]+/g);
     if (hashtags) {

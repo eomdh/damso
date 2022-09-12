@@ -103,7 +103,6 @@ function addPostAPI(data) {
 
 function* addPost(action) {
   try {
-    console.log("작성 데이터", action.data);
     const result = yield call(addPostAPI, action.data);
     yield put({
       type: ADD_POST_SUCCESS,
@@ -128,7 +127,6 @@ function updatePostAPI(postId, data) {
 
 function* updatePost(action) {
   try {
-    console.log("업데이트 데이터", action.data);
     const result = yield call(updatePostAPI, action.postId, action.data);
     yield put({
       type: UPDATE_POST_SUCCESS,

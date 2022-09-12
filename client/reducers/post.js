@@ -158,20 +158,18 @@ const reducer = (state = initialState, action) => {
         break;
       case UPDATE_POST_SUCCESS: {
         const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        console.log(action.data.Images);
         post.content = action.data.Content;
+        post.updatedAt = action.data.updatedAt;
         if (action.data.Images) {
           if (Array.isArray(action.data.Images)) {
-            const images = action.data.Images.map((v) => {
-              return { id: null, src: v};
+            action.data.Images.map((v) => {
+              return post.Images.push({ src: v });
             });
-            draft.mainPosts.find((v) => v.id === action.data.PostId).Images.concat(...images);
           } else {
-            draft.mainPosts.find((v) => v.id === action.data.PostId).concat({
-              id: null, src: action.data.postImages
-            });
+            post.Images = [{ src: action.data.Images }];
           };
         };
-        post.updatedAt = action.data.updatedAt;
         draft.imagePaths = [];
         draft.updatePostLoading = false;
         draft.updatePostDone = true;

@@ -34,7 +34,7 @@ const NicknameContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: ${props => props.me ? "15px" : "55px"};
+  margin-top: ${props => props.me ? "25px" : "55px"};
   margin-bottom: 5px;
 `;
 
@@ -77,6 +77,7 @@ const Button = styled.button`
   all: unset;
   border-radius: 10px;
   height: 30px;
+  margin-top: 5px;
   padding: 8px 15px;
   background-color: #1864ab;
   color: white;

@@ -6,6 +6,7 @@ import TextArea from 'react-textarea-autosize';
 import useInput from '../hooks/useInput';
 
 import styled from 'styled-components';
+import device from '../utils/device'
 import { BsCheckCircleFill } from 'react-icons/bs';
 
 const FormContainer = styled.div`
@@ -23,10 +24,14 @@ const Form = styled.form`
 const Input = styled(TextArea)`
   font-size: 16px;
   font-family: 'Noto Sans KR', sans-serif;
-  width: 350px;
+  width: 470px;
   max-height: 50px;
   border: 1px solid gray;
   border-radius: 5px;
+
+  @media ${device.mobileL} {
+    width: 350px;
+  }
 `;
 
 const IconContainer = styled.button`
@@ -58,7 +63,7 @@ const IntroduceEditForm = ({ setOnEditForm }) => {
       type: CHANGE_INTRODUCE_REQUEST,
       data: introduceInput,
     });
-    
+
     setOnEditForm(prev => !prev);
   }, [introduceInput]);
 

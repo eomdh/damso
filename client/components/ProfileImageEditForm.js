@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
 const Form = styled.form`
+  margin-top: -10px;
   margin-left: 100px;
 `;
 

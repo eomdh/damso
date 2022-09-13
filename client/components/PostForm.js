@@ -26,24 +26,32 @@ const Form = styled.form`
 
 const InputContainer = styled.div`
   display: flex;
-  width: 100%;
 `;
 
 const ProfileImageContainer = styled.div`
   width: 55px;
   height: 55px;
-  margin: 0px 15px 0px 5px;
+  margin-left: 5px;
+  margin-right: 15px;
   border-radius: 50px;
   overflow: hidden;
 `;
 
-const ContentInput = styled(TextArea)`
+const TextAreaContainer = styled.div`
+  padding-right: 25px;
   width: 80%;
-  height: 200px;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
+`;
+
+const ContentInput = styled(TextArea)`
+  width: 100%;
   border: none;
   font-size: 16px;
   font-family: 'Noto Sans KR', sans-serif;
-  min-height: 50px;
+  min-height: 75px;
   max-height: 300px;
   :disabled {
     background-color: white;
@@ -53,6 +61,7 @@ const ContentInput = styled(TextArea)`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  height: 35px;
   align-items: center;
   margin-right: 25px;
 `;
@@ -211,25 +220,27 @@ const PostForm = () => {
           <ProfileImageContainer>
             <ProfileImage path={ me ? me.profileImagePath : null } />
           </ProfileImageContainer>
-          <ContentInput 
-            placeholder={me ? "오늘은 어떤 일이 있었나요?" : "로그인 후 이용해주세요."}
-            disabled={me ? false : true}
-            value={content}
-            onChange={onChangeContent}
-            style={{
-              resize: "none",
-              outline: "none",
-              overflow: "hidden",
-            }}
+          <TextAreaContainer>
+            <ContentInput 
+              placeholder={me ? "오늘은 어떤 일이 있었나요?" : "로그인 후 이용해주세요."}
+              disabled={me ? false : true}
+              value={content}
+              onChange={onChangeContent}
+              style={{
+                resize: "none",
+                outline: "none",
+                overflow: "hidden",
+              }}
+            />
+          </TextAreaContainer>
+          <input
+            type="file"
+            name="image"
+            multiple
+            hidden
+            ref={imageInput}
+            onChange={onChangeImages}
           />
-        <input
-          type="file"
-          name="image"
-          multiple
-          hidden
-          ref={imageInput}
-          onChange={onChangeImages}
-        />
         </InputContainer>
         <ButtonContainer>
           <ImageUploadIcon me={me} onClick={onClickImageUpload}>

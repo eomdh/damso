@@ -48,7 +48,7 @@ const SubmitButton = styled.button`
   background-color: #1864ab;
   color: white;
   letter-spacing: 2px;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 15px;
   width: 70px;
   height: 30px;

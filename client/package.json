@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "build": "next build"
+    "build": "cross-env ANALYZE=true NODE_ENV=production next build"
   },
   "author": "Eom Deokhyeon",
   "license": "ISC",
   "dependencies": {
+    "@next/bundle-analyzer": "^12.3.0",
     "axios": "^0.27.2",
     "babel-plugin-styled-components": "^2.0.7",
+    "cross-env": "^7.0.3",
     "immer": "^9.0.15",
     "moment": "^2.29.4",
     "next": "^9.5.5",
@@ -38,6 +40,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "file-loader": "^6.2.0"
   }
 }

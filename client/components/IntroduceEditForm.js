@@ -21,6 +21,7 @@ const Form = styled.form`
 
 const Input = styled(TextArea)`
   font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
   width: 350px;
   max-height: 50px;
   border: 1px solid gray;

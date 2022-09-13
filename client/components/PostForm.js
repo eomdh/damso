@@ -166,7 +166,7 @@ const PostForm = () => {
       type: UPLOAD_IMAGES_REQUEST,
       data: imageFormData,
     });
-  });
+  }, []);
 
   const onRemoveImage = useCallback((index) => () => {
     dispatch({
@@ -176,7 +176,7 @@ const PostForm = () => {
         index: index,
       }
     })
-  });
+  }, []);
 
   const onSubmit = useCallback((e) => {
     e.preventDefault();

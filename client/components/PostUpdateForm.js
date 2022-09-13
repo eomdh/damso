@@ -79,7 +79,7 @@ const ButtonContainer = styled.div`
 const ImageUploadIcon = styled.div`
   color: #1864ab;
   font-size: 37px;
-  margin: -7px 5px 0px 0px;
+  margin: -10px 5px 0px 0px;
   opacity: 0.5;
   cursor: pointer;
   &:hover {
@@ -186,7 +186,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
     dispatch({
       type: CLOSE_EDIT_MODE,
     })
-    
+
     setEditMode(false);
   }, []);
 

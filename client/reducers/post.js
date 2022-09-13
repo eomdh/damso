@@ -2,7 +2,8 @@ import produce from 'immer';
 
 export const initialState = {
   mainPosts: [],
-  imagePaths: [],
+  addPostImagePaths: [],
+  updatePostImagePaths: [],
   singlePost: null,
   hasMorePosts: true,
   loadPostLoading: false,
@@ -74,8 +75,6 @@ export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 
 export const LOAD_IMAGE_PATHS = 'LOAD_IMAGE_PATHS';
 
-export const REMOVE_IMAGE_PATHS = 'LOAD_IMAGE_PATHS';
-
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
@@ -143,7 +142,7 @@ const reducer = (state = initialState, action) => {
         break;
       case ADD_POST_SUCCESS:
         draft.mainPosts.unshift(action.data);
-        draft.imagePaths = [];
+        draft.addPostImagePaths = [];
         draft.addPostLoading = false;
         draft.addPostDone = true;
         break;
@@ -158,11 +157,11 @@ const reducer = (state = initialState, action) => {
         break;
       case UPDATE_POST_SUCCESS: {
         const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
-        console.log(action.data.Images);
         post.content = action.data.Content;
         post.updatedAt = action.data.updatedAt;
         if (action.data.Images) {
           if (Array.isArray(action.data.Images)) {
+            post.Images = [];
             action.data.Images.map((v) => {
               return post.Images.push({ src: v });
             });
@@ -170,7 +169,7 @@ const reducer = (state = initialState, action) => {
             post.Images = [{ src: action.data.Images }];
           };
         };
-        draft.imagePaths = [];
+        draft.updatePostImagePaths = [];
         draft.updatePostLoading = false;
         draft.updatePostDone = true;
         break;
@@ -200,7 +199,11 @@ const reducer = (state = initialState, action) => {
         draft.uploadImagesError = null;
         break;
       case UPLOAD_IMAGES_SUCCESS:
-        draft.imagePaths.push(action.data);
+        if (action.data.type === 'addPost') {
+          draft.addPostImagePaths.push(action.data.image);
+        } else if (action.data.type === 'updatePost') {
+          draft.updatePostImagePaths.push(action.data.image);
+        };
         draft.uploadImagesLoading = false;
         draft.uploadImagesDone = true;
         break;
@@ -209,13 +212,14 @@ const reducer = (state = initialState, action) => {
         draft.uploadImagesError = action.error;
         break;
       case LOAD_IMAGE_PATHS:
-        draft.imagePaths = action.data;
-        break;
-      case REMOVE_IMAGE_PATHS:
-        draft.imagePaths = [];
+        draft.updatePostImagePaths = action.data;
         break;
       case REMOVE_IMAGE:
-        draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
+        if (action.data.type === 'addPost') {
+          draft.addPostImagePaths = draft.addPostImagePaths.filter((v, i) => i !== action.data.index);
+        } else if (action.data.type === 'updatePost') {
+          draft.updatePostImagePaths = draft.updatePostImagePaths.filter((v, i) => i !== action.data.index);
+        };
         break;
       case ADD_COMMENT_REQUEST:
         draft.addCommentLoading = true;

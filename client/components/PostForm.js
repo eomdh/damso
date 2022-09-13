@@ -5,7 +5,7 @@ import TextArea from 'react-textarea-autosize';
 import ProfileImage from "./ProfileImage";
 
 import styled from 'styled-components';
-import { FaRegImage } from 'react-icons/fa';
+import { FaDAndD, FaRegImage } from 'react-icons/fa';
 import { MdCancel } from "react-icons/md";
 import device from '../utils/device';
 
@@ -124,7 +124,7 @@ const ImageDeleteIcon = styled.div`
 
 const PostForm = () => {
   const { me } = useSelector((state) => state.user);
-  const { imagePaths, addPostDone } = useSelector((state) => state.post);
+  const { addPostImagePaths, addPostDone } = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
   const [content, setContent] = useState('');
@@ -157,6 +157,7 @@ const PostForm = () => {
     [].forEach.call(e.target.files, (file) => {
       imageFormData.append('image', file);
     });
+    imageFormData.append('type', 'addPost');
 
     return dispatch({
       type: UPLOAD_IMAGES_REQUEST,
@@ -167,7 +168,10 @@ const PostForm = () => {
   const onRemoveImage = useCallback((index) => () => {
     dispatch({
       type: REMOVE_IMAGE,
-      data: index,
+      data: {
+        type: "addPost",
+        index: index,
+      }
     })
   });
 
@@ -183,7 +187,7 @@ const PostForm = () => {
     };
 
     const formData = new FormData();
-    imagePaths.forEach((path) => {
+    addPostImagePaths.forEach((path) => {
       formData.append('postImages', path);
     });
     formData.append('content', content);
@@ -192,7 +196,7 @@ const PostForm = () => {
       type: ADD_POST_REQUEST,
       data: formData
     });
-  }, [content, imagePaths]);
+  }, [content, addPostImagePaths]);
 
   return (
     <Container>
@@ -228,7 +232,7 @@ const PostForm = () => {
           </SubmitButton>
         </InputContainer>
         <ImageUploadContainer>
-          {imagePaths && imagePaths.map((v, i) => (
+          {addPostImagePaths && addPostImagePaths.map((v, i) => (
             <ImageContainer key={v}>
               <Image 
                 src={`http://localhost:3065/postImages/${v}`} 

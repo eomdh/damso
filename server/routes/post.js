@@ -188,7 +188,10 @@ router.delete('/:postId/delete', isLoggedIn, async (req, res, next) => {
 
 router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
     console.log(req.files);
-    res.status(200).json(req.files.map((v) => v.filename));
+    res.status(200).json({
+      type: req.body.type, 
+      image: req.files.map((v) => v.filename)
+    });
 });
 
 router.post('/:postId/comment/add', isLoggedIn, async (req, res, next) => {

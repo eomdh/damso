@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-  LOAD_IMAGE_PATHS, REMOVE_IMAGE, REMOVE_IMAGE_PATHS, UPDATE_POST_REQUEST, UPLOAD_IMAGES_REQUEST 
-} from '../reducers/post';
+import { LOAD_IMAGE_PATHS, REMOVE_IMAGE, UPDATE_POST_REQUEST, UPLOAD_IMAGES_REQUEST } from '../reducers/post';
 import TextArea from 'react-textarea-autosize';
 
 import styled from 'styled-components';
@@ -131,7 +129,7 @@ const CancelButton = styled.button`
 const PostUpdateForm = ({ post, editMode, setEditMode }) => {
   const dispatch = useDispatch();
 
-  const { imagePaths } = useSelector((state) => state.post);
+  const { updatePostImagePaths } = useSelector((state) => state.post);
   const [content, setContent] = useState(post.content);
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
 
@@ -142,13 +140,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
         type: LOAD_IMAGE_PATHS,
         data: images,
       })
-    } else if (!editMode) {
-      dispatch({
-        type: REMOVE_IMAGE_PATHS,
-      })
-    } else {
-      return;
-    }
+    };
   }, [editMode]);
 
   const onChangeContent = useCallback((e) => {
@@ -172,6 +164,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
     [].forEach.call(e.target.files, (file) => {
       imageFormData.append('image', file);
     });
+    imageFormData.append('type', 'updatePost');
 
     return dispatch({
       type: UPLOAD_IMAGES_REQUEST,
@@ -182,7 +175,10 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
   const onRemoveImage = useCallback((index) => () => {
     dispatch({
       type: REMOVE_IMAGE,
-      data: index,
+      data: {
+        type: 'updatePost',
+        index: index,
+      }
     })
   });
 
@@ -202,7 +198,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
     };
 
     const formData = new FormData();
-    imagePaths.forEach((path) => {
+    updatePostImagePaths.forEach((path) => {
       formData.append('postImages', path);
     });
     formData.append('content', content);
@@ -214,7 +210,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
     });
 
     setEditMode(false);
-  }, [imagePaths, content]);
+  }, [updatePostImagePaths, content]);
 
   return (
     <Container>
@@ -244,7 +240,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
           <CancelButton type="button" onClick={onCancelUpdate}>취소</CancelButton>
         </ButtonContainer>
         <ImageUploadContainer>
-          {imagePaths && imagePaths.map((v, i) => (
+          {updatePostImagePaths && updatePostImagePaths.map((v, i) => (
             <ImageContainer key={v}>
               <Image 
                 src={`http://localhost:3065/postImages/${v}`} 

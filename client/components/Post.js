@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
+import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, OPEN_EDIT_MODE } from '../reducers/post';
 import ProfileImage from './ProfileImage';
 import PostImages from './PostImages';
 import PostContent from './PostContent';
@@ -140,15 +140,24 @@ const CommentContainer = styled.div`
 const Post = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
+  const { opendEditMode } = useSelector((state => state.post));
   const liked = post.Likers.find((v) => v.id === id);
   const [editMode, setEditMode] = useState(false);
   const [commentFormOpend, setCommentFormOpend] = useState(false);
   const postDate = (post.createdAt === post.updatedAt) ? post.createdAt : post.updatedAt;
   const updated = (post.createdAt === post.updatedAt) ? false : true;
 
-  const onChangeEditMode = useCallback(() => {   
+  const onChangeEditMode = useCallback(() => {
+    if (opendEditMode) {
+      return alert("현재 다른 게시글이 수정중입니다.");
+    };
+
+    dispatch({
+      type: OPEN_EDIT_MODE,
+    });
+
     setEditMode(true);
-  }, [editMode]);
+  }, [opendEditMode, editMode]);
 
   const onRemovePost = useCallback(() => {
     if (window.confirm("정말 삭제하시겠습니까?")) {

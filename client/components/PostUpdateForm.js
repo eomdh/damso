@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOAD_IMAGE_PATHS, REMOVE_IMAGE, UPDATE_POST_REQUEST, UPLOAD_IMAGES_REQUEST } from '../reducers/post';
+import { CLOSE_EDIT_MODE, LOAD_IMAGE_PATHS, REMOVE_IMAGE, UPDATE_POST_REQUEST, UPLOAD_IMAGES_REQUEST } from '../reducers/post';
 import TextArea from 'react-textarea-autosize';
 
 import styled from 'styled-components';
@@ -183,6 +183,10 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
   });
 
   const onCancelUpdate = useCallback(() => {
+    dispatch({
+      type: CLOSE_EDIT_MODE,
+    })
+    
     setEditMode(false);
   }, []);
 

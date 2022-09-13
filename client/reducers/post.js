@@ -180,6 +180,7 @@ const reducer = (state = initialState, action) => {
           };
         };
         draft.updatePostImagePaths = [];
+        draft.opendEditMode = false;
         draft.updatePostLoading = false;
         draft.updatePostDone = true;
         break;

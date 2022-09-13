@@ -5,7 +5,7 @@ import TextArea from 'react-textarea-autosize';
 import ProfileImage from "./ProfileImage";
 
 import styled from 'styled-components';
-import { FaDAndD, FaRegImage } from 'react-icons/fa';
+import { FaRegImage } from 'react-icons/fa';
 import { MdCancel } from "react-icons/md";
 import device from '../utils/device';
 
@@ -41,6 +41,8 @@ const ContentInput = styled(TextArea)`
   height: 200px;
   border: none;
   font-size: 16px;
+  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   min-height: 50px;
   max-height: 300px;
   margin-bottom: 50px;
@@ -70,12 +72,12 @@ const SubmitButton = styled.button`
   background-color: #1864ab;
   color: white;
   letter-spacing: 2px;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 16px;
   width: 70px;
   height: 30px;
   border-radius: 6px;
-  bottom: 10px;
+  bottom: 12px;
   right: 30px;
   cursor: pointer;
   pointer-events: ${props => (props.me ? null : "none")};
@@ -93,6 +95,7 @@ const ImageUploadContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
+  display: inline-block;
   margin-right: 15px;
   position: relative;
 `;

@@ -4,6 +4,7 @@ import AppLayout from '../components/AppLayout';
 import SignupForm from '../components/SignupForm';
 
 import styled from 'styled-components';
+import device from '../utils/device';
 
 const Container = styled.div`
   width: 100%;
@@ -11,6 +12,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 80px;
+
+  @media ${device.mobileL} {
+    margin-top: 30px;
+  }
 `;
 
 const Signup = () => {

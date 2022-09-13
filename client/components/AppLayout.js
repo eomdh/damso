@@ -70,22 +70,23 @@ const SearchForm = styled.form`
     opacity: 1;
   }
 
-  @media ${device.mobileL} {
-    width: 175px;
-  }
-
   @media ${device.tablet} {
     width: 350px;
-    margin-left: 70px;
+  }
+
+  @media ${device.mobileL} {
+    width: 150px;
   }
 `;
 
 const SearchBar = styled.input`
   all: unset;
+  display: flex;
   width: 100%;
   height: 100%;
   font-size: 16px;
-  display: flex;
+  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const SearchIconContainer = styled.button`

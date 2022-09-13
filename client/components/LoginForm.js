@@ -30,6 +30,7 @@ const TitleContainer = styled.div`
 const Title = styled.div`
   font-weight: 600;
   font-size: 27px;
+  letter-spacing: 2px;
   color: #212529;
 `;
 
@@ -105,7 +106,7 @@ const LoginForm = () => {
   return (
     <Container>
       <TitleContainer>
-        <Title>Login</Title>
+        <Title>LOGIN</Title>
       </TitleContainer>
       <Form onSubmit={onSubmit}>
         <Input

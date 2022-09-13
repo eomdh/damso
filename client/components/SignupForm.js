@@ -29,6 +29,7 @@ const TitleContainer = styled.div`
 const Title = styled.div`
   font-weight: 600;
   font-size: 27px;
+  letter-spacing: 2px;
   color: #212529;
 `;
 
@@ -136,7 +137,7 @@ const SignupForm = () => {
   return (
     <Container>
       <TitleContainer>
-        <Title>Signup</Title>
+        <Title>SIGNUP</Title>
       </TitleContainer>
       <Form onSubmit={onSignupSubmit}>
         <Input 

@@ -30,6 +30,8 @@ const ContentInput = styled(TextArea)`
   border: none;
   padding: 8px;
   font-size: 16px;
+  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   min-height: 40px;
   max-height: 300px;
   border-radius: 10px;
@@ -46,8 +48,8 @@ const SubmitButton = styled.button`
   background-color: #1864ab;
   color: white;
   letter-spacing: 2px;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 15px;
   width: 70px;
   height: 30px;
   border-radius: 6px;

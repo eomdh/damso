@@ -223,6 +223,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
           value={content}
           onChange={onChangeContent}
           style={{
+            height: "93px",
             resize: "none",
             outline: "none",
             overflow: "hidden",

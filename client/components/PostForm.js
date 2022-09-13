@@ -16,11 +16,12 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 120px;
   border-bottom: 10px solid #e6ecf0;
   padding: 10px;
-  position: relative;
 `;
 
 const InputContainer = styled.div`
@@ -31,7 +32,7 @@ const InputContainer = styled.div`
 const ProfileImageContainer = styled.div`
   width: 55px;
   height: 55px;
-  margin: 0px 20px 0px 10px;
+  margin: 0px 15px 0px 5px;
   border-radius: 50px;
   overflow: hidden;
 `;
@@ -41,22 +42,26 @@ const ContentInput = styled(TextArea)`
   height: 200px;
   border: none;
   font-size: 16px;
-  font-family: 'Noto Sans', sans-serif;
   font-family: 'Noto Sans KR', sans-serif;
   min-height: 50px;
   max-height: 300px;
-  margin-bottom: 50px;
   :disabled {
     background-color: white;
   }
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 25px;
+`;
+
 const ImageUploadIcon = styled.div`
-  position: absolute;
-  bottom: -3.5px;
-  right: 107px;
+  margin-top: 4px;
+  margin-right: 6px;
   color: #1864ab;
-  font-size: 38px;
+  font-size: 39px;
   opacity: 0.5;
   cursor: pointer;
   pointer-events: ${props => (props.me ? null : "none")};
@@ -67,18 +72,15 @@ const ImageUploadIcon = styled.div`
 `;
 
 const SubmitButton = styled.button`
-  all: unset;
-  position: absolute;
+  width: 70px;
+  height: 30px;
   background-color: #1864ab;
   color: white;
   letter-spacing: 2px;
   font-weight: 500;
   font-size: 16px;
-  width: 70px;
-  height: 30px;
+  border: none;
   border-radius: 6px;
-  bottom: 12px;
-  right: 30px;
   cursor: pointer;
   pointer-events: ${props => (props.me ? null : "none")};
   opacity: ${props => (props.isAvailablePosting ? 1 : 0.5)};
@@ -86,7 +88,6 @@ const SubmitButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  outline: none;
 `;
 
 const ImageUploadContainer = styled.div`
@@ -219,21 +220,23 @@ const PostForm = () => {
               overflow: "hidden",
             }}
           />
-          <input
-            type="file"
-            name="image"
-            multiple
-            hidden
-            ref={imageInput}
-            onChange={onChangeImages}
-          />
+        <input
+          type="file"
+          name="image"
+          multiple
+          hidden
+          ref={imageInput}
+          onChange={onChangeImages}
+        />
+        </InputContainer>
+        <ButtonContainer>
           <ImageUploadIcon me={me} onClick={onClickImageUpload}>
             <FaRegImage />
           </ImageUploadIcon>
           <SubmitButton type="submit" me={me} isAvailablePosting={isAvailablePosting}>
             게시
           </SubmitButton>
-        </InputContainer>
+        </ButtonContainer>
         <ImageUploadContainer>
           {addPostImagePaths && addPostImagePaths.map((v, i) => (
             <ImageContainer key={v}>

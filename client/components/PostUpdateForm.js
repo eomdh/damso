@@ -37,6 +37,7 @@ const ContentInput = styled(TextArea)`
 
 const ImageUploadContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 93%;
 `;
 

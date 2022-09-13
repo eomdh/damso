@@ -92,13 +92,14 @@ const SubmitButton = styled.button`
 
 const ImageUploadContainer = styled.div`
   display: flex;
-  width: 50%;
+  flex-wrap: wrap;
 `;
 
 const ImageContainer = styled.div`
-  display: inline-block;
-  margin-right: 15px;
+  display: flex;
   position: relative;
+  margin-left: 10px;
+  margin-right: 15px;
 `;
 
 const Image = styled.img`
@@ -107,8 +108,8 @@ const Image = styled.img`
   margin-top: 5px;
 
   @media ${device.mobileL} {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
   }
 `;
 
@@ -127,9 +128,9 @@ const ImageDeleteIcon = styled.div`
 `;
 
 const PostForm = () => {
+  const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
   const { addPostImagePaths, addPostDone } = useSelector((state) => state.post);
-  const dispatch = useDispatch();
 
   const [content, setContent] = useState('');
   const [isAvailablePosting, setIsAvailablePosting] = useState(false);
@@ -158,6 +159,7 @@ const PostForm = () => {
   const onChangeImages = useCallback((e) => {
     console.log('image', e.target.files);
     const imageFormData = new FormData();
+
     [].forEach.call(e.target.files, (file) => {
       imageFormData.append('image', file);
     });
@@ -244,7 +246,7 @@ const PostForm = () => {
                 src={`http://localhost:3065/postImages/${v}`} 
                 alt={v}
               />
-              <ImageDeleteIcon onClick={onRemoveImage(i)}>
+              <ImageDeleteIcon onClick={onRemoveImage(i)}>  
                 <MdCancel />
               </ImageDeleteIcon>
             </ImageContainer>

@@ -23,8 +23,16 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
   app.use(hpp());
   app.use(helmet());
+  app.use(cors({
+    origin: 'http://damso.online',
+    credentials: true,
+  }));
 } else {
   app.use(morgan('dev'));
+  app.use(cors({
+    origin: true,
+    credentials: true,
+  }));
 };
 
 app.get('/', (req, res) => {
@@ -36,11 +44,6 @@ db.sequelize.sync()
     console.log("DB Connection Success!")
   })
   .catch(console.error);
-
-app.use(cors({
-  origin: ['http://localhost:3065', 'http://damso.online'],
-  credentials: true,
-}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

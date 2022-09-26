@@ -1,1 +1,1 @@
-export const serverURL = 'http://3.35.10.201';
+export const serverURL = 'http://api.damso.online';

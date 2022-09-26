@@ -254,7 +254,7 @@ const PostForm = () => {
           {addPostImagePaths && addPostImagePaths.map((v, i) => (
             <ImageContainer key={v}>
               <Image 
-                src={v} 
+                src={v.replace(/\/thumb\//, '/original/')}
                 alt={v}
               />
               <ImageDeleteIcon onClick={onRemoveImage(i)}>  

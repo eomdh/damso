@@ -209,7 +209,7 @@ router.patch('/introduce', isLoggedIn, async (req, res, next) => {
 
 router.post('/image', isLoggedIn, upload.single('image'), async (req, res) => {
   await User.update({
-    profileImagePath: req.file.location,
+    profileImagePath: req.file.location.replace(/\/original\//, '/thumb/'),
   }, {
     where: { id: req.user.id },
   });

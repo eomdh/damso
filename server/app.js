@@ -64,6 +64,6 @@ app.use('/post', postRouter);
 app.use('/posts', postsRouter);
 app.use('/hashtag', hashtagRouter);
 
-app.listen(3065, () => {
-  console.log("listening on port 3065!")
+app.listen(80, () => {
+  console.log("listening on port 80!")
 });

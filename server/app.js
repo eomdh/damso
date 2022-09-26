@@ -8,6 +8,9 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const path = require('path');
+const hpp = require('hpp');
+const helmet = require('helmet');
+
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 const postsRouter = require('./routes/posts');
@@ -15,7 +18,14 @@ const hashtagRouter = require('./routes/hashtag');
 
 const app = express();
 dotenv.config();
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined'));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan('dev'));
+};
 
 app.get('/', (req, res) => {
   res.send('Server Running!');
@@ -28,7 +38,7 @@ db.sequelize.sync()
   .catch(console.error);
 
 app.use(cors({
-  origin: true,
+  origin: ['http://localhost:3065', 'damso.com'],
   credentials: true,
 }));
 

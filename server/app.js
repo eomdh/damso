@@ -17,7 +17,7 @@ const app = express();
 dotenv.config();
 app.use(morgan('dev'));
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Server Running!');
 });
 

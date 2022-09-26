@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import ProfileImage from './ProfileImage';
-import ProfileImageEditForm from './profileImageEditForm';
+import ProfileImageEditForm from './ProfileImageEditForm';
 import IntroduceEditForm from './IntroduceEditForm';
 
 import styled from 'styled-components';

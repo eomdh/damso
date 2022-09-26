@@ -17,6 +17,10 @@ const app = express();
 dotenv.config();
 app.use(morgan('dev'));
 
+router.get('/', (req, res) => {
+  res.send('Server Running!');
+});
+
 db.sequelize.sync()
   .then(() => {
     console.log("DB Connection Success!")

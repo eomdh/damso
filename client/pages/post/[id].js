@@ -12,6 +12,7 @@ import wrapper from '../../store/configureStore';
 
 import styled from 'styled-components';
 import device from '../../utils/device';
+import { serverURL } from '../../config/config';
 
 const Container = styled.div`
   width: 100%;
@@ -62,7 +63,7 @@ const SinglePost = () => {
         <meta property="og:title" content={`${singlePost.User.nickname}님의 게시글`} />
         <meta property="og:description" content={singlePost.content} />
         <meta property="og:image" content={singlePost.Images[0] ? singlePost.Images[0].src : 'https://localhost:3000/favicon.ico'} />
-        <meta property="og:url" content={`https://localhost:3065/post/${id}`} />
+        <meta property="og:url" content={`${serverURL}/post/${id}`} />
       </Head>
       <Container>
         <GridContainer>

@@ -12,6 +12,7 @@ import wrapper from '../../store/configureStore';
 
 import styled from 'styled-components';
 import device from '../../utils/device';
+import { serverURL } from '../../config/config';
 
 const Container = styled.div`
   width: 100%;
@@ -104,7 +105,7 @@ const HashtagPosts = () => {
         <meta property="og:title" content={`#${tag}`} />
         <meta property="og:description" content={`#${tag}`} />
         <meta property="og:image" content='https://localhost:3000/favicon.ico' />
-        <meta property="og:url" content={`https://localhost:3065/hashtag/${tag}`} />
+        <meta property="og:url" content={`${serverURL}:3065/hashtag/${tag}`} />
       </Head>
       <Container>
         <GridContainer>

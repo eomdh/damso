@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { FaRegImage } from 'react-icons/fa';
 import { MdCancel } from "react-icons/md";
 import device from '../utils/device';
+import { serverURL } from '../config/config';
 
 const Container = styled.div`
   display: flex;
@@ -249,7 +250,7 @@ const PostUpdateForm = ({ post, editMode, setEditMode }) => {
           {updatePostImagePaths && updatePostImagePaths.map((v, i) => (
             <ImageContainer key={v}>
               <Image 
-                src={`http://localhost:3065/postImages/${v}`} 
+                src={`${serverURL}/postImages/${v}`} 
                 alt={v}
               />
               <ImageDeleteContainer onClick={onRemoveImage(i)}>

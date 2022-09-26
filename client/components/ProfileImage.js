@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 import styled from "styled-components";
+import { serverURL } from "../config/config";
 
 const Container = styled.div`
   width: 100%;
@@ -16,7 +17,7 @@ const Container = styled.div`
 const ProfileImage = ({ path }) => {
   return (
     <Container path={path 
-      ? `http://localhost:3065/profileImages/${path}` 
+      ? `${serverURL}/profileImages/${path}` 
       : require('../public/user.png')} />
   );
 };

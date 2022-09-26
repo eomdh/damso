@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { serverURL } from '../config/config';
 
 const Container = styled.div`
   margin-top: 25px;
@@ -38,7 +37,7 @@ const PostImages = ({ images }) => {
     return (
       <Container>
         <ImageContainer>
-          <Image src={`${serverURL}/postImages/${images[0].src}`} alt="image" />
+          <Image src={`${images[0].src}`} alt="image" />
         </ImageContainer>
       </Container>
     );
@@ -51,7 +50,7 @@ const PostImages = ({ images }) => {
           {images.map(image => (
             <div key={image.src}>
               <ImageContainer>
-                <Image src={`${serverURL}/postImages/${image.src}`} alt="image" key={image.src} />
+                <Image src={`${image.src}`} alt="image" key={image.src} />
               </ImageContainer>
             </div>
           ))}

@@ -195,7 +195,7 @@ router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
     console.log(req.files);
     res.status(200).json({
       type: req.body.type, 
-      image: req.files.map((v) => v.location.replace(/\/original\//, '/thumb/'))
+      image: req.files.map((v) => v.location)
     });
 });
 

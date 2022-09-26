@@ -38,7 +38,7 @@ db.sequelize.sync()
   .catch(console.error);
 
 app.use(cors({
-  origin: ['http://localhost:3065', 'damso.com', 'http://15.164.224.74'],
+  origin: ['http://localhost:3065', 'damso.online', 'http://15.164.224.74'],
   credentials: true,
 }));
 

@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 const { Post, Comment, Image, User, Hashtag } = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
@@ -14,16 +16,19 @@ try {
   fs.mkdirSync('postImages');
 };
 
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: ap-northeast-2,
+});
+
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, done) {
-      done(null, 'postImages');
-    },
-    filename(req, file, done) {
-      const ext = path.extname(file.originalname);
-      const basename = path.basename(file.originalname, ext);
-      done(null, basename + '_' + new Date().getTime() + ext);
-    },
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: 'damso-s3',
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`);
+    }
   }),
   limits: { fileSize: 20 * 1024 * 1024 },
 });
@@ -190,7 +195,7 @@ router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
     console.log(req.files);
     res.status(200).json({
       type: req.body.type, 
-      image: req.files.map((v) => v.filename)
+      image: req.files.map((v) => v.location)
     });
 });
 

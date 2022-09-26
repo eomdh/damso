@@ -16,7 +16,7 @@ const Container = styled.div`
 const ProfileImage = ({ path }) => {
   return (
     <Container path={path
-      ? path 
+      ? {path} 
       : require('../public/user.png')} />
   );
 };

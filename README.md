@@ -1,6 +1,7 @@
 ## 💬 DAMSO
-개인프로젝트로 진행한 웹 기반 소셜 네트워크 서비스입니다. <br />
-[링크](http://damso.online) <br /> <br />
+개인프로젝트로 진행한 웹 기반 소셜 네트워크 서비스입니다. <br>
+![main](https://user-images.githubusercontent.com/106085557/202166863-958fdfd6-c65e-444d-86fd-f86f67822ff2.png) <br>
+[링크](http://damso.online) <br> <br>
 
 ## 🛠 사용 기술
 ### - client

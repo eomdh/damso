@@ -1,5 +1,5 @@
 ## 💬 DAMSO
-Next와 Express를 활용하여 제작한 웹 기반 소셜 네트워크 서비스입니다. <br><br>
+Next.js와 Express를 활용하여 제작한 웹 기반 소셜 네트워크 서비스입니다. <br><br>
 ![main](https://user-images.githubusercontent.com/106085557/202166863-958fdfd6-c65e-444d-86fd-f86f67822ff2.png) <br>
 [링크](http://damso.online) <br><br>
 
